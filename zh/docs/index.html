@@ -179,7 +179,39 @@
 
       <h2>12. 一句话总结</h2>
       <p>如果目标是在 Design Verification 领域做一个既现实、又有展示价值的 AI 项目，那么最好的切入点之一就是：<strong>AI-assisted regression failure triage</strong>。在此基础上，再往 coverage、register/spec、test optimization、multi-agent、waveform-aware debug 逐步扩展，会形成一个很完整的 AI-native DV roadmap。</p>
-    </article>
+    
+<h2>扩展版图：DV + AI 的 15 个细分方向</h2>
+<p>为了让整个版图更完整，最好的表达方式不是把首页塞成 15 个卡片，而是：<strong>首页保留 6 个一级分类，详细文档展开成 15 个细分方向</strong>。这样既清晰，也更接近当前行业实际。</p>
+<h3>首页保留的 6 个一级分类</h3>
+<ul>
+<li>Regression Intelligence</li>
+<li>Coverage Intelligence</li>
+<li>Spec / Register Intelligence</li>
+<li>Test Optimization</li>
+<li>Debug Intelligence</li>
+<li>Verification Platform</li>
+</ul>
+<h3>详细文档展开的 15 个细分方向</h3>
+<ul>
+<li><strong>1. Regression failure triage</strong> —— 回归失败聚类、类别判断、总结与优先级建议。</li>
+<li><strong>2. Coverage closure intelligence</strong> —— coverage hole 分析、优先级、reachable / unreachable 提示。</li>
+<li><strong>3. Spec-to-test / requirement intelligence</strong> —— 从规格提 requirement，并映射到 test、coverage、assertion。</li>
+<li><strong>4. Assertion / property generation</strong> —— 根据 spec 或协议描述生成 SVA / property 草稿。</li>
+<li><strong>5. Testbench / UVM generation</strong> —— 自动搭 verification skeleton、agent、monitor、基础 test。</li>
+<li><strong>6. Constraint and stimulus optimization</strong> —— 优化 constrained-random stimulus，更快命中难场景。</li>
+<li><strong>7. Regression planning / test selection optimization</strong> —— 在有限算力下挑最值得跑的 test。</li>
+<li><strong>8. Waveform / trace-aware debug intelligence</strong> —— 利用 waveform/trace 摘要做 first divergence 和异常定位。</li>
+<li><strong>9. Register / CSR intelligence</strong> —— 解析 CSR/spec、构建寄存器关系图并辅助验证规划。</li>
+<li><strong>10. Formal verification + AI</strong> —— property targeting、假设检查、vacuity 提示、proof 结果解释。</li>
+<li><strong>11. Verification knowledge copilot / RAG assistant</strong> —— 跨 spec、代码、log、bug 历史做验证问答。</li>
+<li><strong>12. Verification agent platform / multi-agent orchestration</strong> —— 用多个 specialized agent 协同处理 verification workflow。</li>
+<li><strong>13. Bug prediction / risk forecasting</strong> —— 预测高风险模块、feature、改动点。</li>
+<li><strong>14. Cross-modal DV intelligence</strong> —— 把 spec、RTL、logs、coverage、waveform 摘要联合起来推理。</li>
+<li><strong>15. Auto-debug / fix recommendation</strong> —— 建议怀疑模块、debug 路径与可能修复方向。</li>
+</ul>
+<p>也就是说，首页里的 6 个方向不是“只有 6 条路”，而是为了展示层次清晰而做的一级聚类；真正更完整的当前 DV + AI 发展图谱，应该看这 15 个细分方向。</p>
+
+</article>
   </div>
 </body>
 </html>

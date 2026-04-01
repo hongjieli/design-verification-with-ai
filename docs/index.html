@@ -95,7 +95,39 @@
 │   └── nightly_example.md
 └── examples/
     └── sample_logs/</code></pre><p>This makes it portfolio-ready without exposing proprietary material.</p><hr /><h1>18. Recommended positioning statement</h1><p>If you need a concise way to describe the idea:</p><p>&gt; I’m interested in applying AI to design verification, especially in regression failure triage. The idea is to automatically parse simulation and UVM logs, cluster related failures, classify likely root-cause categories, and generate actionable summaries for verification engineers. Rather than replacing engineers, the system acts as a triage copilot that reduces duplicate debug effort and speeds up regression analysis.</p><hr /><h1>19. My view on where the real value is</h1><p>The strongest AI ideas in DV are usually not the most glamorous ones. The real value often comes from tools that:</p><ul><li>reduce repetitive analysis</li><li>summarize noisy outputs</li><li>help prioritize work</li><li>preserve institutional debugging knowledge</li></ul><p>That’s why **regression failure triage** is such a good target. It is:</p><ul><li>practical</li><li>high-frequency</li><li>measurable</li><li>adoptable</li><li>extensible</li></ul><p>If I had to start one AI-for-DV project today, this would be near the top of the list.</p><hr /><h1>20. Next steps if turning this into a repo</h1><p>A sensible progression would be:</p><h3>1. Write a polished README describing the problem and architecture</h3><h3>2. Create synthetic log examples for 5–8 failure classes</h3><h3>3. Build a parser that extracts first-error signatures</h3><h3>4. Add simple clustering (rules or embeddings)</h3><h3>5. Generate markdown triage reports</h3><h3>6. Add optional LLM summaries on top</h3><h3>7. Evaluate with manually labeled synthetic cases</h3><p>That yields a credible and demonstrable first version.</p><hr /><h2>Short takeaway</h2><p>If the goal is to combine AI with design verification in a way that is realistic, useful, and portfolio-worthy, then:</p><p>&gt; **AI-assisted regression failure triage** is one of the best starting points.</p><p>It targets a painful daily workflow, uses data teams already have, and creates immediate engineering value without asking AI to make final correctness decisions.</p>
-    </article>
+    
+<h2>Expanded DV + AI Landscape</h2>
+<p>To make the landscape more complete, it is useful to distinguish between the <strong>6 top-level categories</strong> used on the homepage and a more detailed set of <strong>15 sub-directions</strong> that better reflects current industry and research momentum.</p>
+<h3>Top-level categories used on the homepage</h3>
+<ul>
+<li>Regression Intelligence</li>
+<li>Coverage Intelligence</li>
+<li>Spec / Register Intelligence</li>
+<li>Test Optimization</li>
+<li>Debug Intelligence</li>
+<li>Verification Platform</li>
+</ul>
+<h3>Detailed sub-directions</h3>
+<ul>
+<li><strong>1. Regression failure triage</strong> — failure clustering, category prediction, and engineer-facing summaries.</li>
+<li><strong>2. Coverage closure intelligence</strong> — hole analysis, prioritization, and reachability guidance.</li>
+<li><strong>3. Spec-to-test / requirement intelligence</strong> — extracting requirements from specs and mapping them to tests, coverage, and assertions.</li>
+<li><strong>4. Assertion / property generation</strong> — generating SVA/property drafts from spec text or protocol descriptions.</li>
+<li><strong>5. Testbench / UVM generation</strong> — scaffolding verification environments, agents, monitors, and baseline tests.</li>
+<li><strong>6. Constraint and stimulus optimization</strong> — tuning constrained-random behavior to reach hard-to-hit scenarios.</li>
+<li><strong>7. Regression planning / test selection optimization</strong> — choosing the highest-value tests under limited compute budget.</li>
+<li><strong>8. Waveform / trace-aware debug intelligence</strong> — summarizing traces and helping identify first divergence or suspicious events.</li>
+<li><strong>9. Register / CSR intelligence</strong> — parsing CSR specs, building dependency graphs, and recommending validation strategies.</li>
+<li><strong>10. Formal verification + AI</strong> — property targeting, assumption review, vacuity guidance, and proof interpretation support.</li>
+<li><strong>11. Verification knowledge copilot / RAG assistant</strong> — answering verification questions across specs, code, logs, and issue history.</li>
+<li><strong>12. Verification agent platform / multi-agent orchestration</strong> — coordinating specialized AI agents for spec, triage, coverage, and debug workflows.</li>
+<li><strong>13. Bug prediction / risk forecasting</strong> — highlighting high-risk modules, features, or commits before failures proliferate.</li>
+<li><strong>14. Cross-modal DV intelligence</strong> — combining spec text, RTL, logs, coverage, and waveform summaries in one reasoning loop.</li>
+<li><strong>15. Auto-debug / fix recommendation</strong> — suggesting likely suspects, debug paths, and possible fix hypotheses.</li>
+</ul>
+<p>In other words, the homepage intentionally stays compact with 6 major buckets, while the detailed document expands those buckets into a richer 15-direction map.</p>
+
+</article>
   </div>
 </body>
 </html>
