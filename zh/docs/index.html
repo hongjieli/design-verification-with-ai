@@ -4,115 +4,181 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI 与 Design Verification — 中文详细文档</title>
+  <meta name="description" content="关于如何将 AI 与设计验证结合的详细中文工程文档。" />
   <style>
     :root { --bg:#0b1020; --panel:#121a31; --text:#e9eefc; --muted:#a9b6d3; --accent:#78a6ff; --border:rgba(255,255,255,.08); --max:940px; }
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.75}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.78}
     a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px}.article{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:28px}.top{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}.btn{display:inline-block;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--panel)} h1{font-size:40px;line-height:1.1;margin:0 0 16px;letter-spacing:-.03em} h2{font-size:28px;margin:34px 0 12px;border-top:1px solid var(--border);padding-top:26px} h3{font-size:20px;margin:22px 0 8px} p,li{color:var(--muted)} ul{padding-left:22px} code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:2px 6px;border-radius:8px} .lang{margin-left:auto;color:var(--muted)}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px}
+    .article{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:28px}
+    .top{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+    .btn{display:inline-block;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--panel)}
+    .lang-switch{margin-left:auto;display:flex;gap:8px;align-items:center}
+    .lang-pill{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}
+    .lang-pill.active{background:rgba(120,166,255,.18);color:#fff}
+    h1{font-size:40px;line-height:1.1;margin:0 0 16px;letter-spacing:-.03em}
+    h2{font-size:28px;margin:34px 0 12px;border-top:1px solid var(--border);padding-top:26px}
+    h3{font-size:20px;margin:22px 0 8px}
+    p,li{color:var(--muted)}
+    ul{padding-left:22px}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:2px 6px;border-radius:8px}
+    @media (max-width:700px){ .lang-switch{margin-left:0;width:100%} }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="top">
       <a class="btn" href="../index.html">← 返回中文首页</a>
-      <a class="btn" href="../../docs/index.html">English Doc</a>
       <a class="btn" href="https://github.com/hongjieli/design-verification-with-ai" target="_blank" rel="noreferrer">GitHub Repo</a>
-      <div class="lang">中文 ｜ <a href="../../docs/index.html">English</a></div>
+      <div class="lang-switch">
+        <a class="lang-pill" href="../../docs/index.html">English</a>
+        <span class="lang-pill active">中文</span>
+      </div>
     </div>
     <article class="article">
-      <h1>AI 与 Design Verification：详细思路</h1>
-      <p>这份中文文档是英文版的简洁但完整重述，重点是把 <strong>AI 如何和 Design Verification 结合</strong> 讲清楚，并给出一个更适合落地和展示的项目框架。</p>
+      <h1>AI 与 Design Verification：中文详细文档</h1>
+      <p>这份文档是英文版的中文完整整理，目标是把 <strong>AI 如何与 Design Verification 结合</strong> 讲清楚，并且尽量从工程落地角度而不是概念宣传角度来写。重点主线仍然是：<strong>AI-assisted regression failure triage</strong>，同时也把 coverage、register/spec、test optimization、multi-agent platform、waveform-aware debug 这些方向纳入一个更完整的版图。</p>
 
-      <h2>1. 最值得先做的方向：Regression Failure Triage</h2>
-      <p>在 RTL / IP / SoC 验证里，很多时间不是花在“有没有 fail”，而是花在“这些 fail 到底是不是同一个 root cause、哪个最值得先看、哪个是 design bug、哪个只是 testbench 或 infra 问题”。</p>
-      <p>因此，最适合 AI 先切入的方向之一，就是做一个 <strong>回归失败归类与总结助手</strong>。它的任务包括：</p>
+      <h2>1. 为什么这个方向值得做</h2>
+      <p>在 RTL / IP / SoC 验证里，很多真正消耗工程时间的工作并不是“写第一版 testbench”，而是：</p>
       <ul>
-        <li>解析 simulation/UVM/assertion 日志</li>
-        <li>提取 first error、timeout、assertion、scoreboard mismatch 等关键特征</li>
-        <li>对失败做相似度聚类，减少重复分析</li>
-        <li>判断可能属于 design bug、testbench bug、infra issue、flaky 等类别</li>
-        <li>给出一段工程师能直接读的 summary 和下一步 debug 建议</li>
+        <li>看大量 regression fail</li>
+        <li>判断哪些 fail 是重复的</li>
+        <li>分清是 design bug、testbench bug 还是 infra 问题</li>
+        <li>阅读 coverage report 并决定下一步怎么收敛</li>
+        <li>把 spec、register、testplan 和真实验证行为对应起来</li>
       </ul>
-      <p>这个方向的好处是：数据现成、价值清晰、容易做出能节省时间的 MVP，而且不需要 AI 代替工程师做最终 signoff。</p>
+      <p>这些任务有几个共同特点：数据量大、重复度高、噪声多、跨多个来源，而且往往不是“数学推导”问题，而是“归纳、总结、关联、排序、建议”。这正是 AI 非常适合先切入的区域。</p>
 
-      <h2>2. CoverPilot：Coverage Closure Copilot</h2>
-      <p>Coverage closure 是验证后期最费劲的工作之一。CoverPilot 这种思路，就是让 AI 帮你读 coverage report，解释 coverage hole，并把 hole 映射回 RTL 或功能点。</p>
+      <h2>2. 核心主线：AI-Assisted Regression Failure Triage</h2>
+      <p>如果要在 AI + DV 里先选一个最实用、最容易形成 MVP、也最适合展示到 GitHub/作品集上的项目，我会优先做 regression failure triage。</p>
+      <p>它解决的不是“有没有 fail”，而是：</p>
+      <ul>
+        <li>100 个 fail 里到底有几个独立 root cause</li>
+        <li>哪些是已知问题，哪些是新问题</li>
+        <li>哪些最值得先看</li>
+        <li>可能归属于哪个 block / owner</li>
+        <li>下一步 debug 从哪里下手最合理</li>
+      </ul>
+
+      <h3>它可以吃什么输入</h3>
+      <ul>
+        <li>simulation log</li>
+        <li>UVM summary</li>
+        <li>assertion reports</li>
+        <li>test name / seed / commit / branch</li>
+        <li>timeout 信息</li>
+        <li>scoreboard mismatch 摘要</li>
+        <li>optional：波形摘要、历史 bug、历史 regression 结果</li>
+      </ul>
+
+      <h3>它应该输出什么</h3>
+      <ul>
+        <li>one-line failure summary</li>
+        <li>cluster ID（重复问题聚类）</li>
+        <li>likely category（design bug / TB bug / infra / flaky 等）</li>
+        <li>novelty score（像不像新问题）</li>
+        <li>priority / impact 估计</li>
+        <li>suspected owner</li>
+        <li>next-step suggestion</li>
+      </ul>
+
+      <h3>为什么这个方向最现实</h3>
+      <ul>
+        <li>数据现成，团队本来就每天在产生日志</li>
+        <li>价值容易衡量：能不能减少 triage 时间、减少重复 debug</li>
+        <li>不需要 AI 直接改 RTL，也不需要它承担 signoff 风险</li>
+        <li>工程师最容易接受“建议型 / copilot 型”工具</li>
+      </ul>
+
+      <h2>3. 一个实际可做的系统架构</h2>
+      <p>比较靠谱的起步方式通常不是“把整段原始 log 丢给 LLM 然后等奇迹”，而是分层做：</p>
+      <ol>
+        <li>先用脚本提取关键失败片段</li>
+        <li>把 first error、assertion、timeout、phase、module hint 抽成结构化 failure packet</li>
+        <li>用规则或 embedding 做初步聚类</li>
+        <li>再让 LLM 做 summary / category / next-step suggestion</li>
+      </ol>
+      <p>这种设计比纯黑盒大模型方案更便宜、更可控、也更容易解释。</p>
+
+      <h2>4. CoverPilot：Coverage Closure Copilot</h2>
+      <p>CoverPilot 的重点是 coverage intelligence。它的价值在于帮助验证工程师解释 coverage report，而不是只是展示数字。</p>
       <ul>
         <li>哪些 bins 没打到</li>
-        <li>这些 holes 更像是 stimulus 不够、constraint 不对，还是本身不可达</li>
-        <li>它们对应哪个 block / state / feature</li>
-        <li>下一步该补什么 test 或 scenario</li>
+        <li>这些 holes 对应哪个 feature / RTL block / protocol state</li>
+        <li>缺的是 stimulus、constraint、sampling，还是本身不可达</li>
+        <li>下一步建议补什么 test / sequence / scenario</li>
       </ul>
+      <p>coverage closure 是验证后期非常痛的工作，所以这个方向非常值钱，也很适合作为 triage 之后的第二阶段项目。</p>
 
-      <h2>3. RegMatrix：寄存器 / 规格智能</h2>
-      <p>RegMatrix 适合处理寄存器验证、规格文档解析和 traceability。它可以把 PDF/文档里的 register 定义、reset 值、access type、field dependency 等抽出来，形成 machine-usable 的结构化信息。</p>
+      <h2>5. RegMatrix：寄存器 / 规格智能</h2>
+      <p>RegMatrix 适合把文档和寄存器信息结构化。很多验证信息散落在 PDF、表格、wiki、邮件里，而寄存器行为恰好又是比较规则化的一类对象，因此 AI 很适合先做解析和组织工作。</p>
       <ul>
-        <li>寄存器图谱 / dependency graph</li>
-        <li>寄存器测试建议</li>
-        <li>动态约束建议</li>
-        <li>requirement → register → test 的映射</li>
+        <li>寄存器文档解析</li>
+        <li>register graph / dependency graph</li>
+        <li>reset/default/access type 摘要</li>
+        <li>register test 建议</li>
+        <li>dynamic constraint 建议</li>
+        <li>requirement → register → test traceability</li>
       </ul>
 
-      <h2>4. TestForge RL：测试选择优化</h2>
-      <p>不是所有 regression 都值得全量跑。TestForge RL 的思路是：根据历史 coverage 增益、bug 发现能力、运行成本等信号，用强化学习或其他优化方法挑最值得跑的 test。</p>
+      <h2>6. TestForge RL：回归测试优化</h2>
+      <p>不是所有 regression 都值得全量跑。对于大型验证项目，算力、license、wall time 都是成本。TestForge RL 的核心是：让系统根据 coverage 增益、历史 fail、改动影响、测试运行代价，智能决定哪些 test 更值得优先跑。</p>
       <ul>
-        <li>有限算力下最大化 coverage gain</li>
-        <li>减少重复、低收益的测试</li>
-        <li>基于当前改动做更聪明的 test prioritization</li>
+        <li>最大化 coverage reward</li>
+        <li>减少低收益、重复性测试</li>
+        <li>在有限预算下提升验证效率</li>
       </ul>
+      <p>这个方向很有吸引力，但通常比 triage 更依赖 reward design 和历史数据质量。</p>
 
-      <h2>5. DVCore：多代理验证框架</h2>
-      <p>DVCore 更像一个平台化思路。它不是只做一个点工具，而是把多个 verification agent 组织起来：</p>
+      <h2>7. DVCore：多代理验证框架</h2>
+      <p>DVCore 代表的是平台型思路。它不是单点功能，而是把多个 AI agent 结合起来，形成一个面向 verification workflow 的统一系统。</p>
       <ul>
         <li>spec agent</li>
         <li>coverage agent</li>
-        <li>regression triage agent</li>
+        <li>triage agent</li>
         <li>assertion agent</li>
+        <li>register agent</li>
         <li>waveform/debug agent</li>
       </ul>
-      <p>通过统一的 orchestration 和 chat/workflow 接口，把离散的 DV 工具串起来。</p>
+      <p>多代理框架的价值在于，把原本分散的工具和知识库串起来，但它更适合放在后面做整合层，而不是第一步就做。</p>
 
-      <h2>6. WaveScope MCP：波形调试辅助</h2>
-      <p>WaveScope MCP 代表更偏前沿但很有吸引力的一类方向：让 AI 不只是读 log，而是结合波形/事件摘要帮助你找 first divergence 和 root cause。</p>
-      <p>现实里更可行的做法通常不是直接把完整 waveform 喂给大模型，而是先抽成：</p>
+      <h2>8. WaveScope MCP：波形调试辅助</h2>
+      <p>WaveScope MCP 是很有未来感的一类方向。真正的难点不是“让模型看波形”，而是如何把巨大的 waveform 数据先抽成足够有意义的结构化摘要，例如：</p>
       <ul>
         <li>关键信号事件时间线</li>
-        <li>协议 transaction 摘要</li>
-        <li>状态变化序列</li>
+        <li>transaction 序列</li>
+        <li>状态跳转轨迹</li>
+        <li>first divergence 点</li>
       </ul>
-      <p>再让 AI 去做解释和推断。</p>
+      <p>然后再让 AI 解释这些摘要、推测 root cause。这个方向非常有吸引力，但技术难度明显更高。</p>
 
-      <h2>7. 推荐的整体路线</h2>
-      <p>如果要做一个既实用、又适合放到 GitHub/作品集上的项目，我建议优先顺序是：</p>
-      <ul>
-        <li>Regression Failure Triage</li>
-        <li>Coverage Closure Assistant</li>
-        <li>Register / Spec Intelligence</li>
-        <li>RL-based Test Prioritization</li>
-        <li>Waveform-Aware Debug</li>
-        <li>Multi-Agent Platform Integration</li>
-      </ul>
+      <h2>9. 为什么要做一个“完整版图”而不只讲一个点</h2>
+      <p>如果这个仓库只是讲 triage，一个点当然够实用；但如果你想把它做成一个更有作品集价值的项目，那么展示一个完整的 AI + DV landscape 会更强。它说明你不是只知道一个 demo，而是理解整个领域的落地方向、优先级、以及不同 idea 之间的关系。</p>
 
-      <h2>8. 为什么先做 triage 最合理</h2>
-      <p>因为它：</p>
+      <h2>10. 我建议的优先顺序</h2>
       <ul>
-        <li>最贴近日常痛点</li>
-        <li>输入数据现成（logs / metadata / assertions）</li>
-        <li>容易衡量价值（节省 triage 时间、减少重复 debug）</li>
-        <li>最容易做出一个可信的 MVP</li>
+        <li><strong>1.</strong> Regression failure triage</li>
+        <li><strong>2.</strong> Coverage closure assistant</li>
+        <li><strong>3.</strong> Register/spec intelligence</li>
+        <li><strong>4.</strong> RL-based test prioritization</li>
+        <li><strong>5.</strong> Waveform-aware debug</li>
+        <li><strong>6.</strong> Multi-agent platform integration</li>
       </ul>
 
-      <h2>9. 适合 GitHub 展示的呈现方式</h2>
-      <p>这个仓库最适合被定位成一个 <strong>AI for Design Verification</strong> 的 idea landscape + implementation roadmap。首页做概览，详细页讲工程逻辑，后面如果继续做，可以再加：</p>
+      <h2>11. 适合继续扩展到 repo 里的内容</h2>
+      <p>如果后面想把这个 repo 做得更像一个真正的项目，而不是静态文档，可以继续补：</p>
       <ul>
-        <li><code>examples/</code></li>
         <li><code>docs/architecture.md</code></li>
-        <li><code>reports/</code></li>
-        <li><code>sample logs</code></li>
+        <li><code>examples/sample_logs/</code></li>
+        <li><code>reports/nightly_example.md</code></li>
+        <li><code>src/</code> 下的 parser / clustering / summarizer 原型</li>
+        <li>一张架构图和一个 roadmap 页面</li>
       </ul>
 
-      <h2>10. 一句话总结</h2>
-      <p>如果目标是在 DV 领域做一个既现实又有展示价值的 AI 项目，那么最好的切入点之一就是：<strong>AI-assisted regression failure triage</strong>，再逐步扩展到 coverage、spec/register、test optimization、以及 waveform-aware debug。</p>
+      <h2>12. 一句话总结</h2>
+      <p>如果目标是在 Design Verification 领域做一个既现实、又有展示价值的 AI 项目，那么最好的切入点之一就是：<strong>AI-assisted regression failure triage</strong>。在此基础上，再往 coverage、register/spec、test optimization、multi-agent、waveform-aware debug 逐步扩展，会形成一个很完整的 AI-native DV roadmap。</p>
     </article>
   </div>
 </body>

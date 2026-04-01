@@ -26,12 +26,12 @@
     hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
     .top { display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 10px; }
     .btn { display:inline-block; padding:10px 14px; border:1px solid var(--border); border-radius:12px; background: var(--panel); }
-  </style>
+  .lang-switch{display:flex;gap:8px;align-items:center}.lang-pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}.lang-pill.active{background:rgba(120,166,255,.18);color:#fff}</style>
 </head>
 <body>
   <div class="wrap">
     <div class="nav">
-      <div class="top"><div style="margin-left:auto;color:#a9b6d3;">English ｜ <a href="../zh/docs/index.html">中文</a></div>
+      <div class="top"><div class="lang-switch" style="margin-left:auto;"><span class="lang-pill active">English</span><a class="lang-pill" href="../zh/docs/index.html">中文</a></div>
         <a class="btn" href="../index.html">← Back to Home</a>
         <a class="btn" href="https://github.com/hongjieli/design-verification-with-ai" target="_blank" rel="noreferrer">View Repo</a>
       </div>
