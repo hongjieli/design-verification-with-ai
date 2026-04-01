@@ -1,0 +1,103 @@
+<svg width="1400" height="980" viewBox="0 0 1400 980" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#121A31"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#182341"/>
+      <stop offset="1" stop-color="#121A31"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    <style>
+      .title { font: 700 38px Inter, Segoe UI, sans-serif; fill: #E9EEFC; }
+      .subtitle { font: 500 18px Inter, Segoe UI, sans-serif; fill: #A9B6D3; }
+      .cat { font: 700 21px Inter, Segoe UI, sans-serif; fill: #E9EEFC; }
+      .item { font: 500 15px Inter, Segoe UI, sans-serif; fill: #C9D4EE; }
+      .small { font: 500 13px Inter, Segoe UI, sans-serif; fill: #93A4C7; }
+      .outline { stroke: rgba(255,255,255,0.08); stroke-width: 1.2; }
+      .link { stroke: rgba(120,166,255,0.35); stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="980" rx="28" fill="url(#bg)"/>
+  <text x="70" y="82" class="title">Design Verification with AI — Landscape</text>
+  <text x="70" y="114" class="subtitle">6 top-level categories with 15 detailed development directions</text>
+
+  <rect x="510" y="150" width="380" height="88" rx="20" fill="#0F1730" stroke="rgba(255,255,255,0.10)" filter="url(#shadow)"/>
+  <text x="700" y="190" text-anchor="middle" class="cat">AI + Design Verification</text>
+  <text x="700" y="216" text-anchor="middle" class="small">Practical roadmap for RTL / IP / SoC verification workflows</text>
+
+  <!-- connectors -->
+  <path d="M700 238 L700 290" class="link"/>
+  <path d="M700 290 L230 290" class="link"/>
+  <path d="M700 290 L700 290" class="link"/>
+  <path d="M700 290 L1170 290" class="link"/>
+  <path d="M230 290 L230 310" class="link"/>
+  <path d="M700 290 L700 310" class="link"/>
+  <path d="M1170 290 L1170 310" class="link"/>
+  <path d="M230 620 L230 650" class="link"/>
+  <path d="M700 620 L700 650" class="link"/>
+  <path d="M1170 620 L1170 650" class="link"/>
+
+  <!-- row 1 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="310" width="320" height="310" rx="22" fill="url(#card)" class="outline"/>
+    <text x="98" y="348" class="cat">1. Regression Intelligence</text>
+    <text x="98" y="382" class="item">• Regression failure triage</text>
+    <text x="98" y="412" class="item">• Bug prediction / risk forecasting</text>
+    <text x="98" y="442" class="item">• Auto-debug / fix recommendation</text>
+    <text x="98" y="490" class="small">Focus: logs, failure clusters, novelty, prioritization,</text>
+    <text x="98" y="512" class="small">owner hints, next-step debug suggestions.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="540" y="310" width="320" height="310" rx="22" fill="url(#card)" class="outline"/>
+    <text x="568" y="348" class="cat">2. Coverage Intelligence</text>
+    <text x="568" y="382" class="item">• Coverage closure intelligence</text>
+    <text x="568" y="412" class="item">• Constraint &amp; stimulus optimization</text>
+    <text x="568" y="442" class="item">• Regression planning / test selection</text>
+    <text x="568" y="490" class="small">Focus: hole analysis, coverage reward, scenario guidance,</text>
+    <text x="568" y="512" class="small">compute-efficient verification closure.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1010" y="310" width="320" height="310" rx="22" fill="url(#card)" class="outline"/>
+    <text x="1038" y="348" class="cat">3. Spec / Register Intelligence</text>
+    <text x="1038" y="382" class="item">• Spec-to-test / requirement intelligence</text>
+    <text x="1038" y="412" class="item">• Register / CSR intelligence</text>
+    <text x="1038" y="442" class="item">• Assertion / property generation</text>
+    <text x="1038" y="490" class="small">Focus: extracting structured verification intent from</text>
+    <text x="1038" y="512" class="small">documentation, protocols, and CSR definitions.</text>
+  </g>
+
+  <!-- row 2 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="650" width="320" height="250" rx="22" fill="url(#card)" class="outline"/>
+    <text x="98" y="688" class="cat">4. Debug Intelligence</text>
+    <text x="98" y="722" class="item">• Waveform / trace-aware debug</text>
+    <text x="98" y="752" class="item">• Formal verification + AI</text>
+    <text x="98" y="800" class="small">Focus: divergence analysis, event summaries,</text>
+    <text x="98" y="822" class="small">proof interpretation, and debug acceleration.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="540" y="650" width="320" height="250" rx="22" fill="url(#card)" class="outline"/>
+    <text x="568" y="688" class="cat">5. Verification Platform</text>
+    <text x="568" y="722" class="item">• Verification knowledge copilot / RAG</text>
+    <text x="568" y="752" class="item">• Multi-agent orchestration</text>
+    <text x="568" y="782" class="item">• Cross-modal DV intelligence</text>
+    <text x="568" y="830" class="small">Focus: connecting specs, RTL, logs, coverage,</text>
+    <text x="568" y="852" class="small">and workflow automation under one interface.</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1010" y="650" width="320" height="250" rx="22" fill="url(#card)" class="outline"/>
+    <text x="1038" y="688" class="cat">6. Testbench Generation</text>
+    <text x="1038" y="722" class="item">• Testbench / UVM generation</text>
+    <text x="1038" y="770" class="small">Focus: scaffolding agents, monitors,</text>
+    <text x="1038" y="792" class="small">scoreboards, sequences, and baseline tests.</text>
+  </g>
+</svg>
