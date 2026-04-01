@@ -52,6 +52,7 @@
       <p>这些任务有几个共同特点：数据量大、重复度高、噪声多、跨多个来源，而且往往不是“数学推导”问题，而是“归纳、总结、关联、排序、建议”。这正是 AI 非常适合先切入的区域。</p>
 
       <h2>2. 核心主线：AI-Assisted Regression Failure Triage</h2>
+<p><img src="../../assets/topics/regression-intelligence.svg" alt="Regression Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
       <p>如果要在 AI + DV 里先选一个最实用、最容易形成 MVP、也最适合展示到 GitHub/作品集上的项目，我会优先做 regression failure triage。</p>
       <p>它解决的不是“有没有 fail”，而是：</p>
       <ul>
@@ -103,6 +104,7 @@
       <p>这种设计比纯黑盒大模型方案更便宜、更可控、也更容易解释。</p>
 
       <h2>4. CoverPilot：Coverage Closure Copilot</h2>
+<p><img src="../../assets/topics/coverage-intelligence.svg" alt="Coverage Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
       <p>CoverPilot 的重点是 coverage intelligence。它的价值在于帮助验证工程师解释 coverage report，而不是只是展示数字。</p>
       <ul>
         <li>哪些 bins 没打到</li>
@@ -113,6 +115,7 @@
       <p>coverage closure 是验证后期非常痛的工作，所以这个方向非常值钱，也很适合作为 triage 之后的第二阶段项目。</p>
 
       <h2>5. RegMatrix：寄存器 / 规格智能</h2>
+<p><img src="../../assets/topics/spec-register-intelligence.svg" alt="Spec / Register Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
       <p>RegMatrix 适合把文档和寄存器信息结构化。很多验证信息散落在 PDF、表格、wiki、邮件里，而寄存器行为恰好又是比较规则化的一类对象，因此 AI 很适合先做解析和组织工作。</p>
       <ul>
         <li>寄存器文档解析</li>
@@ -124,6 +127,7 @@
       </ul>
 
       <h2>6. TestForge RL：回归测试优化</h2>
+<p><img src="../../assets/topics/test-optimization.svg" alt="Test Optimization 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
       <p>不是所有 regression 都值得全量跑。对于大型验证项目，算力、license、wall time 都是成本。TestForge RL 的核心是：让系统根据 coverage 增益、历史 fail、改动影响、测试运行代价，智能决定哪些 test 更值得优先跑。</p>
       <ul>
         <li>最大化 coverage reward</li>
@@ -133,6 +137,7 @@
       <p>这个方向很有吸引力，但通常比 triage 更依赖 reward design 和历史数据质量。</p>
 
       <h2>7. DVCore：多代理验证框架</h2>
+<p><img src="../../assets/topics/verification-platform.svg" alt="Verification Platform 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
       <p>DVCore 代表的是平台型思路。它不是单点功能，而是把多个 AI agent 结合起来，形成一个面向 verification workflow 的统一系统。</p>
       <ul>
         <li>spec agent</li>
@@ -145,6 +150,7 @@
       <p>多代理框架的价值在于，把原本分散的工具和知识库串起来，但它更适合放在后面做整合层，而不是第一步就做。</p>
 
       <h2>8. WaveScope MCP：波形调试辅助</h2>
+<p><img src="../../assets/topics/debug-intelligence.svg" alt="Debug Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
       <p>WaveScope MCP 是很有未来感的一类方向。真正的难点不是“让模型看波形”，而是如何把巨大的 waveform 数据先抽成足够有意义的结构化摘要，例如：</p>
       <ul>
         <li>关键信号事件时间线</li>
