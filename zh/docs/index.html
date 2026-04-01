@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI 与 Design Verification — 中文详细文档</title>
-  <meta name="description" content="关于如何将 AI 与设计验证结合的详细中文工程文档。" />
+  <meta name="description" content="关于如何将 AI 与设计验证结合的中英严格对照版中文工程文档。" />
   <style>
     :root { --bg:#0b1020; --panel:#121a31; --text:#e9eefc; --muted:#a9b6d3; --accent:#78a6ff; --border:rgba(255,255,255,.08); --max:940px; }
     *{box-sizing:border-box}
@@ -20,9 +20,10 @@
     h1{font-size:40px;line-height:1.1;margin:0 0 16px;letter-spacing:-.03em}
     h2{font-size:28px;margin:34px 0 12px;border-top:1px solid var(--border);padding-top:26px}
     h3{font-size:20px;margin:22px 0 8px}
-    p,li{color:var(--muted)}
-    ul{padding-left:22px}
+    p,li{color:var(--muted)} ul{padding-left:22px}
     code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:2px 6px;border-radius:8px}
+    pre{background:#09101f;border:1px solid var(--border);border-radius:16px;padding:16px;overflow:auto}
+    hr{border:none;border-top:1px solid var(--border);margin:28px 0}
     @media (max-width:700px){ .lang-switch{margin-left:0;width:100%} }
   </style>
 </head>
@@ -37,187 +38,573 @@
       </div>
     </div>
     <article class="article">
-      <h1>AI 与 Design Verification：中文详细文档</h1>
-      <p>这份文档是英文版的中文完整整理，目标是把 <strong>AI 如何与 Design Verification 结合</strong> 讲清楚，并且尽量从工程落地角度而不是概念宣传角度来写。重点主线仍然是：<strong>AI-assisted regression failure triage</strong>，同时也把 coverage、register/spec、test optimization、multi-agent platform、waveform-aware debug 这些方向纳入一个更完整的版图。</p>
-
-      <h2>1. 为什么这个方向值得做</h2>
-      <p>在 RTL / IP / SoC 验证里，很多真正消耗工程时间的工作并不是“写第一版 testbench”，而是：</p>
+      <h1>AI 与 Design Verification：详细工程文档</h1>
+      <p>本文聚焦于如何将 <strong>设计验证（Design Verification, DV）</strong> 与 <strong>AI / LLM</strong> 结合，重点强调当前最具可行性和工程价值的一条主线：</p>
+      <p><strong>AI-assisted regression failure triage（AI 辅助回归失败归类与总结）</strong></p>
+      <p>这份页面被写成适合 GitHub 展示的工程文档，可同时作为：</p>
       <ul>
-        <li>看大量 regression fail</li>
-        <li>判断哪些 fail 是重复的</li>
-        <li>分清是 design bug、testbench bug 还是 infra 问题</li>
-        <li>阅读 coverage report 并决定下一步怎么收敛</li>
-        <li>把 spec、register、testplan 和真实验证行为对应起来</li>
-      </ul>
-      <p>这些任务有几个共同特点：数据量大、重复度高、噪声多、跨多个来源，而且往往不是“数学推导”问题，而是“归纳、总结、关联、排序、建议”。这正是 AI 非常适合先切入的区域。</p>
-
-      <h2>2. 核心主线：AI-Assisted Regression Failure Triage</h2>
-<p><img src="../../assets/topics/regression-intelligence.svg" alt="Regression Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
-      <p>如果要在 AI + DV 里先选一个最实用、最容易形成 MVP、也最适合展示到 GitHub/作品集上的项目，我会优先做 regression failure triage。</p>
-      <p>它解决的不是“有没有 fail”，而是：</p>
-      <ul>
-        <li>100 个 fail 里到底有几个独立 root cause</li>
-        <li>哪些是已知问题，哪些是新问题</li>
-        <li>哪些最值得先看</li>
-        <li>可能归属于哪个 block / owner</li>
-        <li>下一步 debug 从哪里下手最合理</li>
+        <li>讨论笔记</li>
+        <li>项目 proposal 草稿</li>
+        <li>README 的上层设计文档</li>
+        <li>作品集 / 面试材料</li>
       </ul>
 
-      <h3>它可以吃什么输入</h3>
+      <hr />
+
+      <h2>Why this area matters</h2>
+      <p>在现代 RTL / IP / SoC 验证中，团队花费大量时间的不只是写测试，更在于 <strong>解释 regression 结果</strong>：</p>
       <ul>
-        <li>simulation log</li>
-        <li>UVM summary</li>
-        <li>assertion reports</li>
-        <li>test name / seed / commit / branch</li>
+        <li>夜间回归可能一次跑出成百上千个测试</li>
+        <li>大量失败其实是同一个 root cause 的重复表现</li>
+        <li>日志很长、噪声很多</li>
+        <li>问题归属不清晰</li>
+        <li>有些失败来自 design bug，有些来自 testbench、基础设施、seed 不稳定或错误约束</li>
+      </ul>
+      <p>真正痛苦的问题通常不是：</p>
+      <p><strong>“有没有失败？”</strong></p>
+      <p>而是：</p>
+      <p><strong>“哪些失败是真的新问题，哪些只是重复问题，它们最可能的 root cause 是什么，下一步应该做什么？”</strong></p>
+      <p>这使得 <strong>regression triage</strong> 成为一个非常适合 AI 的应用点：</p>
+      <ul>
+        <li>数据本来就存在（log、metadata、assertion、波形摘要）</li>
+        <li>价值容易解释</li>
+        <li>AI 能帮助总结、聚类、排序、建议下一步</li>
+        <li>不要求 AI 直接替代 signoff 或直接修改 RTL</li>
+      </ul>
+      <p>因此它的部署风险更低，也更容易先落地。</p>
+
+      <hr />
+
+      <h2>1. Core Idea: AI-Assisted Regression Failure Triage</h2>
+      <p><img src="../../assets/topics/regression-intelligence.svg" alt="Regression Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
+      <h3>Problem statement</h3>
+      <p>一个典型 regression 会产生大量信息：</p>
+      <ul>
+        <li>simulator compile logs</li>
+        <li>runtime logs</li>
+        <li>UVM messages</li>
+        <li>assertion failures</li>
         <li>timeout 信息</li>
-        <li>scoreboard mismatch 摘要</li>
-        <li>optional：波形摘要、历史 bug、历史 regression 结果</li>
+        <li>seed 值</li>
+        <li>test name</li>
+        <li>commit ID / branch 信息</li>
+        <li>waveform 指针</li>
+        <li>coverage 变化</li>
+        <li>基础设施错误</li>
       </ul>
-
-      <h3>它应该输出什么</h3>
-      <ul>
-        <li>one-line failure summary</li>
-        <li>cluster ID（重复问题聚类）</li>
-        <li>likely category（design bug / TB bug / infra / flaky 等）</li>
-        <li>novelty score（像不像新问题）</li>
-        <li>priority / impact 估计</li>
-        <li>suspected owner</li>
-        <li>next-step suggestion</li>
-      </ul>
-
-      <h3>为什么这个方向最现实</h3>
-      <ul>
-        <li>数据现成，团队本来就每天在产生日志</li>
-        <li>价值容易衡量：能不能减少 triage 时间、减少重复 debug</li>
-        <li>不需要 AI 直接改 RTL，也不需要它承担 signoff 风险</li>
-        <li>工程师最容易接受“建议型 / copilot 型”工具</li>
-      </ul>
-
-      <h2>3. 一个实际可做的系统架构</h2>
-      <p>比较靠谱的起步方式通常不是“把整段原始 log 丢给 LLM 然后等奇迹”，而是分层做：</p>
+      <p>然后工程师必须回答：</p>
       <ol>
-        <li>先用脚本提取关键失败片段</li>
-        <li>把 first error、assertion、timeout、phase、module hint 抽成结构化 failure packet</li>
-        <li>用规则或 embedding 做初步聚类</li>
-        <li>再让 LLM 做 summary / category / next-step suggestion</li>
+        <li>这些失败到底有多少个独立问题？</li>
+        <li>哪些失败实际上是重复的？</li>
+        <li>这更像 design bug、testbench bug 还是基础设施问题？</li>
+        <li>最先可疑的模块或功能点是哪一个？</li>
+        <li>应该优先修哪个问题？</li>
+        <li>应该由哪个 owner/team 接手？</li>
       </ol>
-      <p>这种设计比纯黑盒大模型方案更便宜、更可控、也更容易解释。</p>
+      <p>这个流程重复、量大，而且很依赖模式识别与自然语言总结——非常适合 AI 介入。</p>
 
-      <h2>4. CoverPilot：Coverage Closure Copilot</h2>
-<p><img src="../../assets/topics/coverage-intelligence.svg" alt="Coverage Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
-      <p>CoverPilot 的重点是 coverage intelligence。它的价值在于帮助验证工程师解释 coverage report，而不是只是展示数字。</p>
+      <h3>Goal</h3>
+      <p>构建一个系统，能够自动：</p>
       <ul>
-        <li>哪些 bins 没打到</li>
-        <li>这些 holes 对应哪个 feature / RTL block / protocol state</li>
-        <li>缺的是 stimulus、constraint、sampling，还是本身不可达</li>
-        <li>下一步建议补什么 test / sequence / scenario</li>
+        <li>解析 regression 输出</li>
+        <li>标准化并总结失败</li>
+        <li>将相似失败聚类</li>
+        <li>识别可能的 root-cause 类别</li>
+        <li>按新颖度和严重性排序</li>
+        <li>建议 owner 和下一步动作</li>
+        <li>生成工程师可读的 triage summary</li>
       </ul>
-      <p>coverage closure 是验证后期非常痛的工作，所以这个方向非常值钱，也很适合作为 triage 之后的第二阶段项目。</p>
+      <p>关键点在于：</p>
+      <p><strong>AI 不是最终 correctness 的裁决者，</strong></p>
+      <p><strong>AI 是 triage copilot，用来减少工程人力成本。</strong></p>
 
-      <h2>5. RegMatrix：寄存器 / 规格智能</h2>
-<p><img src="../../assets/topics/spec-register-intelligence.svg" alt="Spec / Register Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
-      <p>RegMatrix 适合把文档和寄存器信息结构化。很多验证信息散落在 PDF、表格、wiki、邮件里，而寄存器行为恰好又是比较规则化的一类对象，因此 AI 很适合先做解析和组织工作。</p>
+      <h2>2. What the system would do</h2>
+      <h3>Inputs</h3>
+      <p>一个实用的 triage 系统可以吃以下输入中的一部分或全部：</p>
+      <h3>Regression metadata</h3>
       <ul>
-        <li>寄存器文档解析</li>
-        <li>register graph / dependency graph</li>
-        <li>reset/default/access type 摘要</li>
-        <li>register test 建议</li>
-        <li>dynamic constraint 建议</li>
-        <li>requirement → register → test traceability</li>
+        <li>regression name</li>
+        <li>build ID</li>
+        <li>branch / commit SHA</li>
+        <li>test name</li>
+        <li>seed</li>
+        <li>simulator version</li>
+        <li>testbench version</li>
+        <li>target configuration</li>
+        <li>DUT/IP version</li>
       </ul>
-
-      <h2>6. TestForge RL：回归测试优化</h2>
-<p><img src="../../assets/topics/test-optimization.svg" alt="Test Optimization 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
-      <p>不是所有 regression 都值得全量跑。对于大型验证项目，算力、license、wall time 都是成本。TestForge RL 的核心是：让系统根据 coverage 增益、历史 fail、改动影响、测试运行代价，智能决定哪些 test 更值得优先跑。</p>
+      <h3>Execution artifacts</h3>
       <ul>
-        <li>最大化 coverage reward</li>
-        <li>减少低收益、重复性测试</li>
-        <li>在有限预算下提升验证效率</li>
+        <li>compile log</li>
+        <li>simulation log</li>
+        <li>UVM report summary</li>
+        <li>assertion failure report</li>
+        <li>timeout / deadlock indicators</li>
+        <li>memory crash / segmentation fault traces</li>
+        <li>protocol checker messages</li>
+        <li>scoreboard mismatch summaries</li>
       </ul>
-      <p>这个方向很有吸引力，但通常比 triage 更依赖 reward design 和历史数据质量。</p>
+      <h3>Optional richer signals</h3>
+      <ul>
+        <li>关键波形的事件摘要</li>
+        <li>feature/coverage context</li>
+        <li>失败 transaction 摘要</li>
+        <li>历史 known issue 数据库</li>
+        <li>Jira/Bug tracker 历史</li>
+        <li>前几次 regression 的对比结果</li>
+      </ul>
 
-      <h2>7. DVCore：多代理验证框架</h2>
-<p><img src="../../assets/topics/verification-platform.svg" alt="Verification Platform 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
-      <p>DVCore 代表的是平台型思路。它不是单点功能，而是把多个 AI agent 结合起来，形成一个面向 verification workflow 的统一系统。</p>
+      <h3>Outputs</h3>
+      <p>一个强一点的系统应该输出结构化结果，例如：</p>
+      <h3>1) Failure summary</h3>
+      <ul>
+        <li>一段自然语言短摘要</li>
+        <li>first error point</li>
+        <li>likely symptom class</li>
+      </ul>
+      <p>示例：</p>
+      <p><strong>AXI write response timeout observed after reset deassertion in burst traffic test. Likely handshake sequencing issue or stalled downstream ready path.</strong></p>
+      <h3>2) Failure category</h3>
+      <p>例如：</p>
+      <ul>
+        <li>likely design bug</li>
+        <li>likely testbench bug</li>
+        <li>likely infra/tool issue</li>
+        <li>timeout/hang</li>
+        <li>assertion violation</li>
+        <li>scoreboard mismatch</li>
+        <li>compile/elaboration failure</li>
+        <li>nondeterministic / flaky / seed-sensitive issue</li>
+      </ul>
+      <h3>3) Cluster ID</h3>
+      <p>将看起来属于同一个 root cause 的失败聚为一组。</p>
+      <h3>4) Novelty score</h3>
+      <p>判断它更像是：</p>
+      <ul>
+        <li>brand new issue</li>
+        <li>known recurrence</li>
+        <li>existing signature 的变体</li>
+      </ul>
+      <h3>5) Priority estimate</h3>
+      <p>可综合考虑：</p>
+      <ul>
+        <li>受影响测试数量</li>
+        <li>block criticality</li>
+        <li>feature criticality</li>
+        <li>是否阻塞大规模 regression</li>
+        <li>失败是否稳定复现</li>
+      </ul>
+      <h3>6) Suspected ownership</h3>
+      <p>例如：</p>
+      <ul>
+        <li>AXI interconnect team</li>
+        <li>DMA block owner</li>
+        <li>UVM env owner</li>
+        <li>CI/infrastructure owner</li>
+      </ul>
+      <h3>7) Recommended next action</h3>
+      <p>例如：</p>
+      <ul>
+        <li>inspect first failing assertion in module X</li>
+        <li>compare against yesterday’s passing commit</li>
+        <li>rerun with waveform dump enabled</li>
+        <li>inspect ready/valid timeline around reset release</li>
+        <li>check scoreboard reference model transaction packing</li>
+        <li>classify as infrastructure and remove from DV bug count</li>
+      </ul>
+
+      <h2>3. Why AI is a good fit</h2>
+      <h3>3.1 Logs are semi-structured, noisy, and repetitive</h3>
+      <p>传统 regex parser 有帮助，但通常比较脆。AI / LLM 更擅长：</p>
+      <ul>
+        <li>从噪声中抽取重点</li>
+        <li>识别语义相似而非文本完全相同的失败</li>
+        <li>把长 log 压缩成工程师可读的短摘要</li>
+      </ul>
+      <h3>3.2 Duplicate failures are not always text-identical</h3>
+      <p>两个失败可能底层 root cause 一样，但表面症状略有不同：</p>
+      <ul>
+        <li>相同 reset bug</li>
+        <li>不同 test name</li>
+        <li>不同 assertion line number</li>
+        <li>不同 seed</li>
+        <li>略有差别的 protocol checker 提示</li>
+      </ul>
+      <p>embedding 或 LLM 辅助的系统比简单字符串匹配更有机会识别它们的相关性。</p>
+      <h3>3.3 Triage is naturally decision-support oriented</h3>
+      <p>这点很重要。AI 在这种场景里输出的是：</p>
+      <ul>
+        <li>建议</li>
+        <li>总结</li>
+        <li>排序</li>
+        <li>可能的分类</li>
+      </ul>
+      <p>而不是最终 signoff 决策，因此更安全也更现实。</p>
+
+      <h2>4. System architecture ideas</h2>
+      <p>这个系统可以有几种常见实现方式。</p>
+      <h3>Option A: Rule-based front end + LLM summarizer</h3>
+      <ol>
+        <li>用脚本/规则解析 log</li>
+        <li>抽取 first error、assertion、severity、timeout 等关键点</li>
+        <li>把压缩后的 failure packet 喂给 LLM</li>
+        <li>LLM 输出 summary、category、suggested root cause</li>
+        <li>再由独立 clustering 层做聚类</li>
+      </ol>
+      <p><strong>优点：</strong>更便宜、更可控、更可解释。<br /><strong>缺点：</strong>前处理质量要求较高。</p>
+      <h3>Option B: Embedding-based clustering + LLM explanation</h3>
+      <ol>
+        <li>抽取 compact failure signatures</li>
+        <li>转成 embeddings</li>
+        <li>做向量相似度搜索 / clustering</li>
+        <li>对每个 cluster 再用 LLM 生成解释和 debug 建议</li>
+      </ol>
+      <p><strong>优点：</strong>适合大规模去重。<br /><strong>缺点：</strong>依赖 signature 质量。</p>
+      <h3>Option C: Retrieval-augmented verification copilot</h3>
+      <ol>
+        <li>存储历史 failures、tickets、resolved root causes</li>
+        <li>新问题出现时召回相似历史案例</li>
+        <li>LLM 对比新旧案例并建议是否复用过去的处理经验</li>
+      </ol>
+      <p><strong>优点：</strong>能利用组织记忆。<br /><strong>缺点：</strong>依赖历史数据质量。</p>
+
+      <h2>5. Data model for a practical implementation</h2>
+      <p>一个实用项目应该为每个 fail 定义结构化 record。</p>
+      <pre><code>{
+  "regression_id": "nightly_2026_04_01",
+  "test_name": "axi_burst_after_reset_rand",
+  "seed": 38192711,
+  "commit": "abc1234",
+  "simulator": "vcs",
+  "status": "fail",
+  "first_error_timestamp": "1250340ns",
+  "first_error_line": "UVM_ERROR @ 1250340ns: scoreboard mismatch...",
+  "assertions": ["axi_resp_timeout_a"],
+  "symptom_tags": ["timeout", "assertion", "post_reset"],
+  "feature": "AXI write response",
+  "module_candidates": ["axi_slave_if", "dma_top"],
+  "cluster_id": "cluster_001",
+  "predicted_category": "likely_design_bug",
+  "novelty_score": 0.82,
+  "priority_score": 0.91,
+  "owner_guess": "dma_team"
+}</code></pre>
+      <p>这种结构化记录能让后续的排序、聚类、报表、反馈学习都更容易实现。</p>
+
+      <h2>6. Root-cause categories worth using</h2>
+      <p>一个好的 triage 流程最好先定义清晰但不过分复杂的 taxonomy。</p>
+      <h3>Design-related</h3>
+      <ul>
+        <li>protocol violation</li>
+        <li>state machine bug</li>
+        <li>reset/power sequencing bug</li>
+        <li>data corruption / mismatch</li>
+        <li>ordering issue</li>
+        <li>liveness / deadlock issue</li>
+      </ul>
+      <h3>Verification environment-related</h3>
+      <ul>
+        <li>scoreboard bug</li>
+        <li>monitor bug</li>
+        <li>driver/sequencer bug</li>
+        <li>bad constraint / illegal stimulus generation</li>
+        <li>reference model mismatch</li>
+      </ul>
+      <h3>Infrastructure/tool-related</h3>
+      <ul>
+        <li>compile issue</li>
+        <li>elaboration issue</li>
+        <li>license/server issue</li>
+        <li>simulator crash</li>
+        <li>environment configuration issue</li>
+      </ul>
+      <h3>Quality/process-related</h3>
+      <ul>
+        <li>flaky / nondeterministic failure</li>
+        <li>duplicate known issue</li>
+        <li>expected fail / waiver candidate</li>
+      </ul>
+
+      <h2>7. Input preprocessing matters more than people think</h2>
+      <p>原始 simulation log 通常又长又乱。更合理的做法是先抽取：</p>
+      <ul>
+        <li>first failing assertion(s)</li>
+        <li>最靠近 first hard failure 的 UVM_ERROR / FATAL</li>
+        <li>timeout markers</li>
+        <li>test phase</li>
+        <li>component path</li>
+        <li>simulator stack trace</li>
+        <li>关键 transaction / signal 摘要</li>
+      </ul>
+      <p>一个 compact failure packet 往往比整段原始 log 更适合下游 AI 使用。</p>
+
+      <h2>8. Example end-to-end workflow</h2>
+      <ol>
+        <li>Run regression</li>
+        <li>Collect failure artifacts</li>
+        <li>Normalize each failure into a common JSON structure</li>
+        <li>Generate signatures</li>
+        <li>Cluster failures</li>
+        <li>Summarize clusters with AI</li>
+        <li>Publish a daily triage report</li>
+        <li>Let engineers review and correct outputs</li>
+      </ol>
+      <p>这些人工修正本身就是后续提升系统质量的高价值反馈数据。</p>
+
+      <h2>9. Examples of useful prompts</h2>
+      <p>如果使用 LLM，prompt 最好足够结构化。</p>
+      <h3>Example: single-failure classification prompt</h3>
+      <pre><code>You are assisting RTL verification triage.
+Classify the following failure into one of these categories only:
+[design_bug, testbench_bug, infra_issue, timeout_hang, assertion_failure, scoreboard_mismatch, flaky]
+Then provide:
+1. a one-sentence summary,
+2. the most likely first debug target,
+3. confidence from 0 to 1.
+Use only evidence from the provided log excerpt and metadata.</code></pre>
+      <h3>Example: cluster summary prompt</h3>
+      <pre><code>The following 17 failures are believed to be related.
+Summarize the common symptom, likely shared root cause, likely owner area, and recommended next debug step.
+Keep output under 8 bullet points.</code></pre>
+
+      <h2>10. Evaluation: how do you know it works?</h2>
+      <ul>
+        <li>Cluster purity</li>
+        <li>Duplicate-reduction quality</li>
+        <li>Category classification accuracy</li>
+        <li>Time saved</li>
+        <li>First-debug-target usefulness</li>
+        <li>Novelty detection precision</li>
+      </ul>
+
+      <h2>11. Engineering challenges</h2>
+      <ul>
+        <li>日志风格不一致</li>
+        <li>相同 root cause 可能表现为不同症状</li>
+        <li>历史标签数据稀缺</li>
+        <li>LLM hallucination 风险</li>
+        <li>上下文长度受限</li>
+        <li>工程师是否愿意信任并采纳</li>
+      </ul>
+
+      <h2>12. Practical MVP scope</h2>
+      <p>更适合作为 v1 的范围：</p>
+      <ul>
+        <li>输入：simulation logs、test name、seed、assertion report、基础 metadata</li>
+        <li>功能：提取 first meaningful error、分类、聚类、one-line summary、daily markdown report</li>
+        <li>先不做：完整波形理解、自动修 bug、复杂的组织内集成</li>
+      </ul>
+
+      <h2>13. Example MVP output</h2>
+      <pre><code># Nightly Regression Summary
+
+- Total tests run: 1240
+- Total failures: 96
+- Unique clusters: 7
+
+## Cluster 1 — AXI write response timeout after reset
+- Affected tests: 21
+- Category: likely_design_bug
+- Confidence: 0.84
+- Common signals: bvalid not observed after aw/w handshake
+- Suggested owner: interconnect / slave response path
+- Suggested next step: inspect ready/valid propagation around reset release
+
+## Cluster 2 — Scoreboard mismatch in descriptor length field
+- Affected tests: 14
+- Category: likely_testbench_bug
+- Confidence: 0.71
+- Suggested next step: compare predictor packing logic against updated RTL field definition
+
+## Cluster 3 — License checkout / simulator startup issue
+- Affected tests: 33
+- Category: infra_issue
+- Confidence: 0.97
+- Suggested owner: CAD / CI infrastructure</code></pre>
+
+      <h2>14. Extensions beyond MVP</h2>
+      <ul>
+        <li>Historical trend analysis</li>
+        <li>Owner-aware routing</li>
+        <li>Similar-case retrieval</li>
+        <li>Coverage-aware prioritization</li>
+        <li>Commit-aware regression selection</li>
+      </ul>
+
+      <h2>15. Relationship to other AI-for-DV ideas</h2>
+      <p>AI-assisted regression triage 与其他 DV+AI 方向天然互补：</p>
+      <ul>
+        <li>coverage closure assistant</li>
+        <li>assertion generation</li>
+        <li>spec-to-test extraction</li>
+        <li>constraint tuning</li>
+        <li>verification copilots</li>
+      </ul>
+      <p>一个成熟平台最终可以把 spec understanding、test generation、regression triage、coverage closure、debug assistance 串在一起。</p>
+
+      <h2>Broader AI + Design Verification Idea Landscape</h2>
+      <p>除了 regression triage，还有一些相邻方向共同构成更完整的 AI-for-DV 路线图。</p>
+
+      <h2>A. CoverPilot — Coverage Closure Copilot</h2>
+      <p><img src="../../assets/topics/coverage-intelligence.svg" alt="Coverage Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
+      <p>CoverPilot 是一个 coverage closure 辅助方向，结合：</p>
+      <ul>
+        <li>functional coverage reports</li>
+        <li>code/RTL coverage</li>
+        <li>black-box / white-box visibility</li>
+        <li>verification plan context</li>
+        <li>coverage hole 到 feature / RTL 的映射</li>
+      </ul>
+      <p>它帮助工程师回答：哪些 uncovered bins 最值得关注、哪些 hole 可能不可达、哪些是 stimulus 不足、哪些对应某段 RTL 逻辑。</p>
+
+      <h2>B. RegMatrix — Register / Spec Intelligence</h2>
+      <p><img src="../../assets/topics/spec-register-intelligence.svg" alt="Spec Register Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
+      <p>RegMatrix 更聚焦于将规格、寄存器、字段关系结构化，支持：</p>
+      <ul>
+        <li>register specification parsing</li>
+        <li>register dependency graph</li>
+        <li>reset/default/access-policy 摘要</li>
+        <li>test list 建议</li>
+        <li>constraint-aware test generation</li>
+        <li>requirement-to-test traceability</li>
+      </ul>
+
+      <h2>C. TestForge RL — Reinforcement Learning for Test Prioritization</h2>
+      <p><img src="../../assets/topics/test-optimization.svg" alt="Test Optimization 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
+      <p>TestForge RL 用 reinforcement learning 或其他 adaptive search 技术来优化 regression 中“该先跑哪些 test”。核心信号包括：</p>
+      <ul>
+        <li>coverage gain</li>
+        <li>historical pass/fail behavior</li>
+        <li>bug density</li>
+        <li>runtime cost</li>
+      </ul>
+      <p>目标是提升 coverage 效率，减少低价值测试。</p>
+
+      <h2>D. DVCore — Multi-Agent Verification Framework</h2>
+      <p><img src="../../assets/topics/verification-platform.svg" alt="Verification Platform 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
+      <p>DVCore 是一个平台化思路，尝试将多个 specialized verification agents 组织在一起，例如：</p>
       <ul>
         <li>spec agent</li>
+        <li>regression triage agent</li>
         <li>coverage agent</li>
-        <li>triage agent</li>
         <li>assertion agent</li>
         <li>register agent</li>
         <li>waveform/debug agent</li>
       </ul>
-      <p>多代理框架的价值在于，把原本分散的工具和知识库串起来，但它更适合放在后面做整合层，而不是第一步就做。</p>
+      <p>由统一 orchestration 层进行任务路由。</p>
 
-      <h2>8. WaveScope MCP：波形调试辅助</h2>
-<p><img src="../../assets/topics/debug-intelligence.svg" alt="Debug Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
-      <p>WaveScope MCP 是很有未来感的一类方向。真正的难点不是“让模型看波形”，而是如何把巨大的 waveform 数据先抽成足够有意义的结构化摘要，例如：</p>
+      <h2>E. WaveScope MCP — Waveform-Aware Debug Assistant</h2>
+      <p><img src="../../assets/topics/debug-intelligence.svg" alt="Debug Intelligence 图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
+      <p>WaveScope MCP 聚焦于将 AI 接到调试/波形流里，通过：</p>
       <ul>
-        <li>关键信号事件时间线</li>
-        <li>transaction 序列</li>
-        <li>状态跳转轨迹</li>
-        <li>first divergence 点</li>
+        <li>事件时间线提取</li>
+        <li>protocol activity 摘要</li>
+        <li>关键状态变化识别</li>
+        <li>与 assertion/log 的相关性分析</li>
       </ul>
-      <p>然后再让 AI 解释这些摘要、推测 root cause。这个方向非常有吸引力，但技术难度明显更高。</p>
+      <p>来帮助定位 first divergence 和 root cause。</p>
 
-      <h2>9. 为什么要做一个“完整版图”而不只讲一个点</h2>
-      <p>如果这个仓库只是讲 triage，一个点当然够实用；但如果你想把它做成一个更有作品集价值的项目，那么展示一个完整的 AI + DV landscape 会更强。它说明你不是只知道一个 demo，而是理解整个领域的落地方向、优先级、以及不同 idea 之间的关系。</p>
-
-      <h2>10. 我建议的优先顺序</h2>
+      <h2>Putting the landscape together</h2>
+      <p>这些方向共同组成一个更完整的 AI-for-DV 地图：</p>
       <ul>
-        <li><strong>1.</strong> Regression failure triage</li>
-        <li><strong>2.</strong> Coverage closure assistant</li>
-        <li><strong>3.</strong> Register/spec intelligence</li>
-        <li><strong>4.</strong> RL-based test prioritization</li>
-        <li><strong>5.</strong> Waveform-aware debug</li>
-        <li><strong>6.</strong> Multi-agent platform integration</li>
+        <li>Regression / Failure Intelligence</li>
+        <li>Coverage Intelligence</li>
+        <li>Spec / Register Intelligence</li>
+        <li>Regression Optimization</li>
+        <li>Verification Platform Architecture</li>
       </ul>
 
-      <h2>11. 适合继续扩展到 repo 里的内容</h2>
-      <p>如果后面想把这个 repo 做得更像一个真正的项目，而不是静态文档，可以继续补：</p>
+      <h2>Recommended prioritization</h2>
+      <ol>
+        <li>Regression failure triage</li>
+        <li>Coverage closure assistant</li>
+        <li>Register/spec intelligence</li>
+        <li>Test optimization / RL</li>
+        <li>Waveform-aware debug</li>
+        <li>Multi-agent DV platform</li>
+      </ol>
+
+      <h2>Suggested repo positioning</h2>
+      <p>这个 repo 最合适的定位方式是：</p>
+      <p><strong>一个面向 AI + Design Verification 的整体 idea landscape 与工程路线图，其中主深挖方向是 AI-assisted regression failure triage。</strong></p>
+
+      <h2>Expanded DV + AI Landscape</h2>
+      <p>为了让整体地图更完整，最好将首页上的 <strong>6 个一级分类</strong> 与详细页里的 <strong>15 个细分方向</strong> 区分开来。</p>
+      <h3>Top-level categories used on the homepage</h3>
       <ul>
-        <li><code>docs/architecture.md</code></li>
-        <li><code>examples/sample_logs/</code></li>
-        <li><code>reports/nightly_example.md</code></li>
-        <li><code>src/</code> 下的 parser / clustering / summarizer 原型</li>
-        <li>一张架构图和一个 roadmap 页面</li>
+        <li>Regression Intelligence</li>
+        <li>Coverage Intelligence</li>
+        <li>Spec / Register Intelligence</li>
+        <li>Test Optimization</li>
+        <li>Debug Intelligence</li>
+        <li>Verification Platform</li>
+      </ul>
+      <h3>Detailed sub-directions</h3>
+      <ul>
+        <li><strong>1. Regression failure triage</strong> —— 回归失败聚类、分类、摘要。</li>
+        <li><strong>2. Coverage closure intelligence</strong> —— coverage hole 分析、优先级、reachability 提示。</li>
+        <li><strong>3. Spec-to-test / requirement intelligence</strong> —— 规格到 test/coverage/assertion 的映射。</li>
+        <li><strong>4. Assertion / property generation</strong> —— 生成 SVA / property 草稿。</li>
+        <li><strong>5. Testbench / UVM generation</strong> —— 自动搭建 verification scaffold。</li>
+        <li><strong>6. Constraint and stimulus optimization</strong> —— 优化 stimulus 命中难场景。</li>
+        <li><strong>7. Regression planning / test selection optimization</strong> —— 在有限预算下挑最值的 tests。</li>
+        <li><strong>8. Waveform / trace-aware debug intelligence</strong> —— 结合波形摘要做 divergence 分析。</li>
+        <li><strong>9. Register / CSR intelligence</strong> —— CSR/spec 解析与验证规划。</li>
+        <li><strong>10. Formal verification + AI</strong> —— formal target、assumption、vacuity、proof 辅助。</li>
+        <li><strong>11. Verification knowledge copilot / RAG assistant</strong> —— 跨 spec、代码、log、bug 历史问答。</li>
+        <li><strong>12. Verification agent platform / multi-agent orchestration</strong> —— 多 agent 协同验证工作流。</li>
+        <li><strong>13. Bug prediction / risk forecasting</strong> —— 高风险模块/feature/commit 预测。</li>
+        <li><strong>14. Cross-modal DV intelligence</strong> —— 联合 spec、RTL、log、coverage、waveform 摘要推理。</li>
+        <li><strong>15. Auto-debug / fix recommendation</strong> —— debug path 与修复方向建议。</li>
+      </ul>
+      <p>也就是说：首页的 6 个方向只是一级分组，而不是说当前 DV + AI 只有 6 条发展路线。</p>
+
+      <h2>17. Suggested tech stack ideas</h2>
+      <p>一个实作版本可以用以下技术栈：</p>
+      <ul>
+        <li>Python 做 parsing 和 orchestration</li>
+        <li>JSON / SQLite / Postgres 做存储</li>
+        <li>embedding model 做相似度与 clustering</li>
+        <li>LLM 做 summary / classification / suggestion</li>
+        <li>Markdown report / web dashboard 做展示</li>
       </ul>
 
-      <h2>12. 一句话总结</h2>
-      <p>如果目标是在 Design Verification 领域做一个既现实、又有展示价值的 AI 项目，那么最好的切入点之一就是：<strong>AI-assisted regression failure triage</strong>。在此基础上，再往 coverage、register/spec、test optimization、multi-agent、waveform-aware debug 逐步扩展，会形成一个很完整的 AI-native DV roadmap。</p>
-    
-<h2>扩展版图：DV + AI 的 15 个细分方向</h2>
-<p>为了让整个版图更完整，最好的表达方式不是把首页塞成 15 个卡片，而是：<strong>首页保留 6 个一级分类，详细文档展开成 15 个细分方向</strong>。这样既清晰，也更接近当前行业实际。</p>
-<h3>首页保留的 6 个一级分类</h3>
-<ul>
-<li>Regression Intelligence</li>
-<li>Coverage Intelligence</li>
-<li>Spec / Register Intelligence</li>
-<li>Test Optimization</li>
-<li>Debug Intelligence</li>
-<li>Verification Platform</li>
-</ul>
-<h3>详细文档展开的 15 个细分方向</h3>
-<ul>
-<li><strong>1. Regression failure triage</strong> —— 回归失败聚类、类别判断、总结与优先级建议。</li>
-<li><strong>2. Coverage closure intelligence</strong> —— coverage hole 分析、优先级、reachable / unreachable 提示。</li>
-<li><strong>3. Spec-to-test / requirement intelligence</strong> —— 从规格提 requirement，并映射到 test、coverage、assertion。</li>
-<li><strong>4. Assertion / property generation</strong> —— 根据 spec 或协议描述生成 SVA / property 草稿。</li>
-<li><strong>5. Testbench / UVM generation</strong> —— 自动搭 verification skeleton、agent、monitor、基础 test。</li>
-<li><strong>6. Constraint and stimulus optimization</strong> —— 优化 constrained-random stimulus，更快命中难场景。</li>
-<li><strong>7. Regression planning / test selection optimization</strong> —— 在有限算力下挑最值得跑的 test。</li>
-<li><strong>8. Waveform / trace-aware debug intelligence</strong> —— 利用 waveform/trace 摘要做 first divergence 和异常定位。</li>
-<li><strong>9. Register / CSR intelligence</strong> —— 解析 CSR/spec、构建寄存器关系图并辅助验证规划。</li>
-<li><strong>10. Formal verification + AI</strong> —— property targeting、假设检查、vacuity 提示、proof 结果解释。</li>
-<li><strong>11. Verification knowledge copilot / RAG assistant</strong> —— 跨 spec、代码、log、bug 历史做验证问答。</li>
-<li><strong>12. Verification agent platform / multi-agent orchestration</strong> —— 用多个 specialized agent 协同处理 verification workflow。</li>
-<li><strong>13. Bug prediction / risk forecasting</strong> —— 预测高风险模块、feature、改动点。</li>
-<li><strong>14. Cross-modal DV intelligence</strong> —— 把 spec、RTL、logs、coverage、waveform 摘要联合起来推理。</li>
-<li><strong>15. Auto-debug / fix recommendation</strong> —— 建议怀疑模块、debug 路径与可能修复方向。</li>
-</ul>
-<p>也就是说，首页里的 6 个方向不是“只有 6 条路”，而是为了展示层次清晰而做的一级聚类；真正更完整的当前 DV + AI 发展图谱，应该看这 15 个细分方向。</p>
+      <h2>18. What makes this strong as a GitHub project</h2>
+      <p>即使不公开公司真实 log，这个项目也能通过 synthetic log、样例架构、markdown reports、clustering prototype 展示核心价值。</p>
 
-</article>
+      <h2>19. Recommended positioning statement</h2>
+      <p><strong>I’m interested in applying AI to design verification, especially in regression failure triage. The idea is to automatically parse simulation and UVM logs, cluster related failures, classify likely root-cause categories, and generate actionable summaries for verification engineers.</strong></p>
+      <p>对应中文可以理解为：</p>
+      <p><strong>我希望将 AI 用于 Design Verification，尤其聚焦回归失败归类与总结：自动解析 simulation/UVM 日志、聚类相关 failures、判断可能的 root-cause 类别，并生成可执行的工程摘要与建议。</strong></p>
+
+      <h2>20. My view on where the real value is</h2>
+      <p>AI 在 DV 里真正的价值，往往不在最花哨的 demo，而在于：</p>
+      <ul>
+        <li>减少重复分析</li>
+        <li>总结噪声很大的输出</li>
+        <li>帮助排序和优先级判断</li>
+        <li>沉淀组织的 debug 知识</li>
+      </ul>
+      <p>这也是为什么 regression failure triage 是一个这么值得先做的切入口。</p>
+
+      <h2>20. Next steps if turning this into a repo</h2>
+      <ol>
+        <li>写一个清晰的 README</li>
+        <li>做 synthetic log examples</li>
+        <li>实现 first-error signature parser</li>
+        <li>加上简单 clustering</li>
+        <li>生成 markdown triage reports</li>
+        <li>再把 LLM summary 放上去</li>
+        <li>用人工标注样本做初步评估</li>
+      </ol>
+
+      <hr />
+
+      <h2>Short takeaway</h2>
+      <p>如果目标是在 Design Verification 里做一个既现实、又有作品集价值的 AI 项目，那么：</p>
+      <p><strong>AI-assisted regression failure triage 是最值得优先启动的方向之一。</strong></p>
+      <p>它直击日常痛点，使用团队已有数据，并且可以在不把最终正确性判断外包给 AI 的前提下，创造立即可见的工程价值。</p>
+    </article>
   </div>
 </body>
 </html>
