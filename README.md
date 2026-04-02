@@ -1,16 +1,16 @@
 # Design Verification with AI
 
-This repository explores practical ways to combine **AI** with **design verification (DV)**.
+This repository explores a structured portfolio of **AI-assisted design verification (DV)** topics.
 
-It covers a broader idea landscape including:
-- regression failure triage
-- coverage closure assistance
-- register/spec intelligence
-- reinforcement-learning-based test optimization
-- multi-agent verification frameworks
-- waveform-aware debug assistance
+Instead of treating AI for DV as a single monolithic idea, this repo organizes the space into several independent but related project directions:
 
-The main deep-dive currently focuses on **AI-assisted regression failure triage**, which is one of the most practical and measurable starting points for AI in DV.
+- **CoverPilot** — coverage intelligence and closure guidance
+- **RegMatrix** — register/spec intelligence and dynamic-constraint reasoning
+- **TestForge RL** — reinforcement-learning-based test selection and coverage optimization
+- **DVCore** — the agent foundation for AI-native DV workflows
+- **WaveScope MCP** — waveform-aware debug intelligence
+
+Together, these topics span a broad verification workflow, from document understanding and test planning to coverage analysis and waveform debug.
 
 ## Documents
 
@@ -21,7 +21,7 @@ The main deep-dive currently focuses on **AI-assisted regression failure triage*
 
 ## Why this repo exists
 
-Design verification teams generate large volumes of logs, reports, test data, coverage data, and documentation. AI is especially useful not as a replacement for verification engineers, but as a copilot for:
+Design verification teams generate large volumes of logs, reports, test data, coverage data, waveforms, and documentation. AI is especially useful not as a replacement for verification engineers, but as a copilot for:
 
 - triage
 - summarization
@@ -30,30 +30,36 @@ Design verification teams generate large volumes of logs, reports, test data, co
 - traceability
 - workflow acceleration
 
-## Core idea categories
+## Portfolio Structure
 
-### 1. Regression / Failure Intelligence
-AI-assisted regression failure triage, clustering, and root-cause summarization.
-
-### 2. Coverage Intelligence
+### 1. CoverPilot
 Coverage-hole analysis, RTL mapping, and closure suggestions.
 
-### 3. Register / Spec Intelligence
-Document parsing, register graphing, requirement traceability, and test recommendation.
+### 2. RegMatrix
+Document parsing, register graphing, dynamic constraints, and test recommendation.
 
-### 4. Regression Optimization
+### 3. TestForge RL
 RL-guided or learning-based test prioritization for better coverage efficiency.
 
-### 5. Verification Platform Architecture
-Multi-agent verification assistants that orchestrate specialized tools.
+### 4. DVCore
+Agent framework, workflow execution, memory, and subagent routing for DV workflows.
 
-### 6. Waveform-Aware Debug
+### 5. WaveScope MCP
 Structured waveform/event analysis to accelerate root-cause understanding.
+
+## Suggested reading order
+
+If you are new to the repo, a good reading path is:
+
+1. `docs/design-verification-ai-ideas.md` — main topic-oriented overview
+2. `docs/supporting-references.md` — standards, tools, and engineering references
+3. `docs/academic-supporting-papers.md` — academic paper shortlist
+4. `zh/docs/academic-supporting-papers.md` — Chinese academic paper version
 
 ## Best practical starting point
 
-If building a first project in this space, the strongest starting direction is:
+If building a first project in this space, the strongest starting directions are:
 
-> **AI-assisted regression failure triage**
+> **CoverPilot** and adjacent regression / coverage intelligence workflows
 
-because it addresses a daily verification pain point, uses existing regression data, and delivers measurable engineering value without asking AI to replace signoff decisions.
+because they use existing DV artifacts, solve recurring engineering pain points, and are easier to measure than fully automated design-changing flows.
