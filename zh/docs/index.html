@@ -598,6 +598,109 @@ Keep output under 8 bullet points.</code></pre>
         <li>用人工标注样本做初步评估</li>
       </ol>
 
+      
+<h2>参考资料与支撑材料</h2>
+<p>下面给出一份按 topic 分类的参考资料清单。它混合了行业资源、验证领域基础资料，以及少量较新的 AI for hardware / verification 公开论文。目标不是说每个方向都已经非常成熟，而是说明：这些 topic 要么已经扎根于主流验证实践，要么已经出现了公开可见的 AI 化探索。</p>
+
+<h3>1. Regression failure triage / fail intelligence</h3>
+<ul>
+<li>Verification Academy — UVM 与验证方法学资源：<a href="https://verificationacademy.com/topics/uvm-universal-verification-methodology/" target="_blank">verificationacademy.com/topics/uvm-universal-verification-methodology/</a></li>
+<li>Verification Academy — Assertions：<a href="https://verificationacademy.com/topics/assertions/" target="_blank">verificationacademy.com/topics/assertions/</a></li>
+<li>这些资源支撑 triage 所依赖的底层对象：UVM reports、assertions、protocol checks、regression debug 流程。</li>
+</ul>
+
+<h3>2. Coverage closure intelligence</h3>
+<ul>
+<li>Verification Academy — Coverage：<a href="https://verificationacademy.com/topics/coverage/" target="_blank">verificationacademy.com/topics/coverage/</a></li>
+<li>coverage closure 和 functional coverage 本来就是主流 DV 流程的重要组成部分；AI 的加入主要是增加“解释 + 排序 + 建议”这一层。</li>
+</ul>
+
+<h3>3. Spec-to-test / requirement intelligence</h3>
+<ul>
+<li>Verification Academy — UVM 与方法学资料：<a href="https://verificationacademy.com/topics/uvm-universal-verification-methodology/" target="_blank">verificationacademy.com/topics/uvm-universal-verification-methodology/</a></li>
+<li>这个方向建立在验证计划、需求追踪、文档驱动测试规划等既有实践之上，AI 主要起到提取、映射和自动化支持作用。</li>
+</ul>
+
+<h3>4. Assertion / property generation</h3>
+<ul>
+<li>AssertLLM: Generating Hardware Verification Assertions from Design Specifications via Multi-LLMs（arXiv 2024）：<a href="https://arxiv.org/abs/2411.14436" target="_blank">arxiv.org/abs/2411.14436</a></li>
+<li>Verification Academy — Assertions：<a href="https://verificationacademy.com/topics/assertions/" target="_blank">verificationacademy.com/topics/assertions/</a></li>
+<li>Verification Academy — Formal Verification：<a href="https://verificationacademy.com/topics/formal-verification/" target="_blank">verificationacademy.com/topics/formal-verification/</a></li>
+</ul>
+
+<h3>5. Testbench / UVM generation</h3>
+<ul>
+<li>Verification Academy — UVM：<a href="https://verificationacademy.com/topics/uvm-universal-verification-methodology/" target="_blank">verificationacademy.com/topics/uvm-universal-verification-methodology/</a></li>
+<li>VeriGen: A Large Language Model for Verilog Code Generation（arXiv 2023）：<a href="https://arxiv.org/abs/2308.00708" target="_blank">arxiv.org/abs/2308.00708</a></li>
+<li>虽然 VeriGen 主要面向 Verilog 生成，而不是直接生成 UVM，但它支持这样一个更大的判断：硬件语言中的 boilerplate / scaffold generation 是 LLM 很适合切入的方向。</li>
+</ul>
+
+<h3>6. Constraint and stimulus optimization</h3>
+<ul>
+<li>Verification Academy — Coverage：<a href="https://verificationacademy.com/topics/coverage/" target="_blank">verificationacademy.com/topics/coverage/</a></li>
+<li>Verification Academy — UVM：<a href="https://verificationacademy.com/topics/uvm-universal-verification-methodology/" target="_blank">verificationacademy.com/topics/uvm-universal-verification-methodology/</a></li>
+<li>这一方向的基础是长期存在的 constrained-random verification；AI/ML 的价值在于做 adaptive search、ranking、tuning。</li>
+</ul>
+
+<h3>7. Regression planning / test selection optimization</h3>
+<ul>
+<li>Verification Academy — Coverage：<a href="https://verificationacademy.com/topics/coverage/" target="_blank">verificationacademy.com/topics/coverage/</a></li>
+<li>这个 topic 可以看作 coverage-driven verification 和 regression management 的自然延伸。公开的 DV-specific RL 文献还不算特别丰富，但工程逻辑很清楚。</li>
+</ul>
+
+<h3>8. Waveform / trace-aware debug intelligence</h3>
+<ul>
+<li>Verification Academy — Assertions：<a href="https://verificationacademy.com/topics/assertions/" target="_blank">verificationacademy.com/topics/assertions/</a></li>
+<li>Verification Academy — Formal Verification：<a href="https://verificationacademy.com/topics/formal-verification/" target="_blank">verificationacademy.com/topics/formal-verification/</a></li>
+<li>这个方向的支撑来自主流 debug 实践本身：event trace、assertion、protocol checker、root-cause localization；AI 是在此基础上加总结和关联分析能力。</li>
+</ul>
+
+<h3>9. Register / CSR intelligence</h3>
+<ul>
+<li>Verification Academy — UVM 资源（与寄存器模型和方法学相关）：<a href="https://verificationacademy.com/topics/uvm-universal-verification-methodology/" target="_blank">verificationacademy.com/topics/uvm-universal-verification-methodology/</a></li>
+<li>这个方向建立在 CSR/register verification 和文档驱动验证的既有流程之上。</li>
+</ul>
+
+<h3>10. Formal verification + AI</h3>
+<ul>
+<li>Verification Academy — Formal Verification：<a href="https://verificationacademy.com/topics/formal-verification/" target="_blank">verificationacademy.com/topics/formal-verification/</a></li>
+<li>AssertLLM：<a href="https://arxiv.org/abs/2411.14436" target="_blank">arxiv.org/abs/2411.14436</a></li>
+<li>这是目前公开可见的“LLM + property/formal”交叉方向中相对明确的一条线。</li>
+</ul>
+
+<h3>11. Verification knowledge copilot / RAG assistant</h3>
+<ul>
+<li>这个方向建立在验证团队已经拥有的大量结构化/半结构化知识源之上：spec、UVM env、coverage report、bug tracker、wiki 等。</li>
+<li>Verification Academy 主站：<a href="https://verificationacademy.com/" target="_blank">verificationacademy.com</a></li>
+</ul>
+
+<h3>12. Verification agent platform / multi-agent orchestration</h3>
+<ul>
+<li>这是更偏架构层的方向，结合 AI assistant、retrieval、workflow orchestration，而不是依赖某一篇 canonical DV 论文。</li>
+<li>它的合理性更多来自当前 AI agent / RAG / engineering workflow 工具链的发展趋势。</li>
+</ul>
+
+<h3>13. Bug prediction / risk forecasting</h3>
+<ul>
+<li>这个 topic 与更广泛的软件/硬件质量预测、change-impact 分析、risk-based planning 有天然联系。</li>
+<li>在 DV 场景里，更适合把它看成 regression intelligence 的延伸，而不是一个已经完全标准化的独立流派。</li>
+</ul>
+
+<h3>14. Cross-modal DV intelligence</h3>
+<ul>
+<li>这个方向的支撑来自现实需求：spec 文本、RTL、logs、coverage、waveform/event summaries 往往需要联合起来看。</li>
+<li>它目前更像 emerging systems direction，而不是已经固化成单一产品类别的成熟路线。</li>
+</ul>
+
+<h3>15. Auto-debug / fix recommendation</h3>
+<ul>
+<li>这个方向要谨慎使用，但它是 failure triage、debug recommendation、code generation 能力向前延伸的自然结果。</li>
+<li>VeriGen：<a href="https://arxiv.org/abs/2308.00708" target="_blank">arxiv.org/abs/2308.00708</a></li>
+</ul>
+
+<p><strong>说明：</strong>上面每个方向的成熟度并不相同。有些方向已经扎根于主流验证实践（coverage、assertions、formal、UVM），AI 只是叠加层；另一些方向还比较新，更多依赖架构趋势、早期论文和公开 demo 来支撑。</p>
+
+
       <hr />
 
       <h2>Short takeaway</h2>
