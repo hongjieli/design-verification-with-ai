@@ -4,6 +4,20 @@ This document presents a structured view of **AI-assisted design verification (D
 
 Instead of treating AI for DV as one single monolithic assistant, this note organizes the space into a set of independent but related topics. Each topic addresses a real verification pain point and can be explored as its own project, prototype, or product direction.
 
+Five of the topic areas come directly from the original project matrix:
+
+- CoverPilot
+- RegMatrix
+- TestForge RL
+- DVCore
+- WaveScope MCP
+
+To make the portfolio more complete, three adjacent topics are added because they are both practically relevant and supportable by real references:
+
+- FailSense
+- AssertMind
+- TraceLens
+
 The overall structure is:
 
 1. Overview
@@ -12,9 +26,12 @@ The overall structure is:
 4. TestForge RL
 5. DVCore
 6. WaveScope MCP
-7. Conclusion
+7. FailSense
+8. AssertMind
+9. TraceLens
+10. Conclusion
 
-Together, these topics span a broad DV workflow, from agent infrastructure and document intelligence to coverage optimization and waveform-aware debug.
+Together, these topics span a broad DV workflow, from agent infrastructure and document intelligence to coverage optimization, failure triage, and waveform-aware debug.
 
 ---
 
@@ -52,13 +69,16 @@ AI is especially useful when it acts as a **copilot** for:
 
 The goal is not to replace verification engineers or automate signoff decisions. The goal is to reduce repetitive analysis work and increase the speed at which engineers move from raw artifacts to informed action.
 
-This document organizes that vision into five topic areas:
+This document organizes that vision into eight topic areas:
 
 1. **CoverPilot** — coverage intelligence
 2. **RegMatrix** — register/spec intelligence
 3. **TestForge RL** — reinforcement-learning-driven test selection
 4. **DVCore** — the agent foundation and orchestration layer
 5. **WaveScope MCP** — waveform-aware debug intelligence
+6. **FailSense** — regression failure intelligence
+7. **AssertMind** — assertion and formal intelligence
+8. **TraceLens** — spec-to-test traceability intelligence
 
 Each topic can stand alone, but the full value appears when they are connected into a practical AI-assisted DV stack.
 
@@ -468,7 +488,247 @@ WaveScope MCP is likely not the very first project to implement, but it is one o
 
 ---
 
-# Chapter 7. Conclusion: Toward a Practical AI-Assisted DV Stack
+# Chapter 7. FailSense: Regression Failure Intelligence
+
+## Problem Statement
+
+Large regressions often produce more information than engineers can efficiently digest:
+
+- many failing tests are duplicates of the same issue
+- visible symptoms differ across seeds and test scenarios
+- ownership is unclear
+- some failures come from design bugs, others from testbench, infra, or environment problems
+- manual triage consumes significant engineering time
+
+This creates a high-value opportunity for AI-assisted failure intelligence.
+
+## Why AI Helps
+
+Regression failure triage is a strong AI use case because it combines:
+
+- semi-structured logs
+- repetitive clustering tasks
+- text similarity and semantic grouping
+- prioritization and novelty detection
+
+AI can help reduce the raw failure volume into a smaller number of engineer-actionable issue buckets.
+
+## Core Idea
+
+**FailSense** is a regression failure intelligence engine that:
+
+- summarizes failures
+- clusters related issues
+- estimates novelty
+- suggests probable ownership
+- recommends next debug actions
+
+## Typical Inputs
+
+- simulation logs
+- UVM reports
+- assertion failures
+- timeout indicators
+- test metadata
+- historical known-issue records
+
+## Typical Outputs
+
+- failure summaries
+- issue clusters
+- novelty and priority estimates
+- ownership suggestions
+- recommended next actions
+
+## Example AI-Assisted Capabilities
+
+- “These 47 failing tests likely collapse into 3 root-cause groups.”
+- “This timeout appears related to a previously seen reset-sequencing issue.”
+- “The most likely first owner is the DMA block team.”
+- “This cluster is probably infra-related and should be filtered from design bug counts.”
+
+## Engineering Challenges
+
+- noisy logs and inconsistent failure formatting
+- weak or missing historical labels
+- semantic duplicates with different surface symptoms
+- balancing explainability with model complexity
+
+## Evaluation Metrics
+
+- reduction in number of failure buckets engineers must inspect
+- triage time saved per regression
+- correctness of duplicate grouping
+- accuracy of novelty and ownership suggestions
+
+## References
+
+- Clustering-based failure triage for RTL regression debugging — <https://doi.org/10.1109/TEST.2014.7035339>
+- Machine Learning in the Service of Hardware Functional Verification — <https://doi.org/10.1007/978-3-031-13074-8_14>
+- Data-Centric Machine Learning Pipeline for Hardware Verification — <https://doi.org/10.1109/SOCC56010.2022.9908095>
+
+---
+
+# Chapter 8. AssertMind: Assertion and Formal Intelligence
+
+## Problem Statement
+
+Assertions and formal methods are powerful, but difficult to scale because engineers still spend large amounts of effort on:
+
+- interpreting properties and proof failures
+- understanding counterexamples
+- deciding which properties are missing
+- translating specification intent into assertion candidates
+
+This makes assertion/formal assistance a strong adjacent AI opportunity.
+
+## Why AI Helps
+
+Assertion and formal workflows are attractive for AI because they already have relatively structured inputs and outputs:
+
+- properties
+- assumptions
+- proof statuses
+- counterexamples
+- protocol and spec text
+
+AI can help interpret, summarize, review, and propose next steps without claiming to replace formal engines.
+
+## Core Idea
+
+**AssertMind** is an assertion and formal intelligence assistant that:
+
+- reviews properties and requirements
+- explains proof failures and counterexamples
+- proposes candidate assertions from spec text
+- summarizes formal results into engineer-readable findings
+
+## Typical Inputs
+
+- assertion/property files
+- formal tool outputs
+- counterexample traces
+- protocol specifications
+- requirement text
+
+## Typical Outputs
+
+- candidate assertion suggestions
+- property review summaries
+- counterexample explanations
+- formal result summaries
+- recommended follow-up checks
+
+## Example AI-Assisted Capabilities
+
+- “This counterexample suggests the property is missing a reset assumption.”
+- “The protocol text implies an eventual response guarantee that is not yet asserted.”
+- “These two failing properties likely share the same sequencing assumption issue.”
+- “This proof result is more useful as a design-debug clue than as a final formal signoff result.”
+
+## Engineering Challenges
+
+- natural-language ambiguity in specs
+- risk of generating invalid or weak properties
+- formal outputs can still be hard to map to engineer intent
+- trust requirements are high in formal contexts
+
+## Evaluation Metrics
+
+- usefulness of generated assertion candidates
+- reduction in time to interpret formal results
+- engineer acceptance of explanations and recommendations
+- quality of counterexample summarization
+
+## References
+
+- Machine-Learning-Enabled Hardware Formal Verification — <https://doi.org/10.14711/thesis-hdl167709>
+- Verification Academy – Formal Verification — <https://verificationacademy.com/topics/formal-verification/>
+- SymbiYosys Documentation — <https://yosyshq.readthedocs.io/projects/sby/en/latest/>
+
+---
+
+# Chapter 9. TraceLens: Spec-to-Test Traceability Intelligence
+
+## Problem Statement
+
+One of the hardest management and engineering problems in verification is traceability:
+
+- which requirements map to which tests
+- which features are under-covered
+- which coverage holes have no clear requirement linkage
+- which tests still provide value and which have become redundant
+
+Without strong traceability, DV knowledge becomes fragmented across documents, tests, coverage reports, and engineer memory.
+
+## Why AI Helps
+
+Traceability is a good AI target because it requires connecting multiple semi-structured sources:
+
+- specification language
+- test descriptions
+- coverage models
+- verification reports
+- feature and block metadata
+
+AI can help build and maintain these mappings more effectively than purely manual linking.
+
+## Core Idea
+
+**TraceLens** is a traceability intelligence layer that connects:
+
+- requirement to test
+- requirement to coverage
+- register/spec features to verification intent
+- historical execution evidence to verification planning
+
+## Typical Inputs
+
+- requirements/spec documents
+- test plans and test descriptions
+- coverage points and UCIS-style data
+- historical regression outputs
+- feature tags and ownership metadata
+
+## Typical Outputs
+
+- requirement-to-test mapping
+- requirement-to-coverage mapping
+- missing-verification-gap reports
+- traceability dashboards
+- suggestions for redundant or low-value tests
+
+## Example AI-Assisted Capabilities
+
+- “This requirement appears to be only partially covered by current tests.”
+- “These coverage bins have no obvious requirement linkage and may reflect model drift.”
+- “This register feature has implementation tests but no end-to-end validation trace.”
+- “These tests appear redundant with respect to current feature traceability goals.”
+
+## Engineering Challenges
+
+- incomplete or weakly written requirements
+- mismatch between feature language and test naming
+- coverage models that drift away from current spec intent
+- maintaining traceability as specs and tests evolve
+
+## Evaluation Metrics
+
+- completeness of requirement linkage
+- reduction in orphaned coverage points
+- usefulness of gap reports
+- engineer confidence in generated traceability mapping
+
+## References
+
+- PyUCIS Documentation — <https://pyucis.readthedocs.io/en/latest/>
+- Accellera UVM Standard — <https://accellera.org/downloads/standards/uvm>
+- Data-Centric Machine Learning Pipeline for Hardware Verification — <https://doi.org/10.1109/SOCC56010.2022.9908095>
+- Verification Academy – Coverage — <https://verificationacademy.com/topics/coverage/>
+
+---
+
+# Chapter 10. Conclusion: Toward a Practical AI-Assisted DV Stack
 
 AI for design verification should not be framed as a single magic tool. A more realistic model is a layered stack of specialized capabilities.
 
@@ -479,15 +739,18 @@ In that stack:
 - **RegMatrix** handles register/spec intelligence
 - **TestForge RL** handles regression optimization
 - **WaveScope MCP** handles waveform-aware debug
+- **FailSense** handles regression failure intelligence
+- **AssertMind** handles assertion and formal assistance
+- **TraceLens** handles spec-to-test traceability intelligence
 
 These topics are independent enough to be built and evaluated separately, but also complementary enough to form a coherent platform.
 
 A practical implementation path might be:
 
-1. start with **CoverPilot** or regression/coverage intelligence
-2. add **RegMatrix** for structured spec-derived verification knowledge
+1. start with **CoverPilot** and **FailSense** for practical coverage/failure intelligence
+2. add **RegMatrix** and **TraceLens** for structured spec-derived verification knowledge and traceability
 3. explore **TestForge RL** for budget-aware regression optimization
-4. build **WaveScope MCP** for higher-value debug acceleration
+4. build **AssertMind** and **WaveScope MCP** for higher-value formal/debug assistance
 5. unify the workflow through **DVCore**
 
 That path keeps the effort grounded in measurable engineering value while still aiming toward a long-term vision of AI-native verification workflows.

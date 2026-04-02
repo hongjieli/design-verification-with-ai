@@ -9,6 +9,9 @@ Instead of treating AI for DV as a single monolithic idea, this repo organizes t
 - **TestForge RL** — reinforcement-learning-based test selection and coverage optimization
 - **DVCore** — the agent foundation for AI-native DV workflows
 - **WaveScope MCP** — waveform-aware debug intelligence
+- **FailSense** — regression failure intelligence
+- **AssertMind** — assertion and formal intelligence
+- **TraceLens** — spec-to-test traceability intelligence
 
 Together, these topics span a broad verification workflow, from document understanding and test planning to coverage analysis and waveform debug.
 
@@ -46,6 +49,15 @@ Agent framework, workflow execution, memory, and subagent routing for DV workflo
 
 ### 5. WaveScope MCP
 Structured waveform/event analysis to accelerate root-cause understanding.
+
+### 6. FailSense
+Regression failure triage, clustering, novelty detection, and ownership suggestion.
+
+### 7. AssertMind
+Assertion review, counterexample explanation, and formal-result intelligence.
+
+### 8. TraceLens
+Requirement-to-test, requirement-to-coverage, and verification traceability intelligence.
 
 ## Suggested reading order
 
