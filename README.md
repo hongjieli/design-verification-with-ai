@@ -15,6 +15,9 @@ The main deep-dive currently focuses on **AI-assisted regression failure triage*
 ## Documents
 
 - [Detailed idea landscape and engineering notes](docs/design-verification-ai-ideas.md)
+- [Supporting references (standards, tools, engineering docs)](docs/supporting-references.md)
+- [Academic supporting papers shortlist](docs/academic-supporting-papers.md)
+- [中文学术支持论文清单](zh/docs/academic-supporting-papers.md)
 
 ## Why this repo exists
 
