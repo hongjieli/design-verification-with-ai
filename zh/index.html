@@ -4,15 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI 与 Design Verification</title>
-  <meta name="description" content="把 AI 用在 Design Verification 上的实用方向：回归失败归类、coverage closure、寄存器/规格智能、RL 测试优化、多代理验证框架、波形调试辅助。" />
+  <meta name="description" content="AI辅助设计验证的8个topic组合，包括 CoverPilot、RegMatrix、TestForge RL、DVCore、WaveScope MCP、FailSense、AssertMind、TraceLens。" />
   <style>
-    :root { --bg:#0b1020; --panel:#121a31; --text:#e9eefc; --muted:#a9b6d3; --accent:#78a6ff; --accent2:#8cf0d2; --border:rgba(255,255,255,.08); --max:1080px; }
+    :root { --bg:#0b1020; --panel:#121a31; --text:#e9eefc; --muted:#a9b6d3; --accent:#78a6ff; --accent2:#8cf0d2; --border:rgba(255,255,255,.08); --shadow:0 10px 30px rgba(0,0,0,.25); --max:1120px; }
     *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at top right, rgba(120,166,255,.18), transparent 24%),radial-gradient(circle at top left, rgba(140,240,210,.12), transparent 20%),var(--bg);line-height:1.65}
     a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
     .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 72px}.hero{padding:44px 0 24px}.eyebrow{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.04);color:var(--muted);font-size:13px;margin-bottom:18px}
-    h1{margin:0 0 16px;font-size:clamp(34px,6vw,58px);line-height:1.05;letter-spacing:-.03em}.lead{max-width:860px;font-size:19px;color:var(--muted);margin:0 0 26px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}.btn{display:inline-block;padding:12px 16px;border-radius:12px;font-weight:600;border:1px solid var(--border);background:var(--panel)}.btn.primary{background:linear-gradient(135deg,var(--accent),#5d7cff);color:#fff;border:none}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:30px}.card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border:1px solid var(--border);border-radius:18px;padding:22px}.span-12{grid-column:span 12}.span-6{grid-column:span 6}.span-4{grid-column:span 4} h2{margin:0 0 12px;font-size:28px;letter-spacing:-.02em} h3{margin:0 0 10px;font-size:20px} p{margin:0 0 12px} ul{margin:10px 0 0 18px;color:var(--muted)} li{margin:6px 0}.muted{color:var(--muted)} .kicker{color:var(--accent2);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}.footer{margin-top:34px;color:var(--muted);font-size:14px;text-align:center}.lang{float:right;font-size:14px;color:var(--muted)} @media (max-width:860px){.span-6,.span-4{grid-column:span 12}.lead{font-size:17px}}
-  .lang-switch{display:flex;gap:8px;align-items:center}.lang-pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}.lang-pill.active{background:rgba(120,166,255,.18);color:#fff}</style>
+    h1{margin:0 0 16px;font-size:clamp(34px,6vw,58px);line-height:1.05;letter-spacing:-.03em}.lead{max-width:920px;font-size:19px;color:var(--muted);margin:0 0 26px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+    .btn{display:inline-block;padding:12px 16px;border-radius:12px;font-weight:600;border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow)}.btn.primary{background:linear-gradient(135deg,var(--accent),#5d7cff);color:#fff;border:none}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:30px}.card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+    .span-12{grid-column:span 12}.span-6{grid-column:span 6}.span-4{grid-column:span 4} h2{margin:0 0 12px;font-size:28px;letter-spacing:-.02em} h3{margin:0 0 10px;font-size:20px} p{margin:0 0 12px} ul{margin:10px 0 0 18px;color:var(--muted)} li{margin:6px 0}
+    .muted{color:var(--muted)} .kicker{color:var(--accent2);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}.footer{margin-top:34px;color:var(--muted);font-size:14px;text-align:center}
+    .lang-switch{display:flex;gap:8px;align-items:center;justify-content:flex-end}.lang-pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}.lang-pill.active{background:rgba(120,166,255,.18);color:#fff}
+    @media (max-width:860px){.span-6,.span-4{grid-column:span 12}.lead{font-size:17px}}
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -20,91 +25,41 @@
       <div class="lang-switch"><a class="lang-pill" href="../index.html">English</a><span class="lang-pill active">中文</span></div>
       <div class="eyebrow">AI × RTL / IP / SoC Verification</div>
       <h1>AI 与 Design Verification</h1>
-      <p class="lead">这是一个围绕 <strong>AI + Design Verification</strong> 的实用型项目主页，重点整理了如何把 AI 用在 <strong>回归失败分析</strong>、<strong>coverage closure</strong>、<strong>寄存器/规格理解</strong>、<strong>RL 测试优化</strong>、以及 <strong>波形调试辅助</strong> 上。</p>
+      <p class="lead">这个站点现在采用 <strong>8-topic AI辅助DV组合结构</strong>。它不再只是“一个主 topic 加若干扩展”，而是把多个独立但相关的方向组织成一个 portfolio。</p>
       <div class="actions">
         <a class="btn primary" href="https://github.com/hongjieli/design-verification-with-ai" target="_blank" rel="noreferrer">查看 GitHub 仓库</a>
-        <a class="btn" href="./docs/index.html">打开中文详细文档</a>
+        <a class="btn" href="../docs/index.html">打开文档入口</a>
       </div>
     </section>
 
     <section class="grid">
       <article class="card span-12">
-        <div class="kicker">核心判断</div>
-        <h2>AI 最适合先做“验证工程师副驾驶”</h2>
-        <p class="muted">在验证工作里，AI 最适合先解决高频、重复、信息噪声大的任务，比如：看 log、归类 fail、总结 coverage hole、梳理 spec 与 test 的映射关系，而不是一上来替代 signoff 判断。</p>
+        <div class="kicker">总览</div>
+        <h2>AI 最适合做验证工程师的副驾驶，而不是替代 signoff</h2>
+        <p class="muted">设计验证里最适合 AI 的地方，是那些高频、重复、信息噪声大、但又需要工程判断的环节，比如 failure triage、coverage closure、spec-to-test mapping、waveform debug 和 workflow orchestration。</p>
       </article>
 
-      <article class="card span-6">
-        <div class="kicker">最值得先做</div>
-        <h3>1. Regression Failure Triage</h3>
-        <p class="muted">这是最实用的起点。AI 可以帮助解析 simulation/UVM 日志、聚类相似失败、判断可能的 root-cause 类别、估计新问题与旧问题、并给出下一步 debug 建议。</p>
-        <ul>
-          <li>自动提取 first error / assertion / timeout 信息</li>
-          <li>把重复失败聚成 cluster</li>
-          <li>给出 design bug / testbench bug / infra issue 等分类建议</li>
-          <li>生成工程师可读的 triage summary</li>
-        </ul>
-      </article>
-
-      <article class="card span-6">
-        <div class="kicker">Coverage 智能</div>
-        <h3>2. CoverPilot</h3>
-        <p class="muted">聚焦 coverage closure。AI 帮你分析 black-box / white-box coverage、解释 coverage hole、把 hole 映射回 RTL / feature，并建议下一步应该补什么 test 或 constraint。</p>
-        <ul>
-          <li>coverage hole 解释</li>
-          <li>RTL / 功能点映射</li>
-          <li>reachable / unreachable 提示</li>
-          <li>closure-oriented 建议</li>
-        </ul>
-      </article>
-
-      <article class="card span-4">
-        <div class="kicker">规格 / 寄存器智能</div>
-        <h3>3. RegMatrix</h3>
-        <p class="muted">把寄存器文档、字段规则、访问属性、依赖关系转成结构化验证知识，支撑 register test、constraint 建议和 traceability。</p>
-      </article>
-
-      <article class="card span-4">
-        <div class="kicker">回归优化</div>
-        <h3>4. TestForge RL</h3>
-        <p class="muted">用强化学习或自适应策略优化 test prioritization，在有限计算预算下更快提升 coverage 或发现更有价值的问题。</p>
-      </article>
-
-      <article class="card span-4">
-        <div class="kicker">平台视角</div>
-        <h3>5. DVCore</h3>
-        <p class="muted">一个多代理 verification framework，让 coverage、log、spec、assertion、waveform 等能力在统一编排层下协同工作。</p>
-      </article>
+      <article class="card span-4"><div class="kicker">Topic 1</div><h3>CoverPilot</h3><p class="muted">coverage intelligence、hole analysis、RTL mapping、closure guidance。</p></article>
+      <article class="card span-4"><div class="kicker">Topic 2</div><h3>RegMatrix</h3><p class="muted">register/spec intelligence、dependency extraction、dynamic constraints、test suggestion。</p></article>
+      <article class="card span-4"><div class="kicker">Topic 3</div><h3>TestForge RL</h3><p class="muted">强化学习测试优选、coverage reward、budget-aware regression optimization。</p></article>
+      <article class="card span-4"><div class="kicker">Topic 4</div><h3>DVCore</h3><p class="muted">DV agent 基座、workflow execution、memory、subagent routing。</p></article>
+      <article class="card span-4"><div class="kicker">Topic 5</div><h3>WaveScope MCP</h3><p class="muted">波形理解、异常信号定位、事件摘要、root-cause acceleration。</p></article>
+      <article class="card span-4"><div class="kicker">Topic 6</div><h3>FailSense</h3><p class="muted">回归失败聚类、novelty detection、owner hint、triage summary。</p></article>
+      <article class="card span-6"><div class="kicker">Topic 7</div><h3>AssertMind</h3><p class="muted">assertion / formal intelligence、counterexample explanation、formal result summarization。</p></article>
+      <article class="card span-6"><div class="kicker">Topic 8</div><h3>TraceLens</h3><p class="muted">spec-to-test / requirement-to-coverage traceability intelligence。</p></article>
 
       <article class="card span-12">
-        <div class="kicker">高级调试</div>
-        <h3>6. WaveScope MCP</h3>
-        <p class="muted">把 AI 接到 RTL debug / waveform 工作流上，通过结构化的事件摘要帮助定位 first divergence 和 root cause。</p>
-      </article>
-
-      
-      <article class="card span-12">
-        <div class="kicker">结构图</div>
-        <h2>DV + AI 版图</h2>
-        <p class="muted">这张图把本项目的 6 个一级分类和 15 个细分方向用一张结构图串了起来。</p>
-        <p><img src="../assets/dv-ai-landscape.svg" alt="DV 与 AI 版图" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
-      </article>
-
-      <article class="card span-12">
-        <div class="kicker">建议路线</div>
-        <h2>推荐的落地顺序</h2>
+        <div class="kicker">文档入口</div>
+        <h2>建议阅读顺序</h2>
         <ul>
-          <li><strong>1.</strong> Regression failure triage</li>
-          <li><strong>2.</strong> Coverage closure assistant</li>
-          <li><strong>3.</strong> Register/spec intelligence</li>
-          <li><strong>4.</strong> RL-based test prioritization</li>
-          <li><strong>5.</strong> Waveform-aware debug</li>
-          <li><strong>6.</strong> Multi-agent platform integration</li>
+          <li><strong>1.</strong> 主文档：overview + 8 个独立 topic + conclusion</li>
+          <li><strong>2.</strong> supporting references：标准 / 工具 / 工程背景</li>
+          <li><strong>3.</strong> academic supporting papers：论文支撑</li>
         </ul>
       </article>
     </section>
 
-    <div class="footer">Bilingual GitHub Pages site for practical AI-native verification ideas.</div>
+    <div class="footer">面向 AI-assisted design verification 的双语 GitHub Pages 站点。</div>
   </div>
 </body>
 </html>

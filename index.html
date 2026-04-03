@@ -4,21 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Design Verification with AI</title>
-  <meta name="description" content="Practical ideas for combining AI with design verification: regression triage, coverage closure, register/spec intelligence, RL-based test optimization, and waveform-aware debug." />
+  <meta name="description" content="A portfolio of AI-assisted design verification topics including CoverPilot, RegMatrix, TestForge RL, DVCore, WaveScope MCP, FailSense, AssertMind, and TraceLens." />
   <style>
     :root {
       --bg: #0b1020;
       --panel: #121a31;
-      --panel-2: #182341;
       --text: #e9eefc;
       --muted: #a9b6d3;
       --accent: #78a6ff;
       --accent-2: #8cf0d2;
       --border: rgba(255,255,255,0.08);
       --shadow: 0 10px 30px rgba(0,0,0,0.25);
-      --max: 1080px;
+      --max: 1120px;
     }
-
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -30,269 +28,133 @@
         var(--bg);
       line-height: 1.6;
     }
-
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 28px 20px 72px;
-    }
-
-    .hero {
-      padding: 44px 0 24px;
-    }
-
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 28px 20px 72px; }
+    .hero { padding: 44px 0 24px; }
     .eyebrow {
-      display: inline-block;
-      padding: 6px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: 0.2px;
-      margin-bottom: 18px;
+      display: inline-block; padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px;
+      background: rgba(255,255,255,0.04); color: var(--muted); font-size: 13px; letter-spacing: 0.2px; margin-bottom: 18px;
     }
-
-    h1 {
-      margin: 0 0 16px;
-      font-size: clamp(34px, 6vw, 58px);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-    }
-
-    .lead {
-      max-width: 820px;
-      font-size: 19px;
-      color: var(--muted);
-      margin: 0 0 26px;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
+    h1 { margin: 0 0 16px; font-size: clamp(34px, 6vw, 58px); line-height: 1.05; letter-spacing: -0.03em; }
+    .lead { max-width: 900px; font-size: 19px; color: var(--muted); margin: 0 0 26px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
     .btn {
-      display: inline-block;
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      box-shadow: var(--shadow);
+      display: inline-block; padding: 12px 16px; border-radius: 12px; font-weight: 600;
+      border: 1px solid var(--border); background: var(--panel); box-shadow: var(--shadow);
     }
-
-    .btn.primary {
-      background: linear-gradient(135deg, var(--accent), #5d7cff);
-      color: white;
-      border: none;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
-      margin-top: 30px;
-    }
-
+    .btn.primary { background: linear-gradient(135deg, var(--accent), #5d7cff); color: white; border: none; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; margin-top: 30px; }
     .card {
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: var(--shadow);
+      border: 1px solid var(--border); border-radius: 18px; padding: 22px; box-shadow: var(--shadow);
     }
-
     .span-12 { grid-column: span 12; }
     .span-6 { grid-column: span 6; }
     .span-4 { grid-column: span 4; }
-
-    h2 {
-      margin: 0 0 12px;
-      font-size: 28px;
-      letter-spacing: -0.02em;
-    }
-
-    h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-    }
-
+    h2 { margin: 0 0 12px; font-size: 28px; letter-spacing: -0.02em; }
+    h3 { margin: 0 0 10px; font-size: 20px; }
     p { margin: 0 0 12px; }
     ul { margin: 10px 0 0 18px; color: var(--muted); }
     li { margin: 6px 0; }
-
     .muted { color: var(--muted); }
     .kicker {
-      color: var(--accent-2);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+      color: var(--accent-2); font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 10px;
     }
-
-    .footer {
-      margin-top: 34px;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-    }
-
-    code {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 2px 6px;
-      border-radius: 8px;
-      font-size: 0.95em;
-    }
-
+    .footer { margin-top: 34px; color: var(--muted); font-size: 14px; text-align: center; }
+    .lang-switch{display:flex;gap:8px;align-items:center;justify-content:flex-end}
+    .lang-pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}
+    .lang-pill.active{background:rgba(120,166,255,.18);color:#fff}
     @media (max-width: 860px) {
       .span-6, .span-4 { grid-column: span 12; }
       .lead { font-size: 17px; }
     }
-  .lang-switch{display:flex;gap:8px;align-items:center}.lang-pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}.lang-pill.active{background:rgba(120,166,255,.18);color:#fff}</style>
+  </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero">
-      <div class="lang-switch" style="float:right;"><span class="lang-pill active">English</span><a class="lang-pill" href="./zh/index.html">中文</a></div><div class="eyebrow">AI × RTL / IP / SoC Verification</div>
+      <div class="lang-switch"><span class="lang-pill active">English</span><a class="lang-pill" href="./zh/index.html">中文</a></div>
+      <div class="eyebrow">AI × RTL / IP / SoC Verification</div>
       <h1>Design Verification with AI</h1>
       <p class="lead">
-        A practical landscape of how AI can be applied to design verification — from
-        <strong>regression failure triage</strong> and <strong>coverage closure</strong>
-        to <strong>register/spec intelligence</strong>, <strong>RL-guided test optimization</strong>,
-        and <strong>waveform-aware debug assistance</strong>.
+        A structured portfolio of <strong>AI-assisted design verification</strong> topics, organized around
+        eight practical project directions: <strong>CoverPilot</strong>, <strong>RegMatrix</strong>, <strong>TestForge RL</strong>,
+        <strong>DVCore</strong>, <strong>WaveScope MCP</strong>, <strong>FailSense</strong>, <strong>AssertMind</strong>, and <strong>TraceLens</strong>.
       </p>
       <div class="actions">
         <a class="btn primary" href="https://github.com/hongjieli/design-verification-with-ai" target="_blank" rel="noreferrer">View GitHub Repo</a>
-        <a class="btn" href="./docs/index.html">Open Full Document</a>
+        <a class="btn" href="./docs/index.html">Open Documentation</a>
       </div>
     </section>
 
     <section class="grid">
       <article class="card span-12">
-        <div class="kicker">Why this matters</div>
-        <h2>AI fits verification best as a copilot, not a replacement</h2>
+        <div class="kicker">Overview</div>
+        <h2>AI fits DV best as a copilot for real engineering artifacts</h2>
         <p class="muted">
-          Verification teams deal with noisy logs, coverage reports, specs, test lists,
-          assertions, waveforms, and issue trackers. AI is especially effective when used to
-          summarize, cluster, prioritize, and connect these artifacts — helping engineers move
-          faster without asking AI to make final signoff decisions.
+          Verification teams work across logs, coverage, specs, assertions, tests, waveforms, and bug history.
+          AI becomes most valuable when it helps summarize, connect, prioritize, and explain these artifacts instead of pretending to replace signoff judgment.
         </p>
+      </article>
+
+      <article class="card span-4">
+        <div class="kicker">Topic 1</div>
+        <h3>CoverPilot</h3>
+        <p class="muted">Coverage intelligence for hole analysis, RTL mapping, closure guidance, and next-step recommendations.</p>
+      </article>
+      <article class="card span-4">
+        <div class="kicker">Topic 2</div>
+        <h3>RegMatrix</h3>
+        <p class="muted">Register/spec intelligence for document parsing, dependency extraction, dynamic constraints, and test suggestion.</p>
+      </article>
+      <article class="card span-4">
+        <div class="kicker">Topic 3</div>
+        <h3>TestForge RL</h3>
+        <p class="muted">Budget-aware regression optimization using RL or adaptive strategies for higher-value test selection.</p>
+      </article>
+
+      <article class="card span-4">
+        <div class="kicker">Topic 4</div>
+        <h3>DVCore</h3>
+        <p class="muted">The agent foundation for AI-native DV workflows, including orchestration, memory, and subagent routing.</p>
+      </article>
+      <article class="card span-4">
+        <div class="kicker">Topic 5</div>
+        <h3>WaveScope MCP</h3>
+        <p class="muted">Waveform-aware debug intelligence focused on event extraction, suspicious signals, and root-cause acceleration.</p>
+      </article>
+      <article class="card span-4">
+        <div class="kicker">Topic 6</div>
+        <h3>FailSense</h3>
+        <p class="muted">Regression failure intelligence for clustering, novelty detection, ownership hints, and triage summaries.</p>
       </article>
 
       <article class="card span-6">
-        <div class="kicker">Deep dive</div>
-        <h3>1. Regression Failure Triage</h3>
-        <p class="muted">
-          The strongest practical starting point. AI can parse simulation logs, cluster related
-          failures, identify likely root-cause categories, estimate novelty, and recommend next
-          debug steps.
-        </p>
-        <ul>
-          <li>Log parsing and failure signature extraction</li>
-          <li>Duplicate-failure clustering</li>
-          <li>Root-cause category prediction</li>
-          <li>Engineer-facing markdown summaries</li>
-        </ul>
+        <div class="kicker">Topic 7</div>
+        <h3>AssertMind</h3>
+        <p class="muted">Assertion and formal intelligence for property review, counterexample explanation, and formal-result summarization.</p>
       </article>
-
       <article class="card span-6">
-        <div class="kicker">Coverage intelligence</div>
-        <h3>2. CoverPilot</h3>
-        <p class="muted">
-          AI-assisted coverage closure that analyzes black-box/white-box coverage, explains
-          holes, maps them back to RTL/features, and suggests what to test next.
-        </p>
+        <div class="kicker">Topic 8</div>
+        <h3>TraceLens</h3>
+        <p class="muted">Spec-to-test traceability intelligence connecting requirements, tests, coverage, and verification planning.</p>
+      </article>
+
+      <article class="card span-12">
+        <div class="kicker">Suggested reading</div>
+        <h2>Recommended reading path</h2>
         <ul>
-          <li>Coverage-hole explanation</li>
-          <li>RTL / feature mapping</li>
-          <li>Reachable vs likely unreachable hints</li>
-          <li>Closure-oriented recommendations</li>
+          <li><strong>1.</strong> Main topic-oriented ideas document</li>
+          <li><strong>2.</strong> Supporting references (standards, tools, engineering docs)</li>
+          <li><strong>3.</strong> Academic supporting papers shortlist</li>
+          <li><strong>4.</strong> Chinese supporting references and paper list</li>
         </ul>
-      </article>
-
-      <article class="card span-4">
-        <div class="kicker">Spec intelligence</div>
-        <h3>3. RegMatrix</h3>
-        <p class="muted">
-          Parse documentation and register definitions into structured verification knowledge:
-          register graphs, constraints, testlists, and traceability matrices.
-        </p>
-      </article>
-
-      <article class="card span-4">
-        <div class="kicker">Regression optimization</div>
-        <h3>4. TestForge RL</h3>
-        <p class="muted">
-          Use reinforcement learning or adaptive strategies to prioritize tests based on runtime
-          cost, coverage reward, and bug-finding value.
-        </p>
-      </article>
-
-      <article class="card span-4">
-        <div class="kicker">Platform architecture</div>
-        <h3>5. DVCore</h3>
-        <p class="muted">
-          A multi-agent verification framework where specialized agents handle logs, coverage,
-          specs, assertions, and debug under one orchestration layer.
-        </p>
-      </article>
-
-      <article class="card span-12">
-        <div class="kicker">Advanced debug</div>
-        <h3>6. WaveScope MCP</h3>
-        <p class="muted">
-          Bring AI closer to RTL debug by combining logs with structured waveform/event summaries
-          to identify first divergence points and accelerate root-cause analysis.
-        </p>
-      </article>
-
-      <article class="card span-12">
-        <div class="kicker">Recommended order</div>
-        <h2>What to build first</h2>
-        <p class="muted">
-          If you're turning these ideas into an actual engineering project, the best order is:
-        </p>
-        <ul>
-          <li><strong>1.</strong> Regression failure triage</li>
-          <li><strong>2.</strong> Coverage closure assistant</li>
-          <li><strong>3.</strong> Register/spec intelligence</li>
-          <li><strong>4.</strong> RL-based test prioritization</li>
-          <li><strong>5.</strong> Waveform-aware debug</li>
-          <li><strong>6.</strong> Multi-agent platform integration</li>
-        </ul>
-      </article>
-
-      
-      <article class="card span-12">
-        <div class="kicker">Landscape map</div>
-        <h2>DV + AI landscape</h2>
-        <p class="muted">A visual map of the 6 top-level categories and the 15 detailed sub-directions covered by this project.</p>
-        <p><img src="./assets/dv-ai-landscape.svg" alt="DV and AI landscape" style="width:100%;height:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:#0b1020;" /></p>
-      </article>
-
-      <article class="card span-12">
-        <div class="kicker">Repository contents</div>
-        <h2>What's in this repo</h2>
-        <p class="muted">
-          The repository includes a detailed document at
-          <code>docs/design-verification-ai-ideas.md</code> covering the engineering rationale,
-          system architecture options, data models, evaluation metrics, and a broader AI + DV
-          idea landscape.
-        </p>
       </article>
     </section>
 
-    <div class="footer">
-      Built as a practical idea map for AI-native design verification workflows.
-    </div>
+    <div class="footer">Bilingual GitHub Pages site for practical AI-assisted design verification ideas.</div>
   </div>
 </body>
 </html>
