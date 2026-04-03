@@ -6,60 +6,52 @@
   <title>Design Verification with AI — Documentation</title>
   <meta name="description" content="Documentation hub for the AI-assisted design verification portfolio." />
   <style>
-    :root { --bg:#0b1020; --panel:#121a31; --text:#e9eefc; --muted:#a9b6d3; --accent:#78a6ff; --border:rgba(255,255,255,0.08); --max:980px; }
+    :root { --bg:#0b1020; --panel:#121a31; --text:#e9eefc; --muted:#a9b6d3; --accent:#78a6ff; --border:rgba(255,255,255,0.08); --max:1040px; }
     *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
     a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px}.nav{margin-bottom:24px;color:var(--muted)}
-    .article{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:20px;padding:28px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px}.article{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:20px;padding:28px}
     h1{font-size:40px;line-height:1.1;margin:0 0 18px;letter-spacing:-0.03em} h2{font-size:28px;margin:30px 0 12px;letter-spacing:-0.02em}
-    h3{font-size:20px;margin:18px 0 8px} p,li{color:var(--muted)} ul{padding-left:22px}
-    .top{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}.btn{display:inline-block;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--panel)}
+    p,li{color:var(--muted)} ul{padding-left:22px}.top{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}.btn{display:inline-block;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--panel)}
     .lang-switch{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}.lang-pill.active{background:rgba(120,166,255,.18);color:#fff}
-    .list a{display:block;padding:12px 14px;margin:10px 0;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{grid-column:span 6;border:1px solid var(--border);border-radius:16px;padding:18px;background:rgba(255,255,255,.02)}@media(max-width:860px){.card{grid-column:span 12}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="nav">
-      <div class="top">
-        <a class="btn" href="../index.html">← Back to Home</a>
-        <a class="btn" href="https://github.com/hongjieli/design-verification-with-ai" target="_blank" rel="noreferrer">View Repo</a>
-        <div class="lang-switch"><span class="lang-pill active">English</span><a class="lang-pill" href="../zh/index.html">中文</a></div>
-      </div>
+    <div class="top">
+      <a class="btn" href="../index.html">← Back to Home</a>
+      <a class="btn" href="https://github.com/hongjieli/design-verification-with-ai" target="_blank" rel="noreferrer">View Repo</a>
+      <div class="lang-switch"><span class="lang-pill active">English</span><a class="lang-pill" href="../zh/index.html">中文</a></div>
     </div>
     <article class="article">
       <h1>Documentation Hub</h1>
-      <p>This site now follows an <strong>8-topic AI-assisted DV portfolio</strong>. The main document is organized as:</p>
-      <ul>
-        <li>Chapter 1: Overview</li>
-        <li>Chapters 2–9: one independent topic per chapter</li>
-        <li>Chapter 10: Conclusion</li>
-      </ul>
+      <p>The documentation is now organized around <strong>8 directly accessible topics</strong>, plus supporting references and academic papers.</p>
 
       <h2>Main documents</h2>
-      <div class="list">
-        <a href="./design-verification-ai-ideas.md"><strong>Main topic-oriented ideas document</strong><br><span class="muted">Overview + 8 independent AI-assisted DV topics + conclusion</span></a>
-        <a href="./supporting-references.md"><strong>Supporting references</strong><br><span class="muted">Standards, tools, engineering references, and implementation background</span></a>
-        <a href="./academic-supporting-papers.md"><strong>Academic supporting papers</strong><br><span class="muted">Shortlist of relevant papers for AI-assisted DV topics</span></a>
-      </div>
-
-      <h2>The 8 topics</h2>
       <ul>
-        <li>CoverPilot</li>
-        <li>RegMatrix</li>
-        <li>TestForge RL</li>
-        <li>DVCore</li>
-        <li>WaveScope MCP</li>
-        <li>FailSense</li>
-        <li>AssertMind</li>
-        <li>TraceLens</li>
+        <li><a href="./design-verification-ai-ideas.md">Main topic-oriented ideas document</a></li>
+        <li><a href="./supporting-references.md">Supporting references</a></li>
+        <li><a href="./academic-supporting-papers.md">Academic supporting papers</a></li>
       </ul>
 
-      <h2>Chinese documents</h2>
-      <div class="list">
-        <a href="../zh/docs/supporting-references.md"><strong>中文 supporting references</strong></a>
-        <a href="../zh/docs/academic-supporting-papers.md"><strong>中文 academic supporting papers</strong></a>
+      <h2>The 8 topics</h2>
+      <div class="grid">
+        <a class="card" href="./topics/coverpilot.md"><strong>CoverPilot</strong><br><span class="muted">Coverage intelligence and closure guidance</span></a>
+        <a class="card" href="./topics/regmatrix.md"><strong>RegMatrix</strong><br><span class="muted">Register/spec intelligence and dynamic constraints</span></a>
+        <a class="card" href="./topics/testforge-rl.md"><strong>TestForge RL</strong><br><span class="muted">RL-guided test selection and regression optimization</span></a>
+        <a class="card" href="./topics/dvcore.md"><strong>DVCore</strong><br><span class="muted">Agent foundation and orchestration layer</span></a>
+        <a class="card" href="./topics/wavescope-mcp.md"><strong>WaveScope MCP</strong><br><span class="muted">Waveform-aware debug intelligence</span></a>
+        <a class="card" href="./topics/failsense.md"><strong>FailSense</strong><br><span class="muted">Regression failure intelligence</span></a>
+        <a class="card" href="./topics/assertmind.md"><strong>AssertMind</strong><br><span class="muted">Assertion and formal intelligence</span></a>
+        <a class="card" href="./topics/tracelens.md"><strong>TraceLens</strong><br><span class="muted">Spec-to-test traceability intelligence</span></a>
       </div>
+
+      <h2>Chinese documents</h2>
+      <ul>
+        <li><a href="../zh/docs/design-verification-ai-ideas.md">Chinese main ideas document</a></li>
+        <li><a href="../zh/docs/supporting-references.md">Chinese supporting references</a></li>
+        <li><a href="../zh/docs/academic-supporting-papers.md">Chinese academic supporting papers</a></li>
+      </ul>
     </article>
   </div>
 </body>
