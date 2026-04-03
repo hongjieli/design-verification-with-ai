@@ -257,7 +257,6 @@ Register/spec intelligence combines document understanding with structured graph
 
 - Real-time automated register abstraction active power-aware electronic system level verification framework — <https://doi.org/10.1016/j.vlsi.2020.11.013>
 - Functional Test Generation with Distribution Constraints — <https://doi.org/10.1007/978-3-642-19237-1_7>
-- Specification analysis and test data generation by solving Boolean combinations of numeric constraints — <https://doi.org/10.1109/APAQ.2000.883800>
 
 ### Engineering / tooling references
 
@@ -447,9 +446,8 @@ Its role is to provide:
 
 ### Academic references
 
-- Dynamic Multi-Agent Orchestration and Retrieval for Multi-Source Question-Answer Systems using Large Language Models — <https://doi.org/10.2139/ssrn.5078120>
+- Dynamic Multi-Agent Orchestration and Retrieval for Multi-Source Question-Answer Systems using Large Language Models — <https://doi.org/10.5121/ijci.2024.130602>
 - A Characterization Study of Bugs in LLM Agent Workflow Orchestration Frameworks — <https://doi.org/10.1109/ASE63991.2025.00278>
-- Z-SPACE: A MULTI-AGENT TOOL ORCHESTRATION FRAMEWORK FOR ENTERPRISE-GRADE LLM AUTOMATION — <https://doi.org/10.2139/ssrn.5896270>
 
 ### Engineering / tooling references
 
@@ -542,7 +540,6 @@ It aims to:
 
 - Symptomatic Bug Localization for Functional Debug of Hardware Designs — <https://doi.org/10.1109/VLSID.2016.14>
 - Automated data analysis techniques for a modern silicon debug environment — <https://doi.org/10.1109/ASPDAC.2012.6164963>
-- FVDebug: An LLM-Driven Debugging Assistant for Automated Root Cause Analysis of Formal Verification Failures — <https://doi.org/10.48550/arXiv.2510.15906>
 
 ### Engineering / tooling references
 
@@ -719,8 +716,8 @@ AI can help interpret, summarize, review, and propose next steps without claimin
 
 ### Academic references
 
-- Machine-Learning-Enabled Hardware Formal Verification — <https://doi.org/10.14711/thesis-hdl167709>
 - Assertions and the Verification Landscape — <https://doi.org/10.1007/978-1-4020-8586-4_2>
+- Assertions for Formal Tools — <https://doi.org/10.1007/0-387-25556-7_7>
 
 ### Engineering / tooling references
 
