@@ -157,10 +157,15 @@ AI can help by turning raw coverage outputs into prioritized and explainable gui
 
 ## References
 
-- Verification Academy – Coverage — <https://verificationacademy.com/topics/coverage/>
+### Academic references
+
 - Coverage-Driven Verification — <https://doi.org/10.1007/978-1-4020-8026-5_7>
 - Speed Up Functional Coverage Closure of CORDIC Designs Using Machine Learning Models — <https://doi.org/10.1109/ICM52667.2021.9664930>
 - Using Deep Neural Networks And Derivative Free Optimization To Accelerate Coverage Closure — <https://doi.org/10.1109/MLCAD52597.2021.9531234>
+
+### Engineering / tooling references
+
+- Verification Academy – Coverage — <https://verificationacademy.com/topics/coverage/>
 
 ## Position in the Stack
 
@@ -247,6 +252,14 @@ Register/spec intelligence combines document understanding with structured graph
 - engineer acceptance of generated relationship graphs
 
 ## References
+
+### Academic references
+
+- Real-time automated register abstraction active power-aware electronic system level verification framework — <https://doi.org/10.1016/j.vlsi.2020.11.013>
+- Functional Test Generation with Distribution Constraints — <https://doi.org/10.1007/978-3-642-19237-1_7>
+- Specification analysis and test data generation by solving Boolean combinations of numeric constraints — <https://doi.org/10.1109/APAQ.2000.883800>
+
+### Engineering / tooling references
 
 - Accellera UVM Standard — <https://accellera.org/downloads/standards/uvm>
 - UVM 1.2 Reference Documentation — <https://verificationacademy.com/verification-methodology-reference/uvm/docs_1.2/html/index.html>
@@ -335,10 +348,17 @@ Among AI approaches, reinforcement learning is especially attractive when the ob
 
 ## References
 
+### Academic references
+
 - Supervised Learning for Coverage-Directed Test Selection in Simulation-Based Verification — <https://doi.org/10.1109/AITest55621.2022.00012>
 - Late Breaking Results: Test Selection For RTL Coverage By Unsupervised Learning From Fast Functional Simulation — <https://doi.org/10.1109/DAC56929.2023.10247936>
 - Reinforcement-Learning Based Method for Accelerating Functional Coverage Closure of Traffic Light Controller Dynamic Digital Design — <https://doi.org/10.1109/ICCTA58027.2022.10206069>
 - Transaction Level Stimulus Optimization in Functional Verification Using Machine Learning Predictors — <https://doi.org/10.1109/ISQED54688.2022.9806210>
+
+### Engineering / tooling references
+
+- Gymnasium Documentation — <https://gymnasium.farama.org/>
+- RLlib Documentation — <https://docs.ray.io/en/latest/rllib/index.html>
 
 ## Position in the Stack
 
@@ -425,9 +445,15 @@ Its role is to provide:
 
 ## References
 
+### Academic references
+
+- Dynamic Multi-Agent Orchestration and Retrieval for Multi-Source Question-Answer Systems using Large Language Models — <https://doi.org/10.2139/ssrn.5078120>
+- A Characterization Study of Bugs in LLM Agent Workflow Orchestration Frameworks — <https://doi.org/10.1109/ASE63991.2025.00278>
+- Z-SPACE: A MULTI-AGENT TOOL ORCHESTRATION FRAMEWORK FOR ENTERPRISE-GRADE LLM AUTOMATION — <https://doi.org/10.2139/ssrn.5896270>
+
+### Engineering / tooling references
+
 - LangChain Overview — <https://docs.langchain.com/oss/python/langchain/overview>
-- Dynamic Multi-Agent Orchestration and Retrieval for Multi-Source Question-Answer Systems using Large Language Models — <https://doi.org/10.5121/ijci.2024.130602>
-- MAO-ARAG: Multi-Agent Orchestration for Adaptive Retrieval-Augmented Generation — <https://doi.org/10.48550/arXiv.2508.01005>
 - OpenTelemetry Traces — <https://opentelemetry.io/docs/concepts/signals/traces/>
 
 ## Position in the Stack
@@ -512,8 +538,14 @@ It aims to:
 
 ## References
 
-- Machine learning-based anomaly detection for post-silicon bug diagnosis — <https://doi.org/10.5555/2485288.2485411>
+### Academic references
+
+- Symptomatic Bug Localization for Functional Debug of Hardware Designs — <https://doi.org/10.1109/VLSID.2016.14>
+- Automated data analysis techniques for a modern silicon debug environment — <https://doi.org/10.1109/ASPDAC.2012.6164963>
 - FVDebug: An LLM-Driven Debugging Assistant for Automated Root Cause Analysis of Formal Verification Failures — <https://doi.org/10.48550/arXiv.2510.15906>
+
+### Engineering / tooling references
+
 - OpenTelemetry Logs — <https://opentelemetry.io/docs/concepts/signals/logs/>
 - Verilator User’s Guide — <https://verilator.org/guide/latest/>
 
@@ -598,9 +630,17 @@ AI can help reduce the raw failure volume into a smaller number of engineer-acti
 
 ## References
 
+### Academic references
+
 - Clustering-based failure triage for RTL regression debugging — <https://doi.org/10.1109/TEST.2014.7035339>
 - Failure Triage in RTL Regression Verification — <https://doi.org/10.1109/TCAD.2017.2783303>
 - Exemplar-based failure triage for regression design debugging — <https://doi.org/10.1109/LATW.2015.7102521>
+
+### Engineering / tooling references
+
+- scikit-learn Clustering Documentation — <https://scikit-learn.org/stable/modules/clustering.html>
+- Sentence Transformers Documentation — <https://www.sbert.net/>
+- Faiss Documentation — <https://faiss.ai/>
 
 ---
 
@@ -677,8 +717,13 @@ AI can help interpret, summarize, review, and propose next steps without claimin
 
 ## References
 
+### Academic references
+
 - Machine-Learning-Enabled Hardware Formal Verification — <https://doi.org/10.14711/thesis-hdl167709>
 - Assertions and the Verification Landscape — <https://doi.org/10.1007/978-1-4020-8586-4_2>
+
+### Engineering / tooling references
+
 - Verification Academy – Formal Verification — <https://verificationacademy.com/topics/formal-verification/>
 - SymbiYosys Documentation — <https://yosyshq.readthedocs.io/projects/sby/en/latest/>
 
@@ -757,10 +802,16 @@ AI can help build and maintain these mappings more effectively than purely manua
 
 ## References
 
-- PyUCIS Documentation — <https://pyucis.readthedocs.io/en/latest/>
-- Verification Academy – Coverage — <https://verificationacademy.com/topics/coverage/>
+### Academic references
+
 - Getting more from requirements traceability: Requirements testing progress — <https://doi.org/10.1109/TEFSE.2013.6620148>
 - Exploring Traceability Links via Issues for Detailed Requirements Coverage Reports — <https://doi.org/10.1109/REW.2017.69>
+- Data-Centric Machine Learning Pipeline for Hardware Verification — <https://doi.org/10.1109/SOCC56010.2022.9908095>
+
+### Engineering / tooling references
+
+- PyUCIS Documentation — <https://pyucis.readthedocs.io/en/latest/>
+- Verification Academy – Coverage — <https://verificationacademy.com/topics/coverage/>
 
 ---
 
