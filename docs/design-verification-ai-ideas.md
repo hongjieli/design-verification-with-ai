@@ -155,6 +155,13 @@ AI can help by turning raw coverage outputs into prioritized and explainable gui
 - percentage of holes correctly mapped to relevant RTL/features
 - reduction in manual coverage triage effort
 
+## References
+
+- Verification Academy – Coverage — <https://verificationacademy.com/topics/coverage/>
+- Coverage-Driven Verification — <https://doi.org/10.1007/978-1-4020-8026-5_7>
+- Speed Up Functional Coverage Closure of CORDIC Designs Using Machine Learning Models — <https://doi.org/10.1109/ICM52667.2021.9664930>
+- Using Deep Neural Networks And Derivative Free Optimization To Accelerate Coverage Closure — <https://doi.org/10.1109/MLCAD52597.2021.9531234>
+
 ## Position in the Stack
 
 CoverPilot is one of the most practical near-term projects because coverage data already exists in most DV environments and the value of better closure guidance is easy to explain.
@@ -239,6 +246,13 @@ Register/spec intelligence combines document understanding with structured graph
 - reduction in missing register corner cases
 - engineer acceptance of generated relationship graphs
 
+## References
+
+- Accellera UVM Standard — <https://accellera.org/downloads/standards/uvm>
+- UVM 1.2 Reference Documentation — <https://verificationacademy.com/verification-methodology-reference/uvm/docs_1.2/html/index.html>
+- PyVSC Documentation — <https://pyvsc.readthedocs.io/en/latest/>
+- NetworkX Documentation — <https://networkx.org/documentation/stable/>
+
 ## Position in the Stack
 
 RegMatrix is a strong topic because register verification is already structured enough to support partial automation, while still being painful enough that better intelligence has clear value.
@@ -318,6 +332,13 @@ Among AI approaches, reinforcement learning is especially attractive when the ob
 - bug yield per regression budget
 - comparison against fixed-priority baselines
 - long-term learning stability
+
+## References
+
+- Supervised Learning for Coverage-Directed Test Selection in Simulation-Based Verification — <https://doi.org/10.1109/AITest55621.2022.00012>
+- Late Breaking Results: Test Selection For RTL Coverage By Unsupervised Learning From Fast Functional Simulation — <https://doi.org/10.1109/DAC56929.2023.10247936>
+- Reinforcement-Learning Based Method for Accelerating Functional Coverage Closure of Traffic Light Controller Dynamic Digital Design — <https://doi.org/10.1109/ICCTA58027.2022.10206069>
+- Transaction Level Stimulus Optimization in Functional Verification Using Machine Learning Predictors — <https://doi.org/10.1109/ISQED54688.2022.9806210>
 
 ## Position in the Stack
 
@@ -402,6 +423,13 @@ Its role is to provide:
 - quality of subagent routing decisions
 - consistency of outputs across repeated sessions
 
+## References
+
+- LangChain Overview — <https://docs.langchain.com/oss/python/langchain/overview>
+- Dynamic Multi-Agent Orchestration and Retrieval for Multi-Source Question-Answer Systems using Large Language Models — <https://doi.org/10.5121/ijci.2024.130602>
+- MAO-ARAG: Multi-Agent Orchestration for Adaptive Retrieval-Augmented Generation — <https://doi.org/10.48550/arXiv.2508.01005>
+- OpenTelemetry Traces — <https://opentelemetry.io/docs/concepts/signals/traces/>
+
 ## Position in the Stack
 
 DVCore is the infrastructure layer that makes the other topic areas feel like one coherent system instead of five separate experiments.
@@ -481,6 +509,13 @@ It aims to:
 - accuracy of suspicious signal localization
 - reduction in waveform inspection effort
 - engineer acceptance of generated root-cause summaries
+
+## References
+
+- Machine learning-based anomaly detection for post-silicon bug diagnosis — <https://doi.org/10.5555/2485288.2485411>
+- FVDebug: An LLM-Driven Debugging Assistant for Automated Root Cause Analysis of Formal Verification Failures — <https://doi.org/10.48550/arXiv.2510.15906>
+- OpenTelemetry Logs — <https://opentelemetry.io/docs/concepts/signals/logs/>
+- Verilator User’s Guide — <https://verilator.org/guide/latest/>
 
 ## Position in the Stack
 
@@ -564,8 +599,8 @@ AI can help reduce the raw failure volume into a smaller number of engineer-acti
 ## References
 
 - Clustering-based failure triage for RTL regression debugging — <https://doi.org/10.1109/TEST.2014.7035339>
-- Machine Learning in the Service of Hardware Functional Verification — <https://doi.org/10.1007/978-3-031-13074-8_14>
-- Data-Centric Machine Learning Pipeline for Hardware Verification — <https://doi.org/10.1109/SOCC56010.2022.9908095>
+- Failure Triage in RTL Regression Verification — <https://doi.org/10.1109/TCAD.2017.2783303>
+- Exemplar-based failure triage for regression design debugging — <https://doi.org/10.1109/LATW.2015.7102521>
 
 ---
 
@@ -643,6 +678,7 @@ AI can help interpret, summarize, review, and propose next steps without claimin
 ## References
 
 - Machine-Learning-Enabled Hardware Formal Verification — <https://doi.org/10.14711/thesis-hdl167709>
+- Assertions and the Verification Landscape — <https://doi.org/10.1007/978-1-4020-8586-4_2>
 - Verification Academy – Formal Verification — <https://verificationacademy.com/topics/formal-verification/>
 - SymbiYosys Documentation — <https://yosyshq.readthedocs.io/projects/sby/en/latest/>
 
@@ -722,9 +758,9 @@ AI can help build and maintain these mappings more effectively than purely manua
 ## References
 
 - PyUCIS Documentation — <https://pyucis.readthedocs.io/en/latest/>
-- Accellera UVM Standard — <https://accellera.org/downloads/standards/uvm>
-- Data-Centric Machine Learning Pipeline for Hardware Verification — <https://doi.org/10.1109/SOCC56010.2022.9908095>
 - Verification Academy – Coverage — <https://verificationacademy.com/topics/coverage/>
+- Getting more from requirements traceability: Requirements testing progress — <https://doi.org/10.1109/TEFSE.2013.6620148>
+- Exploring Traceability Links via Issues for Detailed Requirements Coverage Reports — <https://doi.org/10.1109/REW.2017.69>
 
 ---
 
