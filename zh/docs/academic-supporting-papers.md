@@ -201,3 +201,19 @@
    <https://doi.org/10.1109/AITest62860.2024.00027>
 
 这组文献足以为本仓库最关键的几个技术方向提供一个紧凑但可信的学术支撑骨架。
+
+
+---
+
+## 8. 补充：文献与 8 个 Topic 的对应关系
+
+为了方便直接回填到主文档，这里给出学术文献与 8 个 topic 的简要映射：
+
+- **CoverPilot：** DAC 2023 的 RTL coverage test selection；ICM 2021 的 coverage closure；MLCAD 2021 的 optimization for coverage closure。
+- **RegMatrix：** automated register abstraction；distribution constraints 下的 functional test generation；以及 broader AI-for-DV framing。
+- **TestForge RL：** RL-based coverage closure；transaction-level stimulus optimization；ML-based sequence generation。
+- **DVCore：** data-centric ML pipeline for hardware verification；更广义的 AI-for-DV framing；ML-enabled verification workflow feasibility。
+- **WaveScope MCP：** clustering-based failure triage for RTL debug；data-centric verification pipeline；更广义的 ML-for-verification framing。
+- **FailSense：** clustering-based failure triage；data-centric verification pipeline；ML-assisted hardware verification framing。
+- **AssertMind：** ML-enabled hardware formal verification；更广义 verification-ML framing。
+- **TraceLens：** functional test generation with distribution constraints；data-centric verification pipeline；更广义 AI-for-DV framing。

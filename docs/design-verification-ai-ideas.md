@@ -175,6 +175,8 @@ CoverPilot is one of the most practical near-term projects because coverage data
 
 # Chapter 3. RegMatrix: Register and Constraint Intelligence
 
+> Reference note: this topic is **engineering-strong but literature-weaker** than FailSense or CoverPilot. It should be presented as an engineer-in-the-loop spec/register intelligence assistant, not as a fully automatic spec understanding engine.
+
 ## Problem Statement
 
 Register verification is highly structured, but the knowledge needed to verify it is often spread across:
@@ -462,6 +464,8 @@ DVCore is the infrastructure layer that makes the other topic areas feel like on
 
 # Chapter 6. WaveScope MCP: Waveform-Aware Debug Intelligence
 
+> Reference note: this topic is **promising but more indirect** in the literature. Keep the wording around trace-aware debug assistance, divergence summarization, and structured debug artifacts rather than claiming full automatic waveform understanding.
+
 ## Problem Statement
 
 Waveform debug is one of the most valuable but also one of the hardest places to apply AI in DV.
@@ -554,6 +558,8 @@ WaveScope MCP is likely not the very first project to implement, but it is one o
 
 # Chapter 7. FailSense: Regression Failure Intelligence
 
+> Reference note: this is one of the **strongest-supported** topics in the portfolio, especially because failure triage for RTL regression debugging has direct academic precedent.
+
 ## Problem Statement
 
 Large regressions often produce more information than engineers can efficiently digest:
@@ -643,6 +649,8 @@ AI can help reduce the raw failure volume into a smaller number of engineer-acti
 
 # Chapter 8. AssertMind: Assertion and Formal Intelligence
 
+> Reference note: this topic is supportable, but should be framed conservatively as a formal/property copilot for review, explanation, and debug assistance rather than autonomous assertion generation.
+
 ## Problem Statement
 
 Assertions and formal methods are powerful, but difficult to scale because engineers still spend large amounts of effort on:
@@ -727,6 +735,8 @@ AI can help interpret, summarize, review, and propose next steps without claimin
 ---
 
 # Chapter 9. TraceLens: Spec-to-Test Traceability Intelligence
+
+> Reference note: this topic is best framed as a traceability and linkage layer across requirements, specs, tests, coverage, and debug evidence. The engineering story is stronger than the direct paper match.
 
 ## Problem Statement
 

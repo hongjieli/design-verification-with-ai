@@ -295,3 +295,169 @@ These references are intended to support feasibility, engineering realism, and t
 - practical automation frameworks
 
 That is exactly the kind of foundation needed for a credible AI-assisted design verification project.
+
+
+---
+
+## 9. Topic-by-Topic Strengthened Reference Pack
+
+This section reorganizes the repository references by the eight portfolio topics so they can be inserted more directly into the main idea document.
+
+### 9.1 CoverPilot — Coverage Intelligence
+
+#### Academic references
+- **Late Breaking Results: Test Selection For RTL Coverage By Unsupervised Learning From Fast Functional Simulation** (2023)  
+  DOI: <https://doi.org/10.1109/DAC56929.2023.10247936>  
+  Why relevant: directly connects RTL coverage outcomes with data-driven test selection.
+- **Speed Up Functional Coverage Closure of CORDIC Designs Using Machine Learning Models** (2021)  
+  DOI: <https://doi.org/10.1109/ICM52667.2021.9664930>  
+  Why relevant: explicit evidence that ML can accelerate coverage closure.
+- **Using Deep Neural Networks And Derivative Free Optimization To Accelerate Coverage Closure** (2021)  
+  DOI: <https://doi.org/10.1109/MLCAD52597.2021.9531234>  
+  Why relevant: supports optimization-driven closure guidance rather than passive reporting.
+- **Accelerated Design Verification Coverage Closure Using Machine Learning** (2025)  
+  DOI: <https://doi.org/10.1109/VLSID64188.2025.00070>  
+  Why relevant: recent evidence that ML-for-coverage-closure remains an active topic.
+
+#### Engineering / tooling references
+- **Verification Academy – Coverage** — <https://verificationacademy.com/topics/coverage/>
+- **PyUCIS Documentation** — <https://pyucis.readthedocs.io/en/latest/>
+- **Accellera / IEEE Standards Portal** — <https://www.accellera.org/downloads/ieee>
+- **PyVSC Documentation** — <https://pyvsc.readthedocs.io/en/latest/>
+
+### 9.2 RegMatrix — Register / Spec Intelligence
+
+#### Academic references
+- **Real-time automated register abstraction active power-aware electronic system level verification framework** (2020)  
+  DOI: <https://doi.org/10.1016/j.vlsi.2020.11.013>  
+  Why relevant: supports automated register abstraction and structured register-level verification reasoning.
+- **Functional Test Generation with Distribution Constraints** (2011)  
+  DOI: <https://doi.org/10.1007/978-3-642-19237-1_7>  
+  Why relevant: useful for the constraint-aware test generation side of register/spec intelligence.
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  Why relevant: broader framing for AI support inside hardware verification workflows.
+
+#### Engineering / tooling references
+- **Accellera UVM Standard** — <https://accellera.org/downloads/standards/uvm>
+- **UVM 1.2 Reference Documentation** — <https://verificationacademy.com/verification-methodology-reference/uvm/docs_1.2/html/index.html>
+- **PyVSC Documentation** — <https://pyvsc.readthedocs.io/en/latest/>
+- **NetworkX Documentation** — <https://networkx.org/documentation/stable/>
+
+### 9.3 TestForge RL — Stimulus Optimization / RL-Guided Exploration
+
+#### Academic references
+- **Reinforcement-Learning Based Method for Accelerating Functional Coverage Closure of Traffic Light Controller Dynamic Digital Design** (2022)  
+  DOI: <https://doi.org/10.1109/ICCTA58027.2022.10206069>  
+  Why relevant: direct adjacency to RL-guided coverage closure in digital design verification.
+- **Transaction Level Stimulus Optimization in Functional Verification Using Machine Learning Predictors** (2022)  
+  DOI: <https://doi.org/10.1109/ISQED54688.2022.9806210>  
+  Why relevant: strong support for ML-guided stimulus optimization.
+- **Efficient Sequence Generation for Hardware Verification Using Machine Learning** (2021)  
+  DOI: <https://doi.org/10.1109/ICECS53924.2021.9665495>  
+  Why relevant: supports sequence generation for intelligent verification stimulus.
+- **Late Breaking Results: Test Selection For RTL Coverage By Unsupervised Learning From Fast Functional Simulation** (2023)  
+  DOI: <https://doi.org/10.1109/DAC56929.2023.10247936>  
+  Why relevant: strong support for data-driven test selection under coverage goals.
+
+#### Engineering / tooling references
+- **Ray RLlib Documentation** — <https://docs.ray.io/en/latest/rllib/index.html>
+- **Gymnasium Documentation** — <https://gymnasium.farama.org/>
+- **pytest markers documentation** — <https://docs.pytest.org/en/stable/example/markers.html>
+
+### 9.4 DVCore — Multi-Agent DV Platform / Orchestration
+
+#### Academic references
+- **Data-Centric Machine Learning Pipeline for Hardware Verification** (2022)  
+  DOI: <https://doi.org/10.1109/SOCC56010.2022.9908095>  
+  Why relevant: strongest support for treating DV as a structured artifact pipeline.
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  Why relevant: supports a platform layer that unifies multiple AI-for-DV capabilities.
+- **High Performance Machine Learning Models for Functional Verification of Hardware Designs** (2021)  
+  DOI: <https://doi.org/10.1109/NILES53778.2021.9600502>  
+  Why relevant: provides feasibility support for ML-driven verification workflows.
+
+#### Engineering / tooling references
+- **LangChain Overview** — <https://docs.langchain.com/oss/python/langchain/overview>
+- **OpenTelemetry Logs** — <https://opentelemetry.io/docs/concepts/signals/logs/>
+- **OpenTelemetry Traces** — <https://opentelemetry.io/docs/concepts/signals/traces/>
+- **GitHub Actions Artifacts** — <https://docs.github.com/en/actions/tutorials/store-and-share-data>
+- **SQLite JSON Functions** — <https://www.sqlite.org/json1.html>
+
+### 9.5 WaveScope MCP — Waveform / Debug Intelligence
+
+#### Academic references
+- **Clustering-based failure triage for RTL regression debugging** (2014)  
+  DOI: <https://doi.org/10.1109/TEST.2014.7035339>  
+  Why relevant: directly relevant to debug artifact triage and issue-bucket reasoning.
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  Why relevant: broader support for ML-assisted debug analysis in DV.
+- **Data-Centric Machine Learning Pipeline for Hardware Verification** (2022)  
+  DOI: <https://doi.org/10.1109/SOCC56010.2022.9908095>  
+  Why relevant: supports structured debug artifacts and downstream analysis.
+
+#### Engineering / tooling references
+- **Verilator User’s Guide** — <https://verilator.org/guide/latest/>
+- **cocotb Documentation** — <https://docs.cocotb.org/en/stable/>
+- **OpenTelemetry Logs** — <https://opentelemetry.io/docs/concepts/signals/logs/>
+- **OpenTelemetry Traces** — <https://opentelemetry.io/docs/concepts/signals/traces/>
+
+### 9.6 FailSense — Regression Failure Intelligence
+
+#### Academic references
+- **Clustering-based failure triage for RTL regression debugging** (2014)  
+  DOI: <https://doi.org/10.1109/TEST.2014.7035339>  
+  Why relevant: strongest direct support for regression failure clustering and triage.
+- **Data-Centric Machine Learning Pipeline for Hardware Verification** (2022)  
+  DOI: <https://doi.org/10.1109/SOCC56010.2022.9908095>  
+  Why relevant: supports the structured-data assumptions behind practical regression intelligence.
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  Why relevant: useful broader framing for ML-assisted verification analytics.
+- **Efficient Hardware Verification Using Machine Learning Approach** (2019)  
+  DOI: <https://doi.org/10.1109/ISES47678.2019.00045>  
+  Why relevant: earlier evidence that ML can improve hardware-verification productivity.
+
+#### Engineering / tooling references
+- **Accellera UVM Standard** — <https://accellera.org/downloads/standards/uvm>
+- **UVM 1.2 Reference Documentation** — <https://verificationacademy.com/verification-methodology-reference/uvm/docs_1.2/html/index.html>
+- **scikit-learn Clustering Documentation** — <https://scikit-learn.org/stable/modules/clustering.html>
+- **DBSCAN Documentation** — <https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html>
+- **Sentence Transformers Documentation** — <https://www.sbert.net/>
+- **Faiss Documentation** — <https://faiss.ai/>
+
+### 9.7 AssertMind — Assertion / Formal Intelligence
+
+#### Academic references
+- **Machine-Learning-Enabled Hardware Formal Verification**  
+  DOI: <https://doi.org/10.14711/thesis-hdl167709>  
+  Why relevant: direct adjacency reference for combining ML techniques with hardware formal verification.
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  Why relevant: broader support for AI-enhanced verification reasoning.
+
+#### Engineering / tooling references
+- **Verification Academy – Formal Verification** — <https://verificationacademy.com/topics/formal-verification/>
+- **SymbiYosys Documentation** — <https://yosyshq.readthedocs.io/projects/sby/en/latest/>
+- **PyEDA Documentation** — <https://pyeda.readthedocs.io/en/latest/>
+
+### 9.8 TraceLens — Spec-to-Test Traceability Intelligence
+
+#### Academic references
+- **Functional Test Generation with Distribution Constraints** (2011)  
+  DOI: <https://doi.org/10.1007/978-3-642-19237-1_7>  
+  Why relevant: relevant to moving from constraints and intent toward executable tests.
+- **Data-Centric Machine Learning Pipeline for Hardware Verification** (2022)  
+  DOI: <https://doi.org/10.1109/SOCC56010.2022.9908095>  
+  Why relevant: supports treating verification artifacts as connected, queryable data.
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  Why relevant: broader support for AI layers that connect verification intent and execution.
+
+#### Engineering / tooling references
+- **Accellera UVM Standard** — <https://accellera.org/downloads/standards/uvm>
+- **UVM 1.2 Reference Documentation** — <https://verificationacademy.com/verification-methodology-reference/uvm/docs_1.2/html/index.html>
+- **NetworkX Documentation** — <https://networkx.org/documentation/stable/>
+- **SQLite JSON Functions** — <https://www.sqlite.org/json1.html>

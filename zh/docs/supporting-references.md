@@ -173,3 +173,169 @@
 12. SQLite JSON Functions  
 
 这组资料基本可以为本仓库最重要的主题——CoverPilot、RegMatrix、TestForge RL、DVCore、WaveScope MCP——提供一个比较可信的工程和方法学背景。
+
+
+---
+
+## 9. 按 8 个 Topic 重组后的增强参考文献包
+
+这一节把仓库中的 supporting references 按 8 个核心 topic 重新组织，便于直接嵌入主文档。
+
+### 9.1 CoverPilot — Coverage Intelligence
+
+#### Academic references
+- **Late Breaking Results: Test Selection For RTL Coverage By Unsupervised Learning From Fast Functional Simulation** (2023)  
+  DOI: <https://doi.org/10.1109/DAC56929.2023.10247936>  
+  相关性：直接把 RTL coverage 结果与数据驱动的 test selection 连接起来。
+- **Speed Up Functional Coverage Closure of CORDIC Designs Using Machine Learning Models** (2021)  
+  DOI: <https://doi.org/10.1109/ICM52667.2021.9664930>  
+  相关性：明确证明 ML 可用于加速 coverage closure。
+- **Using Deep Neural Networks And Derivative Free Optimization To Accelerate Coverage Closure** (2021)  
+  DOI: <https://doi.org/10.1109/MLCAD52597.2021.9531234>  
+  相关性：支撑优化驱动的 closure guidance，而不只是被动看报告。
+- **Accelerated Design Verification Coverage Closure Using Machine Learning** (2025)  
+  DOI: <https://doi.org/10.1109/VLSID64188.2025.00070>  
+  相关性：说明 ML-for-coverage-closure 仍然是近年持续被研究的话题。
+
+#### Engineering / tooling references
+- **Verification Academy – Coverage** — <https://verificationacademy.com/topics/coverage/>
+- **PyUCIS Documentation** — <https://pyucis.readthedocs.io/en/latest/>
+- **Accellera / IEEE Standards Portal** — <https://www.accellera.org/downloads/ieee>
+- **PyVSC Documentation** — <https://pyvsc.readthedocs.io/en/latest/>
+
+### 9.2 RegMatrix — Register / Spec Intelligence
+
+#### Academic references
+- **Real-time automated register abstraction active power-aware electronic system level verification framework** (2020)  
+  DOI: <https://doi.org/10.1016/j.vlsi.2020.11.013>  
+  相关性：支撑 automated register abstraction 与结构化 register-level verification reasoning。
+- **Functional Test Generation with Distribution Constraints** (2011)  
+  DOI: <https://doi.org/10.1007/978-3-642-19237-1_7>  
+  相关性：对 register/spec intelligence 中的 constraint-aware test generation 很有帮助。
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  相关性：提供更广义的 AI-for-DV 背景支撑。
+
+#### Engineering / tooling references
+- **Accellera UVM Standard** — <https://accellera.org/downloads/standards/uvm>
+- **UVM 1.2 Reference Documentation** — <https://verificationacademy.com/verification-methodology-reference/uvm/docs_1.2/html/index.html>
+- **PyVSC Documentation** — <https://pyvsc.readthedocs.io/en/latest/>
+- **NetworkX Documentation** — <https://networkx.org/documentation/stable/>
+
+### 9.3 TestForge RL — Stimulus Optimization / RL-guided Exploration
+
+#### Academic references
+- **Reinforcement-Learning Based Method for Accelerating Functional Coverage Closure of Traffic Light Controller Dynamic Digital Design** (2022)  
+  DOI: <https://doi.org/10.1109/ICCTA58027.2022.10206069>  
+  相关性：直接支撑 RL-guided coverage closure。
+- **Transaction Level Stimulus Optimization in Functional Verification Using Machine Learning Predictors** (2022)  
+  DOI: <https://doi.org/10.1109/ISQED54688.2022.9806210>  
+  相关性：强支撑 ML-guided stimulus optimization。
+- **Efficient Sequence Generation for Hardware Verification Using Machine Learning** (2021)  
+  DOI: <https://doi.org/10.1109/ICECS53924.2021.9665495>  
+  相关性：支撑 sequence generation for intelligent verification stimulus。
+- **Late Breaking Results: Test Selection For RTL Coverage By Unsupervised Learning From Fast Functional Simulation** (2023)  
+  DOI: <https://doi.org/10.1109/DAC56929.2023.10247936>  
+  相关性：强支撑 coverage goal 下的数据驱动 test selection。
+
+#### Engineering / tooling references
+- **Ray RLlib Documentation** — <https://docs.ray.io/en/latest/rllib/index.html>
+- **Gymnasium Documentation** — <https://gymnasium.farama.org/>
+- **pytest markers documentation** — <https://docs.pytest.org/en/stable/example/markers.html>
+
+### 9.4 DVCore — Multi-Agent DV Platform / Orchestration
+
+#### Academic references
+- **Data-Centric Machine Learning Pipeline for Hardware Verification** (2022)  
+  DOI: <https://doi.org/10.1109/SOCC56010.2022.9908095>  
+  相关性：把 DV 视为 structured artifact pipeline 的最强学术支撑。
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  相关性：支撑统一编排多个 AI-for-DV capability 的平台层。
+- **High Performance Machine Learning Models for Functional Verification of Hardware Designs** (2021)  
+  DOI: <https://doi.org/10.1109/NILES53778.2021.9600502>  
+  相关性：从 feasibility 角度支撑 ML-driven verification workflow。
+
+#### Engineering / tooling references
+- **LangChain Overview** — <https://docs.langchain.com/oss/python/langchain/overview>
+- **OpenTelemetry Logs** — <https://opentelemetry.io/docs/concepts/signals/logs/>
+- **OpenTelemetry Traces** — <https://opentelemetry.io/docs/concepts/signals/traces/>
+- **GitHub Actions Artifacts** — <https://docs.github.com/en/actions/tutorials/store-and-share-data>
+- **SQLite JSON Functions** — <https://www.sqlite.org/json1.html>
+
+### 9.5 WaveScope MCP — Waveform / Debug Intelligence
+
+#### Academic references
+- **Clustering-based failure triage for RTL regression debugging** (2014)  
+  DOI: <https://doi.org/10.1109/TEST.2014.7035339>  
+  相关性：对 debug artifact triage 和 issue-bucket reasoning 很直接。
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  相关性：为 ML-assisted debug analysis 提供 broader support。
+- **Data-Centric Machine Learning Pipeline for Hardware Verification** (2022)  
+  DOI: <https://doi.org/10.1109/SOCC56010.2022.9908095>  
+  相关性：支撑 structured debug artifacts 与 downstream analysis。
+
+#### Engineering / tooling references
+- **Verilator User’s Guide** — <https://verilator.org/guide/latest/>
+- **cocotb Documentation** — <https://docs.cocotb.org/en/stable/>
+- **OpenTelemetry Logs** — <https://opentelemetry.io/docs/concepts/signals/logs/>
+- **OpenTelemetry Traces** — <https://opentelemetry.io/docs/concepts/signals/traces/>
+
+### 9.6 FailSense — Regression Failure Intelligence
+
+#### Academic references
+- **Clustering-based failure triage for RTL regression debugging** (2014)  
+  DOI: <https://doi.org/10.1109/TEST.2014.7035339>  
+  相关性：这是 regression failure clustering / triage 最直接、最强的支撑。
+- **Data-Centric Machine Learning Pipeline for Hardware Verification** (2022)  
+  DOI: <https://doi.org/10.1109/SOCC56010.2022.9908095>  
+  相关性：支撑 practical regression intelligence 背后的 structured-data 假设。
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  相关性：为 ML-assisted verification analytics 提供 broader framing。
+- **Efficient Hardware Verification Using Machine Learning Approach** (2019)  
+  DOI: <https://doi.org/10.1109/ISES47678.2019.00045>  
+  相关性：较早证明 ML 有机会提升 hardware verification productivity。
+
+#### Engineering / tooling references
+- **Accellera UVM Standard** — <https://accellera.org/downloads/standards/uvm>
+- **UVM 1.2 Reference Documentation** — <https://verificationacademy.com/verification-methodology-reference/uvm/docs_1.2/html/index.html>
+- **scikit-learn Clustering Documentation** — <https://scikit-learn.org/stable/modules/clustering.html>
+- **DBSCAN Documentation** — <https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html>
+- **Sentence Transformers Documentation** — <https://www.sbert.net/>
+- **Faiss Documentation** — <https://faiss.ai/>
+
+### 9.7 AssertMind — Assertion / Formal Intelligence
+
+#### Academic references
+- **Machine-Learning-Enabled Hardware Formal Verification**  
+  DOI: <https://doi.org/10.14711/thesis-hdl167709>  
+  相关性：formal + ML 交叉方向比较直接的引用。
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  相关性：为 AI-enhanced verification reasoning 提供 broader support。
+
+#### Engineering / tooling references
+- **Verification Academy – Formal Verification** — <https://verificationacademy.com/topics/formal-verification/>
+- **SymbiYosys Documentation** — <https://yosyshq.readthedocs.io/projects/sby/en/latest/>
+- **PyEDA Documentation** — <https://pyeda.readthedocs.io/en/latest/>
+
+### 9.8 TraceLens — Spec-to-Test Traceability Intelligence
+
+#### Academic references
+- **Functional Test Generation with Distribution Constraints** (2011)  
+  DOI: <https://doi.org/10.1007/978-3-642-19237-1_7>  
+  相关性：支撑从 constraints / intent 到 executable tests 的转换。
+- **Data-Centric Machine Learning Pipeline for Hardware Verification** (2022)  
+  DOI: <https://doi.org/10.1109/SOCC56010.2022.9908095>  
+  相关性：支撑 verification artifacts 可被视为 connected、queryable data。
+- **Machine Learning in the Service of Hardware Functional Verification** (2022)  
+  DOI: <https://doi.org/10.1007/978-3-031-13074-8_14>  
+  相关性：为连接 verification intent 与 execution 的 AI layer 提供 broader support。
+
+#### Engineering / tooling references
+- **Accellera UVM Standard** — <https://accellera.org/downloads/standards/uvm>
+- **UVM 1.2 Reference Documentation** — <https://verificationacademy.com/verification-methodology-reference/uvm/docs_1.2/html/index.html>
+- **NetworkX Documentation** — <https://networkx.org/documentation/stable/>
+- **SQLite JSON Functions** — <https://www.sqlite.org/json1.html>

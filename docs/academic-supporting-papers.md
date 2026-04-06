@@ -201,3 +201,19 @@ If only a small number of academic references are needed, the most directly usef
    <https://doi.org/10.1109/AITest62860.2024.00027>
 
 This subset gives the repository a compact but credible academic backbone across its most important themes.
+
+
+---
+
+## 8. Additional Topic Mapping Notes
+
+To support direct reuse in the main portfolio document, the academic shortlist also maps naturally onto the eight topic areas:
+
+- **CoverPilot:** DAC 2023 test selection for RTL coverage; ICM 2021 coverage closure; MLCAD 2021 optimization for coverage closure.
+- **RegMatrix:** automated register abstraction; functional test generation with distribution constraints; broader AI-for-DV framing.
+- **TestForge RL:** RL-based coverage closure; transaction-level stimulus optimization; ML-based sequence generation.
+- **DVCore:** data-centric ML pipeline for hardware verification; broader AI-for-DV framing; ML-enabled verification workflow feasibility.
+- **WaveScope MCP:** clustering-based failure triage for RTL debug; data-centric verification pipeline; broader ML-for-verification framing.
+- **FailSense:** clustering-based failure triage; data-centric verification pipeline; ML-assisted hardware verification framing.
+- **AssertMind:** ML-enabled hardware formal verification; broader verification-ML framing.
+- **TraceLens:** functional test generation with distribution constraints; data-centric verification pipeline; broader AI-for-DV framing.
