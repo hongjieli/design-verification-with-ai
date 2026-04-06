@@ -1,14 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Design Verification with AI — Full Document</title><style>
-:root { --bg:#0b1020; --panel:#121a31; --text:#e9eefc; --muted:#a9b6d3; --accent:#78a6ff; --border:rgba(255,255,255,0.08); --max:980px; }
-*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-.wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px}.article{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:20px;padding:28px}
-h1{font-size:38px;line-height:1.1;margin:0 0 18px;letter-spacing:-0.03em} h2{font-size:26px;margin:28px 0 10px;letter-spacing:-0.02em} h3{font-size:19px;margin:18px 0 8px}
-p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px solid var(--border);margin:24px 0}
-.top{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}.btn{display:inline-block;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--panel)}
-.lang-switch{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}.lang-pill.active{background:rgba(120,166,255,.18);color:#fff}
-</style></head><body><div class="wrap"><div class="top"><a class="btn" href="../index.html">← Back to Home</a><a class="btn" href="https://github.com/hongjieli/design-verification-with-ai" target="_blank" rel="noreferrer">View Repo</a><div class="lang-switch"><span class="lang-pill active">English</span><a class="lang-pill" href="../zh/docs/index.html">中文</a></div></div><article class="article"><h1>AI for Design Verification: Topic-Oriented Engineering Ideas</h1>
-<p>This document presents a structured view of **AI-assisted design verification (DV)** as a portfolio of practical project directions.</p>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI for Design Verification</title><style>body{font-family:Arial,Helvetica,sans-serif;max-width:980px;margin:40px auto;padding:0 20px;line-height:1.7;color:#1f2937}h1,h2,h3,h4{color:#111827}code{background:#f3f4f6;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #d1d5db;padding-left:16px;color:#4b5563;margin-left:0}a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}ul{padding-left:22px}</style></head><body><h1>AI for Design Verification: Topic-Oriented Engineering Ideas</h1>
+<p>This document presents a structured view of <strong>AI-assisted design verification (DV)</strong> as a portfolio of practical project directions.</p>
 <p>Instead of treating AI for DV as one single monolithic assistant, this note organizes the space into a set of independent but related topics. Each topic addresses a real verification pain point and can be explored as its own project, prototype, or product direction.</p>
 <p>Five of the topic areas come directly from the original project matrix:</p>
 <ul>
@@ -25,20 +16,9 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 <li>TraceLens</li>
 </ul>
 <p>The overall structure is:</p>
-<ul>
-<li>Overview</li>
-<li>CoverPilot</li>
-<li>RegMatrix</li>
-<li>TestForge RL</li>
-<li>DVCore</li>
-<li>WaveScope MCP</li>
-<li>FailSense</li>
-<li>AssertMind</li>
-<li>TraceLens</li>
-</ul>
-<p>10. Conclusion</p>
+<p>1. Overview 2. CoverPilot 3. RegMatrix 4. TestForge RL 5. DVCore 6. WaveScope MCP 7. FailSense 8. AssertMind 9. TraceLens 10. Conclusion</p>
 <p>Together, these topics span a broad DV workflow, from agent infrastructure and document intelligence to coverage optimization, failure triage, and waveform-aware debug.</p>
-<hr />
+<p>---</p>
 <h1>Chapter 1. Overview: Why AI-Assisted Design Verification Matters</h1>
 <p>Design verification teams deal with a large and growing amount of engineering data:</p>
 <ul>
@@ -60,7 +40,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 <li>How should all these AI-assisted workflows be orchestrated together?</li>
 </ul>
 <p>That is why DV is a strong fit for AI assistance.</p>
-<p>AI is especially useful when it acts as a **copilot** for:</p>
+<p>AI is especially useful when it acts as a <strong>copilot</strong> for:</p>
 <ul>
 <li>summarization</li>
 <li>clustering</li>
@@ -71,18 +51,9 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <p>The goal is not to replace verification engineers or automate signoff decisions. The goal is to reduce repetitive analysis work and increase the speed at which engineers move from raw artifacts to informed action.</p>
 <p>This document organizes that vision into eight topic areas:</p>
-<ul>
-<li>**CoverPilot** — coverage intelligence</li>
-<li>**RegMatrix** — register/spec intelligence</li>
-<li>**TestForge RL** — reinforcement-learning-driven test selection</li>
-<li>**DVCore** — the agent foundation and orchestration layer</li>
-<li>**WaveScope MCP** — waveform-aware debug intelligence</li>
-<li>**FailSense** — regression failure intelligence</li>
-<li>**AssertMind** — assertion and formal intelligence</li>
-<li>**TraceLens** — spec-to-test traceability intelligence</li>
-</ul>
+<p>1. <strong>CoverPilot</strong> — coverage intelligence 2. <strong>RegMatrix</strong> — register/spec intelligence 3. <strong>TestForge RL</strong> — reinforcement-learning-driven test selection 4. <strong>DVCore</strong> — the agent foundation and orchestration layer 5. <strong>WaveScope MCP</strong> — waveform-aware debug intelligence 6. <strong>FailSense</strong> — regression failure intelligence 7. <strong>AssertMind</strong> — assertion and formal intelligence 8. <strong>TraceLens</strong> — spec-to-test traceability intelligence</p>
 <p>Each topic can stand alone, but the full value appears when they are connected into a practical AI-assisted DV stack.</p>
-<hr />
+<p>---</p>
 <h1>Chapter 2. CoverPilot: Coverage Intelligence for Design Verification</h1>
 <h2>Problem Statement</h2>
 <p>Coverage closure is one of the most time-consuming activities in verification. Teams often face:</p>
@@ -102,7 +73,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <p>AI can help by turning raw coverage outputs into prioritized and explainable guidance.</p>
 <h2>Core Idea</h2>
-<p>**CoverPilot** is a coverage intelligence agent that:</p>
+<p><strong>CoverPilot</strong> is a coverage intelligence agent that:</p>
 <ul>
 <li>analyzes coverage holes</li>
 <li>maps them to RTL hierarchy and feature context</li>
@@ -161,8 +132,11 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <h2>Position in the Stack</h2>
 <p>CoverPilot is one of the most practical near-term projects because coverage data already exists in most DV environments and the value of better closure guidance is easy to explain.</p>
-<hr />
+<p>---</p>
 <h1>Chapter 3. RegMatrix: Register and Constraint Intelligence</h1>
+<blockquote>
+<p>Reference note: this topic is <strong>engineering-strong but literature-weaker</strong> than FailSense or CoverPilot. It should be presented as an engineer-in-the-loop spec/register intelligence assistant, not as a fully automatic spec understanding engine.</p>
+</blockquote>
 <h2>Problem Statement</h2>
 <p>Register verification is highly structured, but the knowledge needed to verify it is often spread across:</p>
 <ul>
@@ -190,7 +164,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 <li>transform textual intent into verification-oriented artifacts</li>
 </ul>
 <h2>Core Idea</h2>
-<p>**RegMatrix** is a register relationship and constraint intelligence engine that:</p>
+<p><strong>RegMatrix</strong> is a register relationship and constraint intelligence engine that:</p>
 <ul>
 <li>parses specification and register documentation</li>
 <li>extracts field dependencies and usage constraints</li>
@@ -250,7 +224,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <h2>Position in the Stack</h2>
 <p>RegMatrix is a strong topic because register verification is already structured enough to support partial automation, while still being painful enough that better intelligence has clear value.</p>
-<hr />
+<p>---</p>
 <h1>Chapter 4. TestForge RL: Reinforcement Learning for Test Selection</h1>
 <h2>Problem Statement</h2>
 <p>Regression budgets are limited. Teams may have:</p>
@@ -273,7 +247,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <p>Among AI approaches, reinforcement learning is especially attractive when the objective is to optimize a sequence of decisions under budget.</p>
 <h2>Core Idea</h2>
-<p>**TestForge RL** is a reinforcement-learning-driven test selection engine that:</p>
+<p><strong>TestForge RL</strong> is a reinforcement-learning-driven test selection engine that:</p>
 <ul>
 <li>dynamically chooses a subset of tests from a larger test pool</li>
 <li>optimizes for coverage gain per unit runtime</li>
@@ -334,7 +308,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <h2>Position in the Stack</h2>
 <p>TestForge RL is a strong medium-term topic. It is especially attractive for teams with large regressions, measurable coverage targets, and pressure to improve compute efficiency.</p>
-<hr />
+<p>---</p>
 <h1>Chapter 5. DVCore: The Agent Foundation for AI-Native DV</h1>
 <h2>Problem Statement</h2>
 <p>Even when useful AI features exist, they are often fragmented:</p>
@@ -356,7 +330,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <p>This is where agent infrastructure matters.</p>
 <h2>Core Idea</h2>
-<p>**DVCore** is the verification agent foundation — the “verification brain” — built from scratch for DV workflows.</p>
+<p><strong>DVCore</strong> is the verification agent foundation — the “verification brain” — built from scratch for DV workflows.</p>
 <p>Its role is to provide:</p>
 <ul>
 <li>document handling</li>
@@ -418,8 +392,11 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <h2>Position in the Stack</h2>
 <p>DVCore is the infrastructure layer that makes the other topic areas feel like one coherent system instead of five separate experiments.</p>
-<hr />
+<p>---</p>
 <h1>Chapter 6. WaveScope MCP: Waveform-Aware Debug Intelligence</h1>
+<blockquote>
+<p>Reference note: this topic is <strong>promising but more indirect</strong> in the literature. Keep the wording around trace-aware debug assistance, divergence summarization, and structured debug artifacts rather than claiming full automatic waveform understanding.</p>
+</blockquote>
 <h2>Problem Statement</h2>
 <p>Waveform debug is one of the most valuable but also one of the hardest places to apply AI in DV.</p>
 <p>The difficulty is obvious:</p>
@@ -440,7 +417,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 <li>root-cause hypothesis generation</li>
 </ul>
 <h2>Core Idea</h2>
-<p>**WaveScope MCP** is a waveform/debug tool layer that gives large models a structured way to “see” verification waveforms.</p>
+<p><strong>WaveScope MCP</strong> is a waveform/debug tool layer that gives large models a structured way to “see” verification waveforms.</p>
 <p>It aims to:</p>
 <ul>
 <li>identify suspicious signals and transitions</li>
@@ -499,8 +476,11 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <h2>Position in the Stack</h2>
 <p>WaveScope MCP is likely not the very first project to implement, but it is one of the most strategically valuable long-term topics because waveform debug is where large amounts of expert engineering time are spent.</p>
-<hr />
+<p>---</p>
 <h1>Chapter 7. FailSense: Regression Failure Intelligence</h1>
+<blockquote>
+<p>Reference note: this is one of the <strong>strongest-supported</strong> topics in the portfolio, especially because failure triage for RTL regression debugging has direct academic precedent.</p>
+</blockquote>
 <h2>Problem Statement</h2>
 <p>Large regressions often produce more information than engineers can efficiently digest:</p>
 <ul>
@@ -521,7 +501,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <p>AI can help reduce the raw failure volume into a smaller number of engineer-actionable issue buckets.</p>
 <h2>Core Idea</h2>
-<p>**FailSense** is a regression failure intelligence engine that:</p>
+<p><strong>FailSense</strong> is a regression failure intelligence engine that:</p>
 <ul>
 <li>summarizes failures</li>
 <li>clusters related issues</li>
@@ -580,8 +560,11 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 <li>Sentence Transformers Documentation — <a href="https://www.sbert.net/">https://www.sbert.net/</a></li>
 <li>Faiss Documentation — <a href="https://faiss.ai/">https://faiss.ai/</a></li>
 </ul>
-<hr />
+<p>---</p>
 <h1>Chapter 8. AssertMind: Assertion and Formal Intelligence</h1>
+<blockquote>
+<p>Reference note: this topic is supportable, but should be framed conservatively as a formal/property copilot for review, explanation, and debug assistance rather than autonomous assertion generation.</p>
+</blockquote>
 <h2>Problem Statement</h2>
 <p>Assertions and formal methods are powerful, but difficult to scale because engineers still spend large amounts of effort on:</p>
 <ul>
@@ -602,7 +585,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <p>AI can help interpret, summarize, review, and propose next steps without claiming to replace formal engines.</p>
 <h2>Core Idea</h2>
-<p>**AssertMind** is an assertion and formal intelligence assistant that:</p>
+<p><strong>AssertMind</strong> is an assertion and formal intelligence assistant that:</p>
 <ul>
 <li>reviews properties and requirements</li>
 <li>explains proof failures and counterexamples</li>
@@ -657,8 +640,11 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 <li>Verification Academy – Formal Verification — <a href="https://verificationacademy.com/topics/formal-verification/">https://verificationacademy.com/topics/formal-verification/</a></li>
 <li>SymbiYosys Documentation — <a href="https://yosyshq.readthedocs.io/projects/sby/en/latest/">https://yosyshq.readthedocs.io/projects/sby/en/latest/</a></li>
 </ul>
-<hr />
+<p>---</p>
 <h1>Chapter 9. TraceLens: Spec-to-Test Traceability Intelligence</h1>
+<blockquote>
+<p>Reference note: this topic is best framed as a traceability and linkage layer across requirements, specs, tests, coverage, and debug evidence. The engineering story is stronger than the direct paper match.</p>
+</blockquote>
 <h2>Problem Statement</h2>
 <p>One of the hardest management and engineering problems in verification is traceability:</p>
 <ul>
@@ -679,7 +665,7 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 </ul>
 <p>AI can help build and maintain these mappings more effectively than purely manual linking.</p>
 <h2>Core Idea</h2>
-<p>**TraceLens** is a traceability intelligence layer that connects:</p>
+<p><strong>TraceLens</strong> is a traceability intelligence layer that connects:</p>
 <ul>
 <li>requirement to test</li>
 <li>requirement to coverage</li>
@@ -735,33 +721,27 @@ p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px sol
 <li>PyUCIS Documentation — <a href="https://pyucis.readthedocs.io/en/latest/">https://pyucis.readthedocs.io/en/latest/</a></li>
 <li>Verification Academy – Coverage — <a href="https://verificationacademy.com/topics/coverage/">https://verificationacademy.com/topics/coverage/</a></li>
 </ul>
-<hr />
+<p>---</p>
 <h1>Chapter 10. Conclusion: Toward a Practical AI-Assisted DV Stack</h1>
 <p>AI for design verification should not be framed as a single magic tool. A more realistic model is a layered stack of specialized capabilities.</p>
 <p>In that stack:</p>
 <ul>
-<li>**DVCore** acts as the orchestration and agent foundation</li>
-<li>**CoverPilot** handles coverage intelligence</li>
-<li>**RegMatrix** handles register/spec intelligence</li>
-<li>**TestForge RL** handles regression optimization</li>
-<li>**WaveScope MCP** handles waveform-aware debug</li>
-<li>**FailSense** handles regression failure intelligence</li>
-<li>**AssertMind** handles assertion and formal assistance</li>
-<li>**TraceLens** handles spec-to-test traceability intelligence</li>
+<li><strong>DVCore</strong> acts as the orchestration and agent foundation</li>
+<li><strong>CoverPilot</strong> handles coverage intelligence</li>
+<li><strong>RegMatrix</strong> handles register/spec intelligence</li>
+<li><strong>TestForge RL</strong> handles regression optimization</li>
+<li><strong>WaveScope MCP</strong> handles waveform-aware debug</li>
+<li><strong>FailSense</strong> handles regression failure intelligence</li>
+<li><strong>AssertMind</strong> handles assertion and formal assistance</li>
+<li><strong>TraceLens</strong> handles spec-to-test traceability intelligence</li>
 </ul>
 <p>These topics are independent enough to be built and evaluated separately, but also complementary enough to form a coherent platform.</p>
 <p>A practical implementation path might be:</p>
-<ul>
-<li>start with **CoverPilot** and **FailSense** for practical coverage/failure intelligence</li>
-<li>add **RegMatrix** and **TraceLens** for structured spec-derived verification knowledge and traceability</li>
-<li>explore **TestForge RL** for budget-aware regression optimization</li>
-<li>build **AssertMind** and **WaveScope MCP** for higher-value formal/debug assistance</li>
-<li>unify the workflow through **DVCore**</li>
-</ul>
+<p>1. start with <strong>CoverPilot</strong> and <strong>FailSense</strong> for practical coverage/failure intelligence 2. add <strong>RegMatrix</strong> and <strong>TraceLens</strong> for structured spec-derived verification knowledge and traceability 3. explore <strong>TestForge RL</strong> for budget-aware regression optimization 4. build <strong>AssertMind</strong> and <strong>WaveScope MCP</strong> for higher-value formal/debug assistance 5. unify the workflow through <strong>DVCore</strong></p>
 <p>That path keeps the effort grounded in measurable engineering value while still aiming toward a long-term vision of AI-native verification workflows.</p>
-<hr />
+<p>---</p>
 <h2>Related Documents</h2>
 <ul>
 <li>[Supporting references (standards, tools, engineering docs)](supporting-references.md)</li>
 <li>[Academic supporting papers shortlist](academic-supporting-papers.md)</li>
-</ul></article></div></body></html>
+</ul></body></html>

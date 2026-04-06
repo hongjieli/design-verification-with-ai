@@ -1,89 +1,33 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>AI辅助设计验证 — 完整文档</title><meta name="description" content="完整展开的 8-topic AI辅助设计验证文档。" /><style>
-:root { --bg:#0b1020; --panel:#121a31; --text:#e9eefc; --muted:#a9b6d3; --accent:#78a6ff; --border:rgba(255,255,255,0.08); --max:980px; }
-*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-.wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px}.article{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:20px;padding:28px}
-h1{font-size:38px;line-height:1.1;margin:0 0 18px;letter-spacing:-0.03em} h2{font-size:26px;margin:28px 0 10px;letter-spacing:-0.02em} h3{font-size:19px;margin:18px 0 8px}
-p,li{color:var(--muted)} ul{padding-left:22px} hr{border:none;border-top:1px solid var(--border);margin:24px 0}
-.top{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}.btn{display:inline-block;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--panel)}
-.lang-switch{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.03);font-size:14px}.lang-pill.active{background:rgba(120,166,255,.18);color:#fff}
-</style></head><body><div class="wrap"><div class="top"><a class="btn" href="../index.html">← 返回首页</a><a class="btn" href="https://github.com/hongjieli/design-verification-with-ai" target="_blank" rel="noreferrer">查看仓库</a><div class="lang-switch"><a class="lang-pill" href="../../docs/index.html">English</a><span class="lang-pill active">中文</span></div></div><article class="article">
-<h1>AI辅助设计验证：面向 Topic 的工程构想</h1>
-<p>本文档将 AI-assisted design verification 组织为一个由多个独立 topic 构成的 portfolio，而不是把所有想法混成一个大而泛的“AI for DV”。你要求的页面结构是：<strong>一个完整页面里直接展开 8 个 topic 的详细内容</strong>，因此本页按“综述 → 8 个 topic → 总结”的顺序组织。</p><p><strong>说明：</strong>本页同步更新了参考文献整理策略，优先保留更可靠的 academic references，并将 engineering / tooling references 与学术引用分层展示。</p>
-<hr />
-<h1>第1章：综述 —— 为什么 AI 适合设计验证</h1>
-<p>设计验证团队每天都在处理大量工程 artifacts：regression logs、coverage reports、assertions、test metadata、waveforms、register/spec 文档以及 bug 历史。</p>
-<p>真正耗时的部分通常不是“生成更多数据”，而是把这些数据转成可执行的工程判断：哪些 failures 真正独立、哪些 coverage holes 最重要、spec 里隐含了哪些动态约束、在有限预算下应该优先跑哪些 tests，以及 waveform 的 first divergence 在哪里。</p>
-<p>因此，DV 很适合 AI 做“工程副驾驶”：总结、聚类、优先级排序、traceability、debug 辅助与 workflow orchestration。</p>
-<hr />
-<h1>第2章：CoverPilot —— Coverage Intelligence for Design Verification</h1>
-<h2>问题定义</h2>
-<p>coverage closure 是验证里最耗时的任务之一。工程师通常知道“哪里没覆盖到”，但不知道“为什么没打到、该怎么补、是否值得补”。</p>
-<h2>为什么 AI 有帮助</h2>
-<p>coverage 数据天然具有结构化特征：coverage reports、test metadata、RTL hierarchy、feature mapping。AI 很适合把这些离散 artifacts 组合成有解释力的 closure guidance。</p>
-<h2>核心构想</h2>
-<p><strong>CoverPilot</strong> 是 coverage intelligence agent，用于分析 coverage holes、关联 RTL hierarchy、区分 black-box / white-box reasoning，并给出 closure 建议。</p>
-<h2>输入</h2><ul><li>functional/code coverage reports</li><li>test metadata</li><li>RTL hierarchy</li><li>feature tags</li></ul>
-<h2>输出</h2><ul><li>prioritized coverage-hole list</li><li>probable RTL mapping</li><li>closure suggestions</li><li>progress summaries</li></ul>
-<h2>工程难点</h2><ul><li>coverage point 与 feature intent 映射不完整</li><li>reachable/unreachable 难区分</li><li>低价值 holes 很多</li></ul>
-<hr />
-<h1>第3章：RegMatrix —— Register and Constraint Intelligence</h1>
-<h2>问题定义</h2><p>register verification 的知识散落在 spec、CSR 表、reset/access policy、mode interaction、constraint 假设之中。人工整理很慢，也容易漏 corner case。</p>
-<h2>为什么 AI 有帮助</h2><p>文档解析、依赖抽取、图谱构建和测试建议，是 AI 在半结构化工程文档里非常擅长的任务。</p>
-<h2>核心构想</h2><p><strong>RegMatrix</strong> 是 register relationship and constraint intelligence engine：解析 spec、提取 field dependencies、建立 register graph，并生成 dynamic-constraint-aware test suggestions。</p>
-<h2>输入</h2><ul><li>register specs</li><li>CSR tables</li><li>access/reset semantics</li><li>existing tests</li></ul>
-<h2>输出</h2><ul><li>register relationship graph</li><li>constraint-aware test list</li><li>dependency summaries</li><li>traceability hints</li></ul>
-<h2>工程难点</h2><ul><li>文档语言不一致</li><li>隐式依赖难以显式化</li><li>AI 容易凭空补约束</li></ul>
-<hr />
-<h1>第4章：TestForge RL —— Reinforcement Learning for Test Selection</h1>
-<h2>问题定义</h2><p>回归测试资源有限，但 test list 很大，而且不同 test 对 coverage 和 bug discovery 的贡献并不均等。静态优先级往往效率不高。</p>
-<h2>为什么 AI 有帮助</h2><p>test selection 本质上是一个优化问题。历史 pass/fail、runtime cost、coverage contribution、bug novelty 都可以作为学习信号。</p>
-<h2>核心构想</h2><p><strong>TestForge RL</strong> 使用 RL 或自适应策略，在有限 budget 下动态选择更高价值的 test 子集，以最大化 coverage gain per unit runtime。</p>
-<h2>输入</h2><ul><li>test list</li><li>historical results</li><li>runtime cost</li><li>coverage contribution</li></ul>
-<h2>输出</h2><ul><li>prioritized subset</li><li>budget-aware plan</li><li>expected coverage gain</li></ul>
-<h2>工程难点</h2><ul><li>reward design 困难</li><li>历史数据有偏</li><li>工程师不一定信任 opaque policy</li></ul>
-<hr />
-<h1>第5章：DVCore —— The Agent Foundation for AI-Native DV</h1>
-<h2>问题定义</h2><p>即使有多个 AI 功能点，它们也常常是碎片化的：一个工具看 logs，一个看 coverage，一个读 spec，一个做 debug，彼此之间没有共享 workflow state。</p>
-<h2>为什么 AI 有帮助</h2><p>DV 不只是需要单个 AI 模型，而是需要一个能做 routing、tool orchestration、memory、multi-step workflow 的 agent foundation。</p>
-<h2>核心构想</h2><p><strong>DVCore</strong> 是 AI-native DV 的基础设施层：负责文档处理、workflow execution、chat/history management、subagent routing 和 tool orchestration。</p>
-<h2>输入</h2><ul><li>user requests</li><li>logs and reports</li><li>coverage artifacts</li><li>docs and prior outputs</li></ul>
-<h2>输出</h2><ul><li>task routing decisions</li><li>workflow results</li><li>structured intermediate artifacts</li></ul>
-<h2>工程难点</h2><ul><li>context fragmentation</li><li>tool interoperability</li><li>memory design</li><li>auditability</li></ul>
-<hr />
-<h1>第6章：WaveScope MCP —— Waveform-Aware Debug Intelligence</h1>
-<h2>问题定义</h2><p>waveform debug 是 DV 中最有价值也最难 AI 化的方向之一。raw waveform 太大、时序关系复杂、first divergence 常常比最终 symptom 更重要。</p>
-<h2>为什么 AI 有帮助</h2><p>如果先把 waveform 转成事件、时间线、异常信号列表，AI 就能在更高层次上做 root-cause reasoning。</p>
-<h2>核心构想</h2><p><strong>WaveScope MCP</strong> 是一个给大模型“看懂波形”的结构化 debug 工具层：识别 suspicious signals、汇总 event timeline，并关联 RTL context。</p>
-<h2>输入</h2><ul><li>waveform slices</li><li>signal groups</li><li>assertion failures</li><li>transaction summaries</li></ul>
-<h2>输出</h2><ul><li>suspicious signal list</li><li>first-divergence summary</li><li>candidate root-cause explanation</li></ul>
-<h2>工程难点</h2><ul><li>waveform scale</li><li>signal selection</li><li>transaction abstraction</li><li>避免过度自信的误判</li></ul>
-<hr />
-<h1>第7章：FailSense —— Regression Failure Intelligence</h1>
-<h2>问题定义</h2><p>大型回归里最痛的点之一，是大量 failures 其实是重复的，但工程师仍然要逐条看 log、判断 novelty、猜 owner、决定先修谁。</p>
-<h2>为什么 AI 有帮助</h2><p>log clustering、semantic grouping、novelty detection、ownership suggestion 都是典型适合 AI 的 triage 任务。</p>
-<h2>核心构想</h2><p><strong>FailSense</strong> 是 regression failure intelligence engine：总结 failures、聚类 issue、估计 novelty、建议 owner，并给出 next debug actions。</p>
-<h2>输入</h2><ul><li>simulation logs</li><li>UVM reports</li><li>assertion failures</li><li>historical known issues</li></ul>
-<h2>输出</h2><ul><li>failure summaries</li><li>issue clusters</li><li>priority/novelty estimates</li><li>ownership hints</li></ul>
-<h2>参考支撑</h2><ul><li>Clustering-based failure triage for RTL regression debugging</li><li>Machine Learning in the Service of Hardware Functional Verification</li><li>Data-Centric Machine Learning Pipeline for Hardware Verification</li></ul>
-<hr />
-<h1>第8章：AssertMind —— Assertion and Formal Intelligence</h1>
-<h2>问题定义</h2><p>assertions 和 formal methods 很强，但工程师仍然要花很多时间解释 proof failure、读 counterexample、判断 property 是否缺失或 assumptions 是否写错。</p>
-<h2>为什么 AI 有帮助</h2><p>formal workflow 的输入输出相对结构化：properties、assumptions、proof status、counterexamples。这使它很适合作为 AI 辅助而不是完全自动化替代。</p>
-<h2>核心构想</h2><p><strong>AssertMind</strong> 是 assertion/formal intelligence assistant：review properties、解释 counterexamples、从 spec text 提示 candidate assertions，并总结 formal results。</p>
-<h2>输入</h2><ul><li>assertion/property files</li><li>formal outputs</li><li>counterexample traces</li><li>protocol specs</li></ul>
-<h2>输出</h2><ul><li>candidate assertions</li><li>property review summaries</li><li>counterexample explanations</li><li>formal result summaries</li></ul>
-<h2>参考支撑</h2><ul><li>Machine-Learning-Enabled Hardware Formal Verification</li><li>Verification Academy – Formal Verification</li><li>SymbiYosys Documentation</li></ul>
-<hr />
-<h1>第9章：TraceLens —— Spec-to-Test Traceability Intelligence</h1>
-<h2>问题定义</h2><p>验证里有一个长期但经常被低估的难题：traceability。哪些 requirements 对应哪些 tests？哪些 coverage points 对不上 spec？哪些 tests 已经没有价值？</p>
-<h2>为什么 AI 有帮助</h2><p>traceability 需要跨多个半结构化来源建立映射：requirements、tests、coverage、historical evidence、feature metadata。AI 很适合做这种连接性工作。</p>
-<h2>核心构想</h2><p><strong>TraceLens</strong> 是 requirement-to-test / requirement-to-coverage intelligence layer，用于帮助构建 spec、test、coverage、planning 之间的验证闭环。</p>
-<h2>输入</h2><ul><li>requirements/spec docs</li><li>test plans</li><li>coverage data</li><li>historical regressions</li></ul>
-<h2>输出</h2><ul><li>requirement-to-test mapping</li><li>requirement-to-coverage mapping</li><li>gap reports</li><li>redundancy suggestions</li></ul>
-<h2>参考支撑</h2><ul><li>PyUCIS Documentation</li><li>Accellera UVM Standard</li><li>Data-Centric Machine Learning Pipeline for Hardware Verification</li><li>Verification Academy – Coverage</li></ul>
-<hr />
-<h1>第10章：总结 —— Toward a Practical AI-Assisted DV Stack</h1>
-<p>AI for DV 更现实的形态，不是一个“万能模型”，而是一个由多个独立能力构成的 stack：DVCore 负责 orchestration；CoverPilot 负责 coverage intelligence；RegMatrix 负责 register/spec intelligence；TestForge RL 负责 regression optimization；WaveScope MCP 负责 waveform-aware debug；FailSense 负责 regression failure intelligence；AssertMind 负责 assertion/formal assistance；TraceLens 负责 traceability intelligence。</p>
-<p>这 8 个 topic 既能独立立项，也能组合成一个更完整的 AI-native verification platform。</p>
-</article></div></body></html>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI 辅助设计验证</title><style>body{font-family:Arial,Helvetica,sans-serif;max-width:980px;margin:40px auto;padding:0 20px;line-height:1.7;color:#1f2937}h1,h2,h3,h4{color:#111827}code{background:#f3f4f6;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #d1d5db;padding-left:16px;color:#4b5563;margin-left:0}a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}ul{padding-left:22px}</style></head><body><h1>AI辅助设计验证：面向 Topic 的工程构想</h1>
+<p>本文档将 AI-assisted design verification 组织为一个由多个独立 topic 构成的 portfolio，而不是把所有想法混成一个大而泛的“AI for DV”。</p>
+<h2>结构</h2>
+<p>1. 综述 2. CoverPilot 3. RegMatrix 4. TestForge RL 5. DVCore 6. WaveScope MCP 7. FailSense 8. AssertMind 9. TraceLens 10. 总结</p>
+<h2>核心思路</h2>
+<p>设计验证里的很多痛点都适合 AI 作为“工程副驾驶”介入，包括：</p>
+<ul>
+<li>coverage closure</li>
+<li>register/spec intelligence</li>
+<li>regression failure triage</li>
+<li>test selection optimization</li>
+<li>waveform-aware debug</li>
+<li>assertion/formal assistance</li>
+<li>traceability management</li>
+<li>workflow orchestration</li>
+</ul>
+<h2>8 个 topic 列表</h2>
+<ul>
+<li>[CoverPilot](topics/coverpilot.md)</li>
+<li>[RegMatrix](topics/regmatrix.md)</li>
+<li>[TestForge RL](topics/testforge-rl.md)</li>
+<li>[DVCore](topics/dvcore.md)</li>
+<li>[WaveScope MCP](topics/wavescope-mcp.md)</li>
+<li>[FailSense](topics/failsense.md)</li>
+<li>[AssertMind](topics/assertmind.md)</li>
+<li>[TraceLens](topics/tracelens.md)</li>
+</ul>
+<h2>Supporting documents</h2>
+<ul>
+<li>[中文 supporting references](supporting-references.md)</li>
+<li>[中文 academic supporting papers](academic-supporting-papers.md)</li>
+<li>[English main ideas document](../../docs/design-verification-ai-ideas.md)</li>
+</ul></body></html>
