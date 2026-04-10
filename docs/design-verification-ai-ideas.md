@@ -734,7 +734,7 @@ AI can help interpret, summarize, review, and propose next steps without claimin
 
 ---
 
-# Chapter 9. RegCleanse: Spec-to-Test Traceability Intelligence
+# Chapter 9. RegCleanse: Low-Yield Regression Cleanup Intelligence
 
 > Reference note: this topic is best framed as a traceability and linkage layer across requirements, specs, tests, coverage, and debug evidence. The engineering story is stronger than the direct paper match.
 
@@ -763,7 +763,7 @@ AI can help build and maintain these mappings more effectively than purely manua
 
 ## Core Idea
 
-**RegCleanse** is a traceability intelligence layer that connects:
+**RegCleanse** is a low-yield regression cleanup intelligence layer that connects:
 
 - requirement to test
 - requirement to coverage

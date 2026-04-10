@@ -428,7 +428,7 @@ This section reorganizes the repository references by the eight portfolio topics
 - **Sentence Transformers Documentation** — <https://www.sbert.net/>
 - **Faiss Documentation** — <https://faiss.ai/>
 
-### 9.7 AssertMind — Assertion / Formal Intelligence
+### 9.7 JiraMine — JIRA-Guided High-Yield Test Mining Intelligence
 
 #### Academic references
 - **Machine-Learning-Enabled Hardware Formal Verification**  
@@ -443,7 +443,7 @@ This section reorganizes the repository references by the eight portfolio topics
 - **SymbiYosys Documentation** — <https://yosyshq.readthedocs.io/projects/sby/en/latest/>
 - **PyEDA Documentation** — <https://pyeda.readthedocs.io/en/latest/>
 
-### 9.8 TraceLens — Spec-to-Test Traceability Intelligence
+### 9.8 RegCleanse — Low-Yield Regression Cleanup Intelligence
 
 #### Academic references
 - **Functional Test Generation with Distribution Constraints** (2011)  

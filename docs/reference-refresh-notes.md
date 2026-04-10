@@ -360,7 +360,7 @@ Avoid claiming root-cause certainty from logs alone.
 
 ---
 
-## 7. AssertMind — Assertion / Formal Intelligence
+## 7. JiraMine — JIRA-Guided High-Yield Test Mining Intelligence
 
 ### Academic references
 
@@ -393,18 +393,18 @@ Avoid claiming root-cause certainty from logs alone.
 
 ### Recommended wording
 
-Use wording like: **“AssertMind assists with property review, proof-result interpretation, and counterexample-oriented debug, especially in formal-friendly workflows.”**  
+Use wording like: **“JiraMine assists with property review, proof-result interpretation, and counterexample-oriented debug, especially in formal-friendly workflows.”**  
 Avoid claiming reliable automatic assertion synthesis or full formal signoff automation.
 
 ### Chinese summary bullets
 
-- AssertMind 的证据是“有一定支撑，但不算最强”，适合写成 **formal/property copilot**。
+- JiraMine 的证据是“有一定支撑，但不算最强”，适合写成 **formal/property copilot**。
 - 最可信的价值点是：**解释 proof result、整理 counterexample、辅助 property review**。
 - 不建议把它写成“自动生成高质量 assertion 并替代 formal engineer”。
 
 ---
 
-## 8. TraceLens — Spec-to-Test Traceability Intelligence
+## 8. RegCleanse — Low-Yield Regression Cleanup Intelligence
 
 ### Academic references
 
@@ -447,12 +447,12 @@ Avoid claiming reliable automatic assertion synthesis or full formal signoff aut
 
 ### Recommended wording
 
-Use wording like: **“TraceLens builds traceability links among requirements, specs, tests, coverage, and debug evidence so engineers can see what is implemented, exercised, and still weakly covered.”**  
+Use wording like: **“RegCleanse builds traceability links among requirements, specs, tests, coverage, and debug evidence so engineers can see what is implemented, exercised, and still weakly covered.”**  
 Avoid implying complete or perfectly accurate requirement extraction from arbitrary specs.
 
 ### Chinese summary bullets
 
-- TraceLens 适合被描述为 **traceability intelligence layer**，连接 spec、test、coverage、debug 证据。
+- RegCleanse 适合被描述为 **low-yield regression cleanup intelligence layer**，连接 spec、test、coverage、debug 证据。
 - 这个 topic 的学术引用偏间接，所以写法上要稳，不要夸成“自动 requirement mining 已成熟”。
 - 工程上最适合强调 **graph model + structured storage + methodology mapping**。
 
@@ -474,7 +474,7 @@ The middle tier is:
 
 The more aspirational but still supportable tier is:
 
-7. **AssertMind**
-8. **TraceLens**
+7. **JiraMine**
+8. **RegCleanse**
 
 That does **not** mean the lower-tier topics should be removed. It means their wording should emphasize **assistant / copilot / structured-support** rather than fully automatic reasoning.

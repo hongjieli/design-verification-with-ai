@@ -319,7 +319,7 @@
 
 ---
 
-## 7. AssertMind — Assertion / Formal Intelligence
+## 7. JiraMine — JIRA-Guided High-Yield Test Mining Intelligence
 
 ### 学术文献
 
@@ -352,11 +352,11 @@
 
 ### 建议写法
 
-建议写成：**“AssertMind 辅助 property review、proof-result interpretation 和 counterexample-oriented debug，特别适合 formal-friendly workflow。”**
+建议写成：**“JiraMine 辅助 property review、proof-result interpretation 和 counterexample-oriented debug，特别适合 formal-friendly workflow。”**
 
 ---
 
-## 8. TraceLens — Spec-to-Test Traceability Intelligence
+## 8. RegCleanse — Low-Yield Regression Cleanup Intelligence
 
 ### 学术文献
 
@@ -399,7 +399,7 @@
 
 ### 建议写法
 
-建议写成：**“TraceLens 构建 requirements、specs、tests、coverage 与 debug evidence 之间的 traceability links，帮助工程师识别哪些需求已实现、已验证、或仍然薄弱。”**
+建议写成：**“RegCleanse 构建 requirements、specs、tests、coverage 与 debug evidence 之间的 traceability links，帮助工程师识别哪些需求已实现、已验证、或仍然薄弱。”**
 
 ---
 
@@ -418,8 +418,8 @@
 6. **RegMatrix**
 
 ### 第三梯队（可支撑，但写法要收敛）
-7. **AssertMind**
-8. **TraceLens**
+7. **JiraMine**
+8. **RegCleanse**
 
 这不代表后两项应该删掉，而是代表它们更适合写成：
 

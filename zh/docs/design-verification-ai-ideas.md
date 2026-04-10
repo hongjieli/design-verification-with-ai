@@ -15,8 +15,8 @@
 为了让整个组合更完整，另外补入了三个紧邻且具有真实工程支撑的方向：
 
 - FailSense
-- AssertMind
-- TraceLens
+- JiraMine
+- RegCleanse
 
 整体结构可以概括为：
 
@@ -27,8 +27,8 @@
 5. DVCore
 6. WaveScope MCP
 7. FailSense
-8. AssertMind
-9. TraceLens
+8. JiraMine
+9. RegCleanse
 10. Conclusion
 
 这八个方向合在一起，覆盖了 DV 工作流中的大部分关键活动：从 agent 基础设施、规格文档理解，到 coverage 优化、回归失败 triage、waveform debug 与 traceability 管理。
@@ -77,8 +77,8 @@ AI 最有价值的角色，不是替代验证工程师，也不是自动做 sign
 4. **DVCore** —— AI-native DV 的 agent foundation 与 orchestration layer
 5. **WaveScope MCP** —— waveform-aware debug intelligence
 6. **FailSense** —— regression failure intelligence
-7. **AssertMind** —— assertion / formal intelligence
-8. **TraceLens** —— spec-to-test traceability intelligence
+7. **JiraMine** —— JIRA-guided high-yield test mining intelligence
+8. **RegCleanse** —— low-yield regression cleanup intelligence
 
 每个方向都可以独立存在；但当它们被连接起来时，才能形成真正实用的 AI-assisted DV stack。
 
@@ -596,7 +596,7 @@ FailSense 是 8 个 topic 里学术支撑最直接、最扎实的方向之一，
 
 ---
 
-# 第 8 章：AssertMind —— Assertion / Formal Intelligence
+# 第 8 章：JiraMine —— JIRA-Guided High-Yield Test Mining Intelligence
 
 ## 问题定义
 
@@ -618,7 +618,7 @@ Assertion 与 formal 工作很重要，但也经常非常费劲：
 
 ## 核心思路
 
-**AssertMind** 是 assertion / formal intelligence layer，用于：
+**JiraMine** 是 JIRA-guided high-yield test mining intelligence layer，用于：
 
 - review property 的结构与表达
 - 解释 counterexample
@@ -671,11 +671,11 @@ Assertion 与 formal 工作很重要，但也经常非常费劲：
 
 ## 为什么这个方向值得做
 
-AssertMind 是一个需要保守表达、但很实用的方向。最稳妥的定位不是“自动写 assertion”，而是“formal / property copilot for review, explanation, and debug assistance”。
+JiraMine 是一个需要保守表达、但很实用的方向。最稳妥的定位不是“自动写 assertion”，而是“formal / property copilot for review, explanation, and debug assistance”。
 
 ---
 
-# 第 9 章：TraceLens —— Spec-to-Test Traceability Intelligence
+# 第 9 章：RegCleanse —— Low-Yield Regression Cleanup Intelligence
 
 ## 问题定义
 
@@ -704,7 +704,7 @@ Traceability 问题非常适合 AI 作为“连接层”来处理：
 
 ## 核心思路
 
-**TraceLens** 是一个 traceability intelligence layer，用于：
+**RegCleanse** 是一个 low-yield regression cleanup intelligence layer，用于：
 
 - 连接 requirements 与 tests
 - 把 coverage 与 feature intent 对齐
@@ -756,7 +756,7 @@ Traceability 问题非常适合 AI 作为“连接层”来处理：
 
 ## 为什么这个方向值得做
 
-TraceLens 的学术匹配相对间接，但工程故事很强。它最适合被描述成 requirements、tests、coverage 与 debug evidence 之间的 traceability intelligence layer。
+RegCleanse 的学术匹配相对间接，但工程故事很强。它最适合被描述成 requirements、tests、coverage 与 debug evidence 之间的 low-yield regression cleanup intelligence layer。
 
 ---
 
@@ -780,13 +780,13 @@ AI-assisted design verification 最稳妥、也最有工程说服力的表达方
 - **DVCore**：agent foundation
 - **WaveScope MCP**：waveform debug intelligence
 - **FailSense**：failure intelligence
-- **AssertMind**：assertion/formal intelligence
-- **TraceLens**：traceability intelligence
+- **JiraMine**：JIRA-guided high-yield test mining intelligence
+- **RegCleanse**：low-yield regression cleanup intelligence
 
 这些方向并不要求同时启动。它们完全可以按团队的痛点优先级分阶段推进：
 
 - 短期：FailSense、CoverPilot、RegMatrix
-- 中期：TestForge RL、TraceLens
-- 长期：WaveScope MCP、DVCore 深度整合、AssertMind 深度协作
+- 中期：TestForge RL、RegCleanse
+- 长期：WaveScope MCP、DVCore 深度整合、JiraMine 深度协作
 
 当这些能力逐渐组合起来时，AI 在 DV 中的角色就不再只是“写点脚本”或“帮忙总结日志”，而会变成一整套真正服务工程判断的辅助系统。

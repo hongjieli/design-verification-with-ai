@@ -215,5 +215,5 @@ To support direct reuse in the main portfolio document, the academic shortlist a
 - **DVCore:** data-centric ML pipeline for hardware verification; broader AI-for-DV framing; ML-enabled verification workflow feasibility.
 - **WaveScope MCP:** clustering-based failure triage for RTL debug; data-centric verification pipeline; broader ML-for-verification framing.
 - **FailSense:** clustering-based failure triage; data-centric verification pipeline; ML-assisted hardware verification framing.
-- **AssertMind:** ML-enabled hardware formal verification; broader verification-ML framing.
-- **TraceLens:** functional test generation with distribution constraints; data-centric verification pipeline; broader AI-for-DV framing.
+- **JiraMine:** ML-enabled hardware formal verification; broader verification-ML framing.
+- **RegCleanse:** functional test generation with distribution constraints; data-centric verification pipeline; broader AI-for-DV framing.

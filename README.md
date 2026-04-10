@@ -10,8 +10,8 @@ Instead of treating AI for DV as a single monolithic idea, this repo organizes t
 - **DVCore** — the agent foundation for AI-native DV workflows
 - **WaveScope MCP** — waveform-aware debug intelligence
 - **FailSense** — regression failure intelligence
-- **AssertMind** — assertion and formal intelligence
-- **TraceLens** — spec-to-test traceability intelligence
+- **JiraMine** — assertion and formal intelligence
+- **RegCleanse** — low-yield regression cleanup intelligence
 
 Together, these topics span a broad verification workflow, from document understanding and test planning to coverage analysis and waveform debug.
 
@@ -53,11 +53,11 @@ Structured waveform/event analysis to accelerate root-cause understanding.
 ### 6. FailSense
 Regression failure triage, clustering, novelty detection, and ownership suggestion.
 
-### 7. AssertMind
+### 7. JiraMine
 Assertion review, counterexample explanation, and formal-result intelligence.
 
-### 8. TraceLens
-Requirement-to-test, requirement-to-coverage, and verification traceability intelligence.
+### 8. RegCleanse
+Requirement-to-test, requirement-to-coverage, and verification low-yield regression cleanup intelligence.
 
 ## Suggested reading order
 
