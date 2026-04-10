@@ -15,8 +15,8 @@ Five of the topic areas come directly from the original project matrix:
 To make the portfolio more complete, three adjacent topics are added because they are both practically relevant and supportable by real references:
 
 - FailSense
-- AssertMind
-- TraceLens
+- JiraMine
+- RegCleanse
 
 The overall structure is:
 
@@ -77,8 +77,8 @@ This document organizes that vision into eight topic areas:
 4. **DVCore** — the agent foundation and orchestration layer
 5. **WaveScope MCP** — waveform-aware debug intelligence
 6. **FailSense** — regression failure intelligence
-7. **AssertMind** — assertion and formal intelligence
-8. **TraceLens** — spec-to-test traceability intelligence
+7. **JiraMine** — JIRA-guided high-yield test mining
+8. **RegCleanse** — low-yield regression cleanup intelligence
 
 Each topic can stand alone, but the full value appears when they are connected into a practical AI-assisted DV stack.
 
