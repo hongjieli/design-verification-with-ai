@@ -27,8 +27,8 @@ The overall structure is:
 5. DVCore
 6. WaveScope MCP
 7. FailSense
-8. AssertMind
-9. TraceLens
+8. JiraMine
+9. RegCleanse
 10. Conclusion
 
 Together, these topics span a broad DV workflow, from agent infrastructure and document intelligence to coverage optimization, failure triage, and waveform-aware debug.
@@ -647,7 +647,7 @@ AI can help reduce the raw failure volume into a smaller number of engineer-acti
 
 ---
 
-# Chapter 8. AssertMind: Assertion and Formal Intelligence
+# Chapter 8. JiraMine: Assertion and Formal Intelligence
 
 > Reference note: this topic is supportable, but should be framed conservatively as a formal/property copilot for review, explanation, and debug assistance rather than autonomous assertion generation.
 
@@ -676,7 +676,7 @@ AI can help interpret, summarize, review, and propose next steps without claimin
 
 ## Core Idea
 
-**AssertMind** is an assertion and formal intelligence assistant that:
+**JiraMine** is an JIRA-guided high-yield test mining intelligence assistant that:
 
 - reviews properties and requirements
 - explains proof failures and counterexamples
@@ -734,7 +734,7 @@ AI can help interpret, summarize, review, and propose next steps without claimin
 
 ---
 
-# Chapter 9. TraceLens: Spec-to-Test Traceability Intelligence
+# Chapter 9. RegCleanse: Spec-to-Test Traceability Intelligence
 
 > Reference note: this topic is best framed as a traceability and linkage layer across requirements, specs, tests, coverage, and debug evidence. The engineering story is stronger than the direct paper match.
 
@@ -763,7 +763,7 @@ AI can help build and maintain these mappings more effectively than purely manua
 
 ## Core Idea
 
-**TraceLens** is a traceability intelligence layer that connects:
+**RegCleanse** is a traceability intelligence layer that connects:
 
 - requirement to test
 - requirement to coverage
@@ -834,17 +834,17 @@ In that stack:
 - **TestForge RL** handles regression optimization
 - **WaveScope MCP** handles waveform-aware debug
 - **FailSense** handles regression failure intelligence
-- **AssertMind** handles assertion and formal assistance
-- **TraceLens** handles spec-to-test traceability intelligence
+- **JiraMine** handles assertion and formal assistance
+- **RegCleanse** handles low-yield regression cleanup intelligence
 
 These topics are independent enough to be built and evaluated separately, but also complementary enough to form a coherent platform.
 
 A practical implementation path might be:
 
 1. start with **CoverPilot** and **FailSense** for practical coverage/failure intelligence
-2. add **RegMatrix** and **TraceLens** for structured spec-derived verification knowledge and traceability
+2. add **RegMatrix** and **RegCleanse** for structured spec-derived verification knowledge and traceability
 3. explore **TestForge RL** for budget-aware regression optimization
-4. build **AssertMind** and **WaveScope MCP** for higher-value formal/debug assistance
+4. build **JiraMine** and **WaveScope MCP** for higher-value formal/debug assistance
 5. unify the workflow through **DVCore**
 
 That path keeps the effort grounded in measurable engineering value while still aiming toward a long-term vision of AI-native verification workflows.
